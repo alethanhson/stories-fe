@@ -1,0 +1,15 @@
+{
+  "list": {
+    "title": "Title",
+    "placeholder": "Placeholder",
+    "create": "Create",
+    "avatar": "Avatar",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "created": "Created at",
+    "action": "Action"
+  },
+  "created_success": "Successful account registration",
+  "create_error": "Error account registration"
+}

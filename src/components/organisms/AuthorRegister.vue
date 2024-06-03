@@ -45,16 +45,17 @@ import { authors } from '@/api/modules/author'
 import type { FormAuthorData } from '@/api/modules/author/types.ts'
 import { ALLOWED_IMAGE_TYPES, MAX_TEXT_INPUT } from '@/constants'
 import i18n from '@/i18n'
+import { useAuthStore } from '@/stores/modules/auth'
 import { ToastType } from '@/types'
 import { showToast } from '@/utils/toastHelper'
 import { useField } from 'vee-validate'
 import { ref } from 'vue'
-const store = useStore()
+const authStore = useAuthStore()
 const show = ref<boolean>(true)
 const { t } = i18n.global
 const imagePreview = ref<string | null>(null)
 const author = reactive<FormAuthorData>({
-  create_by_user_id: store.getters['author/currenUser'].id,
+  create_by_user_id: authStore.currentUser?.id,
   author_name: computed(() => valueFieldName) as unknown as string
 })
 const {

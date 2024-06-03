@@ -23,6 +23,11 @@ const authRouter: Array<RouteRecordRaw> = [
   {
     path: '/:pathMatch(.*)*',
     redirect: '/page-error'
+  },
+  {
+    path: '/page-unauthorized',
+    name: 'page_unauthorized',
+    component: () => import('@/views/page-unauthorized/UnauthorizedView.vue')
   }
 ]
 

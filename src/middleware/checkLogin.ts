@@ -1,6 +1,9 @@
 import { USER_ROLE, USER_STATUS } from '@/constants'
+import i18n from '@/i18n'
 import router from '@/router'
 import { useAuthStore } from '@/stores/modules/auth'
+import { ToastType } from '@/types'
+import { showToast } from '@/utils'
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 
 const authStore = useAuthStore()
@@ -10,7 +13,7 @@ export async function checkLogin(
   next: NavigationGuardNext
 ): Promise<void> {
   const excludedRoutes = [
-    'forgot_password',
+    'home',
     'reset_password',
     'reset_password_send_mail',
     'confirm_send',
@@ -27,6 +30,11 @@ export async function checkLogin(
   const isLoggedIn = authStore.isLoggedIn
   if (isLoggedIn) {
     const auth = await authStore.currentUser
+    console.log('🚀 ~ auth:', auth)
+
+    if (to.name === 'login' || excludedRoutes.includes(to.name as string)) {
+      return next({ name: 'login' })
+    }
 
     if (auth.status === USER_STATUS.INACTIVE) {
       authStore.logout().then(() => router.push({ name: 'login' }))
@@ -40,19 +48,26 @@ export async function checkLogin(
       }
     })
 
-    // redirect when go to login
-    if (to.name === 'login' || to.path === '/') {
-      switch (auth.role) {
-        case USER_ROLE.ADMIN:
-          return next({ name: 'agent.dashboard' })
-        case USER_ROLE.AUTHOR:
-          return next({ name: 'manager.appointment' })
-        case USER_ROLE.USER:
-          return next({ name: 'staff.home' })
-        default:
-          router.push({ name: 'page_error' })
-          break
-      }
+    if (to.name === 'dashboard_admin' && auth.role != USER_ROLE.ADMIN) {
+      showToast(i18n.global.t('common.unauthorized'), ToastType.ERROR)
+
+      return next({ name: 'page_unauthorized' })
+    }
+
+    if (to.name === 'dashboard_admin' && auth.role != USER_ROLE.ADMIN) {
+      showToast(i18n.global.t('common.unauthorized'), ToastType.ERROR)
+
+      return next({ name: 'page_unauthorized' })
+    }
+
+    if (
+      to.name === 'dashboard_author' &&
+      auth.role != USER_ROLE.AUTHOR &&
+      auth.role != USER_ROLE.ADMIN
+    ) {
+      showToast(i18n.global.t('common.unauthorized'), ToastType.ERROR)
+
+      return next({ name: 'page_unauthorized' })
     }
 
     next()

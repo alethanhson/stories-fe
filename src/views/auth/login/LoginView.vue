@@ -1,23 +1,44 @@
 <template>
-  <div class="flex h-screen mx-auto max-w-[1440px]">
-    <div class="basis-1/2 relative md:w-full sp:mx-auto">
-      <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:w-full md:px-[30px]"
-      >
-        <p class="text-black text-center text-headline-l mb-10 mt-6">Login</p>
-        <div
-          class="px-12 w-[498px] sp:min-w-[330px] sp:w-auto md:w-full border rounded-lg pt-[22px] pb-8"
-        >
-          <div class="text-left mb-4 text-body-s">
-            <input type="text" v-model="state.email" />
+  <div v-if="show" class="flex bg-[#1B1B1B] bg-opacity-60 fixed inset-0 z-10">
+    <div
+      class="modal w-full h-full md:w-1/3 md:h-[600px] bg-white md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 absolute rounded-lg p-10"
+    >
+      <button @click="closeForm" class="hidden md:flex absolute right-2 top-2">✕</button>
+      <div class="form w-full">
+        <form @submit.prevent="handleLogin">
+          <p class="text-black text-center text-body-l">Đăng nhập</p>
+          <div class="input mt-8 text-body-s">
+            <label class="text-body-s">Email</label>
+            <base-input-field
+              v-model="state.email"
+              id="email"
+              type="email"
+              field-name="email"
+              placeholder="Nhập email"
+              class="mb-2"
+              rules="required|email"
+              :error="errorMsg.email"
+              :isFocus="hasEmailError"
+            />
+
+            <label class="">Mật khẩu</label>
+            <base-input-field
+              v-model="state.password"
+              id="password"
+              type="password"
+              field-name="password"
+              placeholder="Nhập mật khẩu"
+              rules="required|min:8|max:20"
+            />
           </div>
-          <div class="text-left mb-4 text-body-s">
-            <input type="password" v-model="state.password" />
-          </div>
-        </div>
-        <div class="flex justify-center pt-6">
-          <button @click="handleLogin">Login</button>
-        </div>
+          <base-button size="sm" class="w-full mt-8 py-6" type="submit"> Đăng nhập </base-button>
+        </form>
+      </div>
+      <div class="text-center mt-8">
+        <p>
+          Bạn chưa có tài khoản?
+          <router-link to="{ name: 'register' }">Đăng ký ngay</router-link>
+        </p>
       </div>
     </div>
   </div>
@@ -31,9 +52,16 @@ import { ToastType } from '@/types'
 import { clearObject, isObjectEmpty } from '@/utils/helper'
 import { showToast } from '@/utils/toastHelper'
 import { useForm } from 'vee-validate'
+import { USER_ROLE } from '../../../constants/user-status'
 
+defineProps(['show'])
+const emit = defineEmits(['close'])
 const authStore = useAuthStore()
 const loadingStore = useLoadingStore()
+const closeForm = () => {
+  emit('close')
+}
+const hasEmailError = ref(false)
 const state = reactive({
   email: undefined,
   password: undefined,
@@ -63,14 +91,28 @@ const handleLogin = async () => {
 
   try {
     clearObject(errorMsg)
-
     await authStore.login(state)
-    await authStore.currentUser()
+    const currentUser = await authStore.currentUser()
 
-    router.push({ name: 'home' })
-    window.location.reload() // Reload the page to update the profile language settings
+    if (currentUser && currentUser.role) {
+      if (currentUser.role == USER_ROLE.ADMIN) {
+        router.push({ name: 'dashboard_admin' })
+      } else if (currentUser.role == USER_ROLE.AUTHOR) {
+        router.push({ name: 'dashboard_author' })
+      } else if (currentUser.role == USER_ROLE.USER) {
+        router.push({ name: 'home' })
+      }
+    } else {
+      router.push({ name: 'home' })
+    }
+    closeForm()
   } catch (error: any) {
-    showToast(error.message, ToastType.ERROR)
+    if (error.email) {
+      errorMsg.email = error.email
+      hasEmailError.value = true
+    } else {
+      showToast(error.message, ToastType.ERROR)
+    }
   }
 }
 

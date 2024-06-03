@@ -1,21 +1,17 @@
 # Pull Request Checklist
 
-## 1. Chụp Hình Giao Diện Người Dùng (UI)
+1. **Chụp Hình Giao Diện Người Dùng (UI)**
 
-- [ ] Chụp ảnh màn hình các thay đổi UI.
-- [ ] Đính kèm ảnh chụp màn hình trong mô tả PR.
+   - [ ] Chụp ảnh màn hình IU
 
-## 2. Chạy Lệnh Build
+2. **Chạy Build**
 
-- [ ] Chạy lệnh `npm run build` để xây dựng dự án.
-- [ ] Đảm bảo không có lỗi trong quá trình build.
+   - [ ] `npm run build` thành công.
 
-## 3. Định Dạng Mã Nguồn
-
-- [ ] Chạy lệnh `npm run format` để định dạng mã nguồn.
-- [ ] Đảm bảo tất cả các tệp mã nguồn tuân thủ quy chuẩn định dạng.
+3. **Định Dạng Mã Nguồn**
+   - [ ] `npm run format`.
 
 ---
 
-**Người tạo PR:** [Tên của bạn]  
-**Ngày tạo PR:** [Ngày tạo]
+**Người tạo PR:**  
+**Ngày tạo PR:**

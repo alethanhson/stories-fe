@@ -3,7 +3,6 @@
 ## 1. Chụp Hình Giao Diện Người Dùng (UI)
 
 - [ ] Chụp ảnh màn hình các thay đổi UI.
-- [ ] Lưu ảnh vào thư mục `screenshots/`.
 - [ ] Đính kèm ảnh chụp màn hình trong mô tả PR.
 
 ## 2. Chạy Lệnh Build

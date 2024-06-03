@@ -1,3 +1,4 @@
+import type { USER_ROLE } from '@/constants'
 import { POSITION } from 'vue-toastification'
 import { ToastType } from './toastMessage'
 
@@ -27,4 +28,21 @@ export interface ResponseSuccess {
 export interface ResponseSuccessNoContent {
   code: number
   message: string
+}
+
+export interface LoadingState {
+  isLoading: boolean
+}
+
+export interface AuthState {
+  access_token: string | null
+  user: UserDetail | null
+}
+export type UserRole = (typeof USER_ROLE)[keyof typeof USER_ROLE]
+
+export interface UserDetail {
+  id: number
+  username: string
+  email: string
+  role: UserRole
 }

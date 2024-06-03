@@ -1,9 +1,16 @@
 import authRouter from '@/router/router.auth'
 import type { NavigationGuard, RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
+import adminRouter from './router.admin'
+import authorRouter from './router.author'
 import homeRouter from './router.home'
 
-const routes: Array<RouteRecordRaw> = [...authRouter, ...homeRouter]
+const routes: Array<RouteRecordRaw> = [
+  ...authRouter,
+  ...homeRouter,
+  ...adminRouter,
+  ...authorRouter
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

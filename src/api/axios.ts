@@ -1,6 +1,7 @@
 import type { AxiosResponse } from 'axios'
 import axios, { AxiosError } from 'axios'
 
+import App from '@/App.vue'
 import {
   CODE_ACTION_CANNOT_DONE,
   CODE_UNAUTHENTICATED,
@@ -19,7 +20,11 @@ import {
 import router from '@/router'
 import { useAuthStore } from '@/stores/modules/auth'
 import type { ResponseError } from '@/types'
-const authStore = useAuthStore()
+import { createPinia } from 'pinia'
+const pinia = createPinia()
+const app = createApp(App)
+app.use(pinia)
+
 const instance = axios.create({
   baseURL: `${import.meta.env.VITE_API_BASE_URL}/${import.meta.env.VITE_API_PREFIX}`,
   timeout: 10000,
@@ -46,7 +51,8 @@ instance.interceptors.response.use(
     return response.data
   },
   (error: AxiosError) => {
-    // network error
+    const authStore = useAuthStore()
+    // Network error
     const errorResponse = error.response
     const httpCode = errorResponse?.status
     const errorData = errorResponse?.data as ResponseError
@@ -67,7 +73,7 @@ instance.interceptors.response.use(
     }
 
     switch (httpCode) {
-      // validation
+      // Validation
       case HTTP_DATA_INVALID:
         return Promise.reject(errorData.errors)
 

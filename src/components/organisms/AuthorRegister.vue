@@ -4,7 +4,7 @@
       @click.stop
       class="w-[400px] shadow-sm mx-auto mt-20 h-fit flex flex-col bg-white p-10 rounded-lg"
     >
-      <base-icon name="cancel" @click="show = !show" class="self-end w-8 h-8"></base-icon>
+      <base-icon name="cancel" @click="emit('show', false)" class="self-end w-8 h-8"></base-icon>
       <label htmlFor="fileUpload" class="flex justify-center relative mb-6">
         <img
           v-if="imagePreview"
@@ -47,7 +47,6 @@ import { ALLOWED_IMAGE_TYPES, MAX_TEXT_INPUT } from '@/constants'
 import i18n from '@/i18n'
 import { useAuthStore } from '@/stores/modules/auth'
 import { ToastType } from '@/types'
-import { USER_ROLE } from '@/constants'
 import { showToast } from '@/utils/toastHelper'
 import { useField } from 'vee-validate'
 import { ref } from 'vue'

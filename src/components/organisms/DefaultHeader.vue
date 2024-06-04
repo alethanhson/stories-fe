@@ -53,7 +53,7 @@
     <div
       ref="navbar"
       :class="{ 'w-1/2 md:w-0 ': isOpen, 'w-0 ': !isOpen }"
-      class="h-screen top-0 bg-white text-black pt-5 shadow-lg absolute right-0 transition-all duration-200 ease-in-out overflow-hidden"
+      class="h-screen top-0 bg-white text-black pt-5 shadow-lg absolute right-0 transition-all duration-200 ease-in-out overflow-hidden z-50"
     >
       <div v-show="isOpen">
         <div class="w-full px-4 flex items-center flex-row-reverse gap-5 text-nowrap">
@@ -94,9 +94,9 @@ import logo from '@/assets/images/logo.jpg'
 import type { DropdownInstance } from 'element-plus'
 
 const search = ref('')
-const isLogin = ref(true)
+const isLogin = ref(false)
 const navbar = ref<HTMLElement | null>(null)
-const isOpen = ref(true)
+const isOpen = ref(false)
 const dropdown = ref<DropdownInstance>()
 
 function showClick() {

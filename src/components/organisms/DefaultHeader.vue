@@ -26,7 +26,9 @@
     <div class="gap-2 items-center md:flex hidden">
       <el-button type="warning" round plain>Service Package</el-button>
       <el-button v-if="!isLogin" type="primary" round>Login</el-button>
-      <el-button v-if="!isLogin" type="success" round>Register</el-button>
+      <router-link v-if="!isLogin" :to="{ name: 'register' }" class="w-full">
+        <el-button type="success" round>Register</el-button>
+      </router-link>
       <el-dropdown v-if="isLogin" ref="dropdown" trigger="contextmenu">
         <span class="el-dropdown-link">
           <div
@@ -79,9 +81,11 @@
 
         <main class="w-full px-5 bg-fuchsia-400">content</main>
 
-        <footer class="bottom-0 w-full px-5 py-3 absolute bg-cyan-100 flex">
+        <footer class="bottom-0 w-full px-5 py-3 absolute bg-cyan-100 flex gap-3">
           <el-button type="primary" plain class="w-full">Login</el-button>
-          <el-button type="info" plain class="w-full">Register</el-button>
+          <router-link :to="{ name: 'register' }" class="w-full">
+            <el-button type="info" class="w-full" plain>Register</el-button>
+          </router-link>
         </footer>
       </div>
     </div>

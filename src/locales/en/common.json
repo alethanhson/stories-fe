@@ -1,0 +1,9 @@
+{
+    "logout_success": "Logout successfully",
+    "logout_error": "An error occurred while logging out",
+    "unauthorized": "You don't have authorized",
+    "success": "Success",
+    "error": "Error",
+    "accept": "Accept",
+    "cancel": "Cancel"
+}

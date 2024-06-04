@@ -34,7 +34,7 @@
       >
       </base-input-field>
       <div class="flex gap-6 justify-between mt-6">
-        <base-button status="error">{{ t('common.cancel') }}</base-button>
+        <base-button status="error" @click="emit('show', false)">{{ t('common.cancel') }}</base-button>
         <base-button status="success" @click="createAuthor">{{ t('common.accept') }}</base-button>
       </div>
     </div>
@@ -91,7 +91,7 @@ const createAuthor = async () => {
     try {
       await authors.create(author)
       showToast(t('author.register_success'), ToastType.SUCCESS)
-      show.value = !show.value
+      emit('show', false)
     } catch (error) {
       showToast(t('author.register_failed'), ToastType.ERROR)
       console.log(error)

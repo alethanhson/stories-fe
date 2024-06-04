@@ -118,7 +118,7 @@ const handleClick = (event) => {
     isOpen.value = false
   }
 }
-const show = (show:Boolean) => {
+const show = (show:boolean) => {
   showAuthorRegis.value = show
 }
 

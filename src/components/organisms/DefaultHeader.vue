@@ -39,7 +39,9 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>Profile</el-dropdown-item>
-            <el-dropdown-item @click="showAuthorRegis = true">Register as an author</el-dropdown-item>
+            <el-dropdown-item @click="showAuthorRegis = true"
+              >Register as an author</el-dropdown-item
+            >
             <el-dropdown-item>Manager Service Package</el-dropdown-item>
             <el-dropdown-item>Setting</el-dropdown-item>
             <el-dropdown-item>Logout</el-dropdown-item>
@@ -86,7 +88,7 @@
       </div>
     </div>
   </div>
-  <author-register :showAuthorRegis = "showAuthorRegis" @show = "show"></author-register>
+  <author-register :showAuthorRegis="showAuthorRegis" @show="show"></author-register>
 </template>
 
 <script setup lang="ts">
@@ -118,7 +120,7 @@ const handleClick = (event) => {
     isOpen.value = false
   }
 }
-const show = (show:boolean) => {
+const show = (show: boolean) => {
   showAuthorRegis.value = show
 }
 

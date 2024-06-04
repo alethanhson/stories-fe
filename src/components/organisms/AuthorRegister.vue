@@ -1,5 +1,9 @@
 <template>
-  <div v-if="props.showAuthorRegis" @click="emit('show', false)" class="fixed inset-0 bg-gray-25 bg-opacity-60">
+  <div
+    v-if="props.showAuthorRegis"
+    @click="emit('show', false)"
+    class="fixed inset-0 bg-gray-25 bg-opacity-60"
+  >
     <div
       @click.stop
       class="w-[400px] shadow-sm mx-auto mt-20 h-fit flex flex-col bg-white p-10 rounded-lg"
@@ -34,7 +38,9 @@
       >
       </base-input-field>
       <div class="flex gap-6 justify-between mt-6">
-        <base-button status="error" @click="emit('show', false)">{{ t('common.cancel') }}</base-button>
+        <base-button status="error" @click="emit('show', false)">{{
+          t('common.cancel')
+        }}</base-button>
         <base-button status="success" @click="createAuthor">{{ t('common.accept') }}</base-button>
       </div>
     </div>
@@ -54,9 +60,9 @@ const props = defineProps({
   showAuthorRegis: {
     type: Boolean,
     default: false
-  },
+  }
 })
-const emit =defineEmits(['show'])
+const emit = defineEmits(['show'])
 const authStore = useAuthStore()
 const { t } = i18n.global
 const imagePreview = ref<string | null>(null)

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-gray-100 h-full relative flex flex-col items-center gap-3 text-gray-600">
+  <div class="p-4 bg-gray-100 h-screen relative flex flex-col items-center gap-3 text-gray-600">
     <div class="w-5 h-5 absolute top-4 left-4 cursor-pointer" @click="$router.back()">
       <BaseIcon name="arrowLeft" stroke="white" fill="white" :isActiveHover="true" />
     </div>
@@ -19,7 +19,7 @@
             class="absolute cursor-pointer bottom-1 right-1 w-5 h-5 text-gray-300"
           >
             <BaseIcon name="photo" />
-            <BaseInput
+            <BaseInputField
               id="abc"
               @change="onFileChange"
               fieldName="avatar"
@@ -27,13 +27,13 @@
               accept="image/*"
               class="mt-1 border-blue-300 hidden"
             >
-            </BaseInput>
+            </BaseInputField>
           </label>
         </div>
       </div>
       <div class="w-full relative">
         <label for="" class="text-left">Email:</label>
-        <BaseInput
+        <BaseInputField
           id="a"
           v-model="userForm.email"
           fieldName="email"
@@ -43,14 +43,14 @@
           :error="errors.email"
           @keyup.enter="register"
         >
-        </BaseInput>
+        </BaseInputField>
         <span v-show="errors.email && isSubmit" class="text-red-500 absolute text-[0.7rem]">
           {{ errors.email }}
         </span>
       </div>
       <div class="w-full">
         <label for="" class="text-left">Username:</label>
-        <BaseInput
+        <BaseInputField
           id="b"
           v-model="userForm.username"
           fieldName="username"
@@ -59,14 +59,14 @@
           :error="errors.username"
           @keyup.enter="register"
         >
-        </BaseInput>
+        </BaseInputField>
         <span v-show="errors.username && isSubmit" class="text-red-500 absolute text-[0.7rem]">
           {{ errors.username }}
         </span>
       </div>
       <div class="w-full relative">
         <label for="" class="text-left">Password:</label>
-        <BaseInput
+        <BaseInputField
           id="c"
           v-model="userForm.password"
           fieldName="password"
@@ -76,7 +76,7 @@
           :error="errors.password"
           @keyup.enter="register"
         >
-        </BaseInput>
+        </BaseInputField>
         <div
           class="absolute w-5 right-2 top-1/2 translate-y-1/2 cursor-pointer"
           @click="showPassword = !showPassword"
@@ -89,7 +89,7 @@
       </div>
       <div class="w-full">
         <label for="" class="text-left">Fullname:</label>
-        <BaseInput
+        <BaseInputField
           id="d"
           v-model="userForm.full_name"
           fieldName="fullname"
@@ -99,7 +99,7 @@
           :error="errors.fullname"
           @keyup.enter="register"
         >
-        </BaseInput>
+        </BaseInputField>
         <span v-show="errors.fullname && isSubmit" class="text-red-500 absolute text-[0.7rem]">
           {{ errors.fullname }}
         </span>

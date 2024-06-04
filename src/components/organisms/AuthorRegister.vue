@@ -1,8 +1,8 @@
 <template>
-  <div v-if="show" @click="show = !show" class="fixed w-full h-full bg-gray-25 opacity-80">
+  <div v-if="props.showAuthorRegis" @click="emit('show', false)" class="fixed inset-0 bg-gray-25 bg-opacity-60">
     <div
       @click.stop
-      class="w-[400px] shadow-sm m-auto h-fit flex flex-col bg-white z-10 p-10 rounded-lg"
+      class="w-[400px] shadow-sm mx-auto mt-20 h-fit flex flex-col bg-white p-10 rounded-lg"
     >
       <base-icon name="cancel" @click="show = !show" class="self-end w-8 h-8"></base-icon>
       <label htmlFor="fileUpload" class="flex justify-center relative mb-6">
@@ -47,11 +47,18 @@ import { ALLOWED_IMAGE_TYPES, MAX_TEXT_INPUT } from '@/constants'
 import i18n from '@/i18n'
 import { useAuthStore } from '@/stores/modules/auth'
 import { ToastType } from '@/types'
+import { USER_ROLE } from '@/constants'
 import { showToast } from '@/utils/toastHelper'
 import { useField } from 'vee-validate'
 import { ref } from 'vue'
+const props = defineProps({
+  showAuthorRegis: {
+    type: Boolean,
+    default: false
+  },
+})
+const emit =defineEmits(['show'])
 const authStore = useAuthStore()
-const show = ref<boolean>(true)
 const { t } = i18n.global
 const imagePreview = ref<string | null>(null)
 const author = reactive<FormAuthorData>({

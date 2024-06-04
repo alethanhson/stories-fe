@@ -96,9 +96,11 @@
 import avatarDefault from '@/assets/images/default_avatar.png'
 import logo from '@/assets/images/logo.jpg'
 import type { DropdownInstance } from 'element-plus'
+import { useAuthStore } from '@/stores/modules/auth'
 
+const authStore = useAuthStore()
 const search = ref('')
-const isLogin = ref(false)
+const isLogin = authStore.isLoggedIn
 const navbar = ref<HTMLElement | null>(null)
 const isOpen = ref(false)
 const dropdown = ref<DropdownInstance>()

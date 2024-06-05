@@ -11,6 +11,7 @@
         v-for="genre in genres"
         :key="indexPrefix + genre.id"
         :title="genre.name_genre"
+        class="!px-0 md:!px-[20px]"
       >
         <span class="overflow-hidden text-ellipsis">{{ genre.name_genre }}</span>
       </el-menu-item>

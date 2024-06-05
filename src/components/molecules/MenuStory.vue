@@ -10,6 +10,7 @@
       v-for="story in stories"
       :key="indexPrefix + story.id"
       :title="story.title"
+      class="!px-0 md:!px-[20px]"
     >
       <div :class="['justify-between', 'w-full', 'flex', 'items-center']">
         <span class="overflow-hidden text-ellipsis">{{ story.title }}</span>

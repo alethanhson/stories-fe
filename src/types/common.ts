@@ -56,5 +56,7 @@ export interface Genre {
 export interface Story {
   id: number
   title: string
+  id_genre: number
+  type: string
   views?: number
 }

@@ -28,7 +28,9 @@
       <router-link :to="{ name: 'login' }">
         <el-button v-if="!isLogin" type="primary" round>Login</el-button>
       </router-link>
-      <el-button v-if="!isLogin" type="success" round>Register</el-button>
+      <router-link v-if="!isLogin" :to="{ name: 'register' }" class="w-full">
+        <el-button type="success" round>Register</el-button>
+      </router-link>
       <el-dropdown v-if="isLogin" ref="dropdown" trigger="contextmenu">
         <span class="el-dropdown-link">
           <div
@@ -55,7 +57,7 @@
     <div
       ref="navbar"
       :class="{ 'w-1/2 md:w-0 ': isOpen, 'w-0 ': !isOpen }"
-      class="h-screen top-0 bg-white text-black pt-5 shadow-lg absolute right-0 transition-all duration-200 ease-in-out overflow-hidden"
+      class="h-screen top-0 bg-white text-black pt-5 shadow-lg absolute right-0 transition-all duration-200 ease-in-out overflow-hidden z-50"
     >
       <div v-show="isOpen">
         <div class="w-full px-4 flex items-center flex-row-reverse gap-5 text-nowrap">
@@ -103,10 +105,9 @@ import { ToastType } from '@/types'
 
 const authStore = useAuthStore()
 const isLogin = computed(() => !!authStore.isLoggedIn)
-
 const search = ref('')
 const navbar = ref<HTMLElement | null>(null)
-const isOpen = ref(true)
+const isOpen = ref(false)
 const dropdown = ref<DropdownInstance>()
 
 function showClick() {

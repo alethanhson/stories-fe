@@ -24,7 +24,9 @@
     </div>
 
     <div class="gap-2 items-center md:flex hidden">
-      <el-button type="warning" round plain>Service Package</el-button>
+      <router-link :to="{ name: 'service-package' }">
+        <el-button type="warning" round plain>Service Package</el-button>
+      </router-link>
       <el-button v-if="!isLogin" type="primary" round>Login</el-button>
       <router-link v-if="!isLogin" :to="{ name: 'register' }" class="w-full">
         <el-button type="success" round>Register</el-button>

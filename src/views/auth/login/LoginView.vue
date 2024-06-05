@@ -80,16 +80,21 @@ const handleLogin = async () => {
     clearObject(errorMsg)
     await authStore.login(state)
     const currentUser = await authStore.currentUser
+    const roleNumber = parseInt(currentUser.role, 10)
 
-    if (currentUser.role == USER_ROLE.ADMIN) {
-      router.push({ name: 'dashboard_admin' })
-    } else if (currentUser.role == USER_ROLE.AUTHOR) {
-      router.push({ name: 'dashboard_author' })
-    } else if (currentUser.role == USER_ROLE.USER) {
-      router.push({ name: 'home' })
+    switch (roleNumber) {
+      case USER_ROLE.ADMIN:
+        router.push({ name: 'dashboard_admin' })
+        break
+      case USER_ROLE.AUTHOR:
+        router.push({ name: 'dashboard_author' })
+        break
+      case USER_ROLE.USER:
+        router.push({ name: 'home' })
+        break
+      default:
+        router.push({ name: 'login' })
     }
-
-    console.log('success')
   } catch (error: any) {
     if (error.email) {
       errorMsg.email = error.email

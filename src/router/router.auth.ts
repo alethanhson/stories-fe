@@ -1,10 +1,18 @@
+import { useAuthStore } from '@/stores/modules/auth'
 import type { RouteRecordRaw } from 'vue-router'
 
 const authRouter: Array<RouteRecordRaw> = [
   {
     path: '/auth/login',
     name: 'login',
-    component: () => import('@/views/auth/login/LoginView.vue')
+    component: () => import('@/views/auth/login/LoginView.vue'),
+    beforeEnter(to, from, next) {
+      const authStore = useAuthStore()
+      if (authStore.isLoggedIn) {
+        return next(from)
+      }
+      next()
+    }
   },
   {
     path: '/auth/register',

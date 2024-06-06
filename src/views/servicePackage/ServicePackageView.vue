@@ -66,7 +66,6 @@ const fetchServicePackageList = async () => {
 const fetchServicePackageListPopular = async () => {
   const { data }: ServicePackageResponse = await fetchServicePopular()
   servicePopularList.push(...data)
-  console.log('servicePopularList: ', servicePopularList)
 }
 </script>
 

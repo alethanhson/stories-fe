@@ -16,16 +16,30 @@
         </div>
       </div>
     </div>
+
     <div
       class="bg-gradient-to-r from-purple-500 to-pink-500 w-full min-h-screen py-10 px-4 sm:px-10 md:px-20"
     >
-      <p class="font-bold text-4xl">Popular packages</p>
-      <p class="font-semibold mt-2">Use a bank account, momo wallet or vnpay wallet</p>
+      <div>
+        <p class="font-bold text-4xl">Popular packages</p>
+        <p class="font-semibold mt-2">Use a bank account, momo wallet or vnpay wallet</p>
 
-      <div class="grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-10 mt-10">
-        <template v-for="item in servicePackageList" :key="item.id">
-          <BasePackage :servicePackage="item"
-        /></template>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-10 mt-10">
+          <template v-for="item in servicePopularList" :key="item.id">
+            <BasePackage :servicePackage="item"
+          /></template>
+        </div>
+      </div>
+
+      <div class="mt-10">
+        <p class="font-bold text-4xl">Other packages</p>
+        <p class="font-semibold mt-2">Use a bank account, momo wallet or vnpay wallet</p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-10 mt-10">
+          <template v-for="item in servicePackageList" :key="item.id">
+            <BasePackage :servicePackage="item"
+          /></template>
+        </div>
       </div>
     </div>
   </div>
@@ -33,18 +47,26 @@
 
 <script setup lang="ts">
 import coverImg from '@/assets/images/cover_img.png'
-import { fetchServicePackage } from '@/api/modules/servicePackage'
+import { fetchServicePackage, fetchServicePopular } from '@/api/modules/servicePackage'
 import type { ServicePackageResponse, ServicePackage } from '@/api/modules/servicePackage/types'
 
 const servicePackageList = reactive<ServicePackage[]>([])
+const servicePopularList = reactive<ServicePackage[]>([])
 
 onMounted(async () => {
+  fetchServicePackageListPopular()
   await fetchServicePackageList()
 })
 
 const fetchServicePackageList = async () => {
   const { data }: ServicePackageResponse = await fetchServicePackage()
   servicePackageList.push(...data)
+}
+
+const fetchServicePackageListPopular = async () => {
+  const { data }: ServicePackageResponse = await fetchServicePopular()
+  servicePopularList.push(...data)
+  console.log('servicePopularList: ', servicePopularList)
 }
 </script>
 

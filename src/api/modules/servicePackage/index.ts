@@ -9,6 +9,14 @@ export const fetchServicePackage = async (): Promise<ServicePackageResponse> => 
   }
 }
 
+export const fetchServicePopular = async (): Promise<ServicePackageResponse> => {
+  try {
+    return await axios.get('/service-package/data-popular')
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
 export const registerServiceApi = async (
   payload: RegisterServiceForm
 ): Promise<RegisterServiceResponse> => {

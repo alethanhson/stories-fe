@@ -37,12 +37,14 @@ import { SERVICE_PACKAGE } from '@/constants'
 import { ToastType } from '@/types'
 import { showToast } from '@/utils'
 import { useUserServiceStore } from '@/stores/modules/servicePackage'
+import { useAuthStore } from '@/stores/modules/auth'
 import type {
   RegisterServiceForm,
   RegisterServiceResponse
 } from '@/api/modules/servicePackage/types'
 
 const userServiceStore = useUserServiceStore()
+const userStore = useAuthStore()
 
 const props = defineProps({
   isBorder: {
@@ -71,7 +73,7 @@ const style = {
 }
 
 const registerServiceForm = reactive<RegisterServiceForm>({
-  user_id: 2,
+  user_id: userStore.currentUser.id,
   service_package_id: props.servicePackage.id
 })
 

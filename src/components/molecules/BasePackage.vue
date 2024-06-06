@@ -16,8 +16,9 @@
         type="primary"
         round
         class="mt-3 font-semibold bg-main-primary-300 px-4 py-2 w-full rounded-3xl hover:bg-main-primary-400"
-        >Buy</el-button
-      >
+        @click="registerService()"
+        >Buy
+      </el-button>
     </div>
     <div
       v-if="tag"
@@ -33,6 +34,15 @@
 
 <script setup lang="ts">
 import { SERVICE_PACKAGE } from '@/constants'
+import { ToastType } from '@/types'
+import { showToast } from '@/utils'
+import { useUserServiceStore } from '@/stores/modules/servicePackage'
+import type {
+  RegisterServiceForm,
+  RegisterServiceResponse
+} from '@/api/modules/servicePackage/types'
+
+const userServiceStore = useUserServiceStore()
 
 const props = defineProps({
   isBorder: {
@@ -60,6 +70,11 @@ const style = {
   }
 }
 
+const registerServiceForm = reactive<RegisterServiceForm>({
+  user_id: 2,
+  service_package_id: props.servicePackage.id
+})
+
 const formatVND = (vnd: number) => {
   return vnd.toLocaleString('vi', { style: 'currency', currency: 'VND' })
 }
@@ -69,16 +84,24 @@ const pricePerDay = () => {
 }
 function handleBorder() {
   const sp = props.servicePackage
-  console.log('sp: ', sp)
   if (sp.type == SERVICE_PACKAGE.BASE) {
     return style.border.base
   } else if (sp.type == SERVICE_PACKAGE.PRO) {
     return style.border.pro
   }
 }
+async function registerService() {
+  try {
+    const userService: RegisterServiceResponse =
+      await userServiceStore.registerService(registerServiceForm)
+    if (userService) showToast(userService.message, ToastType.SUCCESS)
+  } catch (error: any) {
+    showToast(error.message, ToastType.ERROR)
+  }
+}
 </script>
 
-<style>
+<style scoped>
 .border-pro {
   border: solid transparent;
   border-image: linear-gradient(to right, #ec4899, #f43f5e, #f59e0b) 1;

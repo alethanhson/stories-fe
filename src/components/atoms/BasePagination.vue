@@ -53,7 +53,7 @@ const props = defineProps({
     default: false
   }
 })
-const pagerCount = ref<Number>(5)
+const pagerCount = ref<number>(5)
 
 const form = computed(() => {
   return {

@@ -7,11 +7,7 @@ export const useUserServiceStore = defineStore('service', {
   getters: {},
   actions: {
     async registerService(payload: RegisterServiceForm) {
-      try {
-        return await registerServiceApi(payload)
-      } catch (error) {
-        return Promise.reject(error)
-      }
+      return await registerServiceApi(payload)
     }
   }
 })

@@ -1,5 +1,5 @@
 import HeaderLayout from '@/layouts/HeaderLayout.vue'
-// import { checkLogin } from '@/middleware/checkLogin'
+import { checkLogin } from '@/middleware/checkLogin'
 import type { RouteRecordRaw } from 'vue-router'
 
 const servicePackage: Array<RouteRecordRaw> = [
@@ -8,7 +8,7 @@ const servicePackage: Array<RouteRecordRaw> = [
     name: 'service-package-parent',
     component: HeaderLayout,
     meta: {
-      // middleware: [checkLogin]
+      middleware: [checkLogin]
     },
     children: [
       {

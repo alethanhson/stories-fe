@@ -12,13 +12,17 @@
     <div class="flex flex-col items-center mt-7 text-xl w-full">
       <p class="font-semibold text-3xl">{{ formatVND(servicePackage.price) }}</p>
       <span class="text-base">{{ formatVND(pricePerDay()) }} / day</span>
-      <el-button
-        type="primary"
-        round
-        class="mt-3 font-semibold bg-main-primary-300 px-4 py-2 w-full rounded-3xl hover:bg-main-primary-400"
-        @click="registerService()"
-        >Buy
-      </el-button>
+      <router-link
+        :to="{ name: 'gateway', params: { service_package_id: servicePackage.id } }"
+        class="w-full"
+      >
+        <el-button
+          type="primary"
+          round
+          class="mt-3 font-semibold bg-main-primary-300 px-4 py-2 w-full rounded-3xl hover:bg-main-primary-400"
+          >Buy
+        </el-button>
+      </router-link>
     </div>
     <div
       v-if="tag"
@@ -73,7 +77,8 @@ const style = {
 }
 
 const registerServiceForm = reactive<RegisterServiceForm>({
-  user_id: userStore.currentUser.id,
+  // user_id: userStore.currentUser.id,
+  user_id: 2,
   service_package_id: props.servicePackage.id
 })
 

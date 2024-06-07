@@ -6,7 +6,7 @@ const userServiceResource = '/user-service-packages'
 
 export const fetchServicePackage = async (): Promise<ServicePackageResponse> => {
   try {
-    return await axios.get(`${serviceResource}/data`)
+    return await axios.get(`${serviceResource}`)
   } catch (error) {
     return Promise.reject(error)
   }
@@ -23,5 +23,5 @@ export const fetchServicePopular = async (): Promise<ServicePackageResponse> => 
 export const registerServiceApi = async (
   payload: RegisterServiceForm
 ): Promise<RegisterServiceResponse> => {
-  return await axios.post(`${userServiceResource}/create`, payload)
+  return await axios.post(`${userServiceResource}`, payload)
 }

@@ -14,6 +14,9 @@ export default {
         'body-s': ['1rem', 1.5], //16px, 24px
         'body-xs': ['0.875rem', '18px'], //14px, 16px
       },
+      backgroundImage: {
+        'gradient-to-r-custom': 'linear-gradient(to right, #ec4899, #f43f5e, #f59e0b)',
+      },
       colors: {
         current: 'currentcolor',
         'main-color': '#000000',

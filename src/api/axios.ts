@@ -15,7 +15,8 @@ import {
   HTTP_SERVER_ERROR,
   HTTP_TOO_MANY_REQUESTS,
   HTTP_UNAUTHORIZED,
-  HTTP_UNKNOW_STATUS
+  HTTP_UNKNOW_STATUS,
+  HTTP_CONFLICT
 } from '@/constants'
 import router from '@/router'
 import { useAuthStore } from '@/stores/modules/auth'
@@ -94,6 +95,10 @@ instance.interceptors.response.use(
         }
 
         return Promise.reject(errorData)
+
+      case HTTP_CONFLICT:
+        return Promise.reject(errorData)
+
       default:
         return
     }

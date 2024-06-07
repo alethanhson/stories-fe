@@ -1,4 +1,4 @@
-import { USER_ROLE, USER_STATUS } from '@/constants'
+import { USER_ROLE } from '@/constants'
 import i18n from '@/i18n'
 import router from '@/router'
 import { useAuthStore } from '@/stores/modules/auth'
@@ -35,24 +35,13 @@ export async function checkLogin(
     if (to.name === 'login' || excludedRoutes.includes(to.name as string)) {
       return next({ name: 'login' })
     }
-
-    if (auth.status === USER_STATUS.INACTIVE) {
-      authStore.logout().then(() => router.push({ name: 'login' }))
-      return
-    }
-
+    
     to.matched.some((record) => {
       if (record.meta.isParent && record.meta.role !== auth.role && to.path !== '/') {
         router.push({ name: 'page_error' })
         return
       }
     })
-
-    if (to.name === 'dashboard_admin' && auth.role != USER_ROLE.ADMIN) {
-      showToast(i18n.global.t('common.unauthorized'), ToastType.ERROR)
-
-      return next({ name: 'page_unauthorized' })
-    }
 
     if (to.name === 'dashboard_admin' && auth.role != USER_ROLE.ADMIN) {
       showToast(i18n.global.t('common.unauthorized'), ToastType.ERROR)

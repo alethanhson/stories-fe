@@ -1,7 +1,7 @@
 <template>
   <div
-    class="p-5 rounded-xl flex items-center gap-4 cursor-pointer box-content"
-    :class="[isActive ? 'outline-2 outline outline-main-primary-300' : '']"
+    class="p-5 rounded-xl flex items-center gap-4 cursor-pointer box-content outline"
+    :class="[isActive ? 'outline-2 outline-main-primary-300' : 'outline-1 outline-[#212121]']"
   >
     <div class="w-7">
       <BaseIcon name="bank" :class="[isActive ? 'fill-main-primary-300' : 'fill-white']" />

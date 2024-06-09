@@ -51,11 +51,14 @@ import { showToast } from '@/utils/toastHelper'
 import { useForm } from 'vee-validate'
 import { USER_ROLE } from '@/constants/user-status'
 import { loginForm, messageErrorLogin } from './login.common'
+import i18n from '@/i18n'
 
+const { t } = i18n.global
 const authStore = useAuthStore()
 const loadingStore = useLoadingStore()
 const hasEmailError = ref(false)
 const router = useRouter()
+const route = useRoute()
 
 const state = reactive({ ...loginForm })
 const errorMsg = reactive({ ...messageErrorLogin })
@@ -104,9 +107,16 @@ const handleLogin = async () => {
     }
   }
 }
+const verifyNotification = () => {
+  if (route.query.statusNotify) {
+    showToast(t('auth.verify_success'), ToastType.SUCCESS)
+    router.replace({ query: {} })
+  }
+}
 
 onMounted(async () => {
   setLoading()
   removeLoading()
+  verifyNotification()
 })
 </script>

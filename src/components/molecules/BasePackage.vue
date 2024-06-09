@@ -42,6 +42,7 @@ import { ToastType } from '@/types'
 import { showToast } from '@/utils'
 import { useUserServiceStore } from '@/stores/modules/servicePackage'
 import { useAuthStore } from '@/stores/modules/auth'
+import { formatVND } from '@/utils'
 import type {
   RegisterServiceForm,
   RegisterServiceResponse
@@ -71,8 +72,8 @@ const props = defineProps({
 
 const style = {
   border: {
-    base: 'border-green-400',
-    pro: 'border-pro'
+    [SERVICE_PACKAGE.BASE]: 'border-green-400',
+    [SERVICE_PACKAGE.PRO]: 'border-pro'
   }
 }
 
@@ -82,22 +83,15 @@ const registerServiceForm = reactive<RegisterServiceForm>({
   service_package_id: props.servicePackage.id
 })
 
-const formatVND = (vnd: number) => {
-  return vnd.toLocaleString('vi', { style: 'currency', currency: 'VND' })
-}
 const pricePerDay = () => {
   const sp = props.servicePackage
   return sp.price / sp.duration
 }
-function handleBorder() {
+const handleBorder = () => {
   const sp = props.servicePackage
-  if (sp.type == SERVICE_PACKAGE.BASE) {
-    return style.border.base
-  } else if (sp.type == SERVICE_PACKAGE.PRO) {
-    return style.border.pro
-  }
+  return style.border[sp.type]
 }
-async function registerService() {
+const registerService = async () => {
   try {
     const userService: RegisterServiceResponse =
       await userServiceStore.registerService(registerServiceForm)

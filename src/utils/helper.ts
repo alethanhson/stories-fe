@@ -27,3 +27,7 @@ export const getFirstDayOfMonth = () => {
 export const getLastDayOfMonth = () => {
   return dayjs().endOf('month').format('YYYY/MM/DD')
 }
+
+export const formatVND = (vnd: number) => {
+  return vnd.toLocaleString('vi', { style: 'currency', currency: 'VND' })
+}

@@ -1,5 +1,12 @@
 import axios from '@/api/axios'
-import type { FormRegister, LoginRequest, LoginResponse, RegisterResponse } from './types'
+import type {
+  FormRegister,
+  LoginRequest,
+  LoginResponse,
+  LogoutRequest,
+  LogoutResponse,
+  RegisterResponse
+} from './types'
 
 const headers = {
   'Content-Type': 'multipart/form-data'
@@ -24,6 +31,18 @@ export const register = async (data: FormRegister): Promise<RegisterResponse> =>
 export const resendEmail = async (data: FormRegister): Promise<RegisterResponse> => {
   try {
     return await axios.post('/send-email', data, { headers })
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+export const logout = async (data: LogoutRequest): Promise<LogoutResponse> => {
+  try {
+    return await axios.post('auth/logout', data, {
+      headers: {
+        Authorization: `Bearer ${data.access_token}`
+      }
+    })
   } catch (error) {
     return Promise.reject(error)
   }

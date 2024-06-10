@@ -1,4 +1,9 @@
-import { login as apiLogin, register as registerApi, resendEmail } from '@/api/modules/auth'
+import {
+  login as apiLogin,
+  register as registerApi,
+  logout as apiLogout,
+  resendEmail
+} from '@/api/modules/auth'
 import type { FormRegister } from '@/api/modules/auth/types'
 import { defineStore } from 'pinia'
 
@@ -22,14 +27,17 @@ export const useAuthStore = defineStore('auth', {
       localStorage.setItem('access_token', token)
       return Promise.resolve()
     },
-    logout() {
-      return new Promise<void>((resolve) => {
+    async logout() {
+      try {
+        const accessToken: any = this.access_token
+        await apiLogout({ access_token: accessToken })
         this.access_token = null
         this.user = null
         localStorage.removeItem('access_token')
         localStorage.removeItem('user')
-        resolve()
-      })
+      } catch (error) {
+        return Promise.reject(error)
+      }
     },
     async login(credentials: any) {
       try {

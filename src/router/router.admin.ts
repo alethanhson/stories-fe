@@ -1,11 +1,11 @@
-import DefaultLayout from '@/layouts/BaseLayout.vue'
+import AdminLayout from '@/layouts/AdminLayout.vue'
 import { checkLogin } from '@/middleware/checkLogin'
 import type { RouteRecordRaw } from 'vue-router'
 
 const adminRouter: Array<RouteRecordRaw> = [
   {
     path: '/admin',
-    component: DefaultLayout,
+    component: AdminLayout,
     meta: {
       middleware: [checkLogin]
     },

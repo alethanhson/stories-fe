@@ -12,60 +12,77 @@
               {{ item }}
             </BaseSelect>
             <div
-              v-if="item == 'ATM Card'"
-              class="ps-10 grid grid-cols-4 gap-2 cursor-pointer transition-all duration-300 ease-in overflow-hidden"
+              v-if="item == PAYMENTS.ATM"
+              class="xl:ps-10 grid xl:grid-cols-4 sm:grid-cols-2 gap-2 cursor-pointer px-1 transition-all duration-300 ease-in overflow-hidden"
               :class="[paymentType == item ? 'max-h-[2500px] py-5' : 'max-h-0 py-0']"
             >
-              <BankLabel v-for="bank in bankList" :key="bank" :bank="bank" />
+              <BankLabel
+                v-for="(bank, index) in bankList"
+                :key="bank"
+                :bank="bank"
+                :isActive="bankActive == index"
+                @click="selectBank(index)"
+              />
             </div>
           </div>
         </div>
       </div>
 
-      <div class="bg-pink-500 flex-[3]">
-        <div class="w-full bg-blue-400">
-          Payment Info
-          <table class="table-auto w-full ">
-            <tbody>
-              <tr class="">
-                <td>Package</td>
-                <td>oke</td>
-              </tr>
-              <tr>
-                <td>Package</td>
-                <td>oke</td>
-              </tr>
-              <tr>
-                <td>Package</td>
-                <td>oke</td>
-              </tr>
-              <tr>
-                <td>Package</td>
-                <td>oke</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <BillingInfomation
+        :servicePackageList="servicePackageList"
+        :paymentType="paymentType"
+        :bankList="bankList"
+        :items="items"
+        :active="active"
+        :bankActive="bankActive"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { fetchBankList } from '@/api/modules/common'
+import type { ServicePackage } from '@/api/modules/servicePackage/types'
+import { useUserServiceStore } from '@/stores/modules/servicePackage'
+import { servicePackage } from './service.common'
+import { PAYMENTS } from '@/constants'
 
-const items = ['Oke', 'ATM Card', 'XYZZZZ']
+const items = [PAYMENTS.STRIPE, PAYMENTS.ATM]
 const active = ref(0)
-const bankList = ref([])
-const paymentType = ref('')
+const bankActive = ref(0)
+const bankList = reactive<any>([])
+const paymentType = ref(items[0])
+const serviceStore = useUserServiceStore()
+const servicePackageList = reactive<ServicePackage[]>([])
+const route = useRoute()
+const paymentMethod = ref(parseInt(route.params.service_package_id + ''))
 
 onMounted(async () => {
-  await loadBankList()
+  loadBankList()
+  await getServicePackage()
 })
+watch(
+  () => serviceStore.servicePackage,
+  (newV) => {
+    servicePackageList.splice(0, servicePackageList.length)
+    servicePackageList.push(...newV)
+  }
+)
 
 const loadBankList = async () => {
   const response: any = await fetchBankList()
-  bankList.value = response.data.data
+  bankList.push(...response.data.data)
+}
+const getServicePackage = async () => {
+  try {
+    servicePackage.value = await serviceStore.findServicePackage(paymentMethod.value)
+  } catch (error) {
+    console.log('error: ', error)
+  }
+}
+const selectBank = (index) => {
+  bankActive.value = index
+  window.scrollTo(0, 0)
 }
 </script>
 

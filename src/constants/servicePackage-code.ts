@@ -3,3 +3,8 @@ export const SERVICE_PACKAGE = {
   BASE: 2,
   PRO: 3
 }
+
+export const PAYMENTS = {
+  STRIPE: 'Stripe Payment',
+  ATM: 'ATM Payment'
+}

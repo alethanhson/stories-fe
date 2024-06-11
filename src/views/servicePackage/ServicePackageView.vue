@@ -47,11 +47,15 @@
 
 <script setup lang="ts">
 import coverImg from '@/assets/images/cover_img.png'
-import { fetchServicePackage, fetchServicePopular } from '@/api/modules/servicePackage'
+import { fetchServicePopular } from '@/api/modules/servicePackage'
 import type { ServicePackageResponse, ServicePackage } from '@/api/modules/servicePackage/types'
+import { useUserServiceStore } from '@/stores/modules/servicePackage'
+import { showToast } from '@/utils'
+import { ToastType } from '@/types'
 
 const servicePackageList = reactive<ServicePackage[]>([])
 const servicePopularList = reactive<ServicePackage[]>([])
+const servicePackageStore = useUserServiceStore()
 
 onMounted(async () => {
   fetchServicePackageListPopular()
@@ -59,10 +63,13 @@ onMounted(async () => {
 })
 
 const fetchServicePackageList = async () => {
-  const { data }: ServicePackageResponse = await fetchServicePackage()
-  servicePackageList.push(...data)
+  try {
+    await servicePackageStore.fetchServicePackage()
+    servicePackageList.push(...servicePackageStore.getServicePackage)
+  } catch (error) {
+    showToast('error', ToastType.ERROR)
+  }
 }
-
 const fetchServicePackageListPopular = async () => {
   const { data }: ServicePackageResponse = await fetchServicePopular()
   servicePopularList.push(...data)

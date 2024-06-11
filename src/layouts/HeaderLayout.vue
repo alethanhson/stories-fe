@@ -11,6 +11,27 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { ServicePackage } from '@/api/modules/servicePackage/types'
+import { useUserServiceStore } from '@/stores/modules/servicePackage'
+import { showToast } from '@/utils'
+import { ToastType } from '@/types'
+
+const servicePackageList = reactive<ServicePackage[]>([])
+const servicePackageStore = useUserServiceStore()
+
+onMounted(async () => {
+  await fetchServicePackageList()
+})
+
+const fetchServicePackageList = async () => {
+  try {
+    await servicePackageStore.fetchServicePackage()
+    servicePackageList.push(...servicePackageStore.getServicePackage)
+  } catch (error) {
+    showToast('error', ToastType.ERROR)
+  }
+}
+</script>
 
 <style></style>

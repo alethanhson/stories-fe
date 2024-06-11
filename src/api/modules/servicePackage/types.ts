@@ -28,3 +28,16 @@ export interface UserServicePackage {
   start_date: number
   id: number
 }
+
+export interface paymentForm {
+  id: number
+  amount: number
+  gateway: string
+  bankCode: string
+}
+
+export interface PaymentResponse {
+  code: number
+  message?: string
+  payment_url: string
+}

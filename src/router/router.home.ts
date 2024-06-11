@@ -1,7 +1,6 @@
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { checkLogin } from '@/middleware/checkLogin'
 import type { RouteRecordRaw } from 'vue-router'
-// import { checkLogin } from '@/middleware/checkLogin'
 
 const homeRouter: Array<RouteRecordRaw> = [
   {

@@ -24,8 +24,12 @@
     </div>
 
     <div class="gap-2 items-center md:flex hidden">
-      <el-button type="warning" round plain>Service Package</el-button>
-      <el-button v-if="!isLogin" type="primary" round>Login</el-button>
+      <router-link :to="{ name: 'login' }">
+        <el-button v-if="!isLogin" type="primary" round>Login</el-button>
+      </router-link>
+      <router-link :to="{ name: 'service-package' }">
+        <el-button type="warning" round plain>Service Package</el-button>
+      </router-link>
       <router-link v-if="!isLogin" :to="{ name: 'register' }" class="w-full">
         <el-button type="success" round>Register</el-button>
       </router-link>
@@ -41,10 +45,12 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>Profile</el-dropdown-item>
-            <el-dropdown-item>Register as an author</el-dropdown-item>
+            <el-dropdown-item @click="showAuthorRegis = true"
+              >Register as an author</el-dropdown-item
+            >
             <el-dropdown-item>Manager Service Package</el-dropdown-item>
             <el-dropdown-item>Setting</el-dropdown-item>
-            <el-dropdown-item>Logout</el-dropdown-item>
+            <el-dropdown-item @click="handleLogout">Logout</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -96,15 +102,16 @@
           </el-menu>
         </main>
 
-        <footer class="bottom-0 w-full px-5 py-3 absolute bg-cyan-100 flex gap-3">
-          <el-button type="primary" plain class="w-full">Login</el-button>
-          <router-link :to="{ name: 'register' }" class="w-full">
-            <el-button type="info" class="w-full" plain>Register</el-button>
+        <footer class="bottom-0 w-full px-5 py-3 absolute bg-cyan-100 flex">
+          <router-link :to="{ name: 'login' }">
+            <el-button v-if="!isLogin" type="primary" plain class="w-full">Login</el-button>
           </router-link>
+          <el-button type="info" plain class="w-full">Register</el-button>
         </footer>
       </div>
     </div>
   </div>
+  <author-register :showAuthorRegis="showAuthorRegis" @show="show"></author-register>
 </template>
 
 <script setup lang="ts">
@@ -114,13 +121,17 @@ import type { DropdownInstance } from 'element-plus'
 import { useAuthStore } from '@/stores/modules/auth'
 import { novelGenres, comicGenres } from '@/mock/mock.genre'
 import { popularStories, newStories } from '@/mock/mock.story'
+import { showToast } from '@/utils'
+import i18n from '@/i18n'
+import { ToastType } from '@/types'
 
 const authStore = useAuthStore()
+const isLogin = computed(() => !!authStore.isLoggedIn)
 const search = ref('')
-const isLogin = authStore.isLoggedIn
 const navbar = ref<HTMLElement | null>(null)
 const isOpen = ref(false)
 const dropdown = ref<DropdownInstance>()
+const showAuthorRegis = ref<boolean>(false)
 
 function showClick() {
   if (!dropdown.value) return
@@ -139,6 +150,9 @@ const handleClick = (event) => {
     isOpen.value = false
   }
 }
+const show = (show: boolean) => {
+  showAuthorRegis.value = show
+}
 
 onMounted(() => {
   document.addEventListener('click', handleClick)
@@ -147,4 +161,16 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener('click', handleClick)
 })
+
+const router = useRouter()
+
+const handleLogout = async () => {
+  try {
+    await authStore.logout()
+    router.push({ name: 'home' })
+    showToast(i18n.global.t('common.logout_success'), ToastType.SUCCESS)
+  } catch (error) {
+    showToast(i18n.global.t('common.logout_error'), ToastType.ERROR)
+  }
+}
 </script>

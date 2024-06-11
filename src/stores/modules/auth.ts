@@ -4,8 +4,8 @@ import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    access_token: null as string | null,
-    user: null as any | null
+    access_token: localStorage.getItem('access_token') || null,
+    user: JSON.parse(localStorage.getItem('user') || 'null')
   }),
   getters: {
     isLoggedIn: (state) => !!state.access_token,
@@ -15,17 +15,20 @@ export const useAuthStore = defineStore('auth', {
     setUserProfile(user: any) {
       this.user = user
       localStorage.setItem('user', JSON.stringify(user))
+      return Promise.resolve()
     },
     setAccessToken(token: string) {
       this.access_token = token
       localStorage.setItem('access_token', token)
+      return Promise.resolve()
     },
     logout() {
-      return new Promise(() => {
+      return new Promise<void>((resolve) => {
         this.access_token = null
         this.user = null
         localStorage.removeItem('access_token')
         localStorage.removeItem('user')
+        resolve()
       })
     },
     async login(credentials: any) {

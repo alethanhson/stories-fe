@@ -45,7 +45,9 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>Profile</el-dropdown-item>
-            <el-dropdown-item>Register as an author</el-dropdown-item>
+            <el-dropdown-item @click="showAuthorRegis = true"
+              >Register as an author</el-dropdown-item
+            >
             <el-dropdown-item>Manager Service Package</el-dropdown-item>
             <el-dropdown-item>Setting</el-dropdown-item>
             <el-dropdown-item @click="handleLogout">Logout</el-dropdown-item>
@@ -94,6 +96,7 @@
       </div>
     </div>
   </div>
+  <author-register :showAuthorRegis="showAuthorRegis" @show="show"></author-register>
 </template>
 
 <script setup lang="ts">
@@ -111,6 +114,7 @@ const search = ref('')
 const navbar = ref<HTMLElement | null>(null)
 const isOpen = ref(false)
 const dropdown = ref<DropdownInstance>()
+const showAuthorRegis = ref<boolean>(false)
 
 function showClick() {
   if (!dropdown.value) return
@@ -128,6 +132,9 @@ const handleClick = (event) => {
   if (navbar.value && !navbar.value.contains(event.target)) {
     isOpen.value = false
   }
+}
+const show = (show: boolean) => {
+  showAuthorRegis.value = show
 }
 
 onMounted(() => {

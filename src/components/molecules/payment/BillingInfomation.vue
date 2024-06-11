@@ -119,7 +119,6 @@ const handlePayment = async () => {
       id: servicePackage.value.id
     }
     const response: PaymentResponse = await paymentApi(payload)
-    console.log('response: ', response);
 
     if (response.code == 200) {
       window.location.href = response.payment_url

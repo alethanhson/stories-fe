@@ -38,11 +38,7 @@ export const resendEmail = async (data: FormRegister): Promise<RegisterResponse>
 
 export const logout = async (data: LogoutRequest): Promise<LogoutResponse> => {
   try {
-    return await axios.post('auth/logout', data, {
-      headers: {
-        Authorization: `Bearer ${data.access_token}`
-      }
-    })
+    return await axios.post('auth/logout', data)
   } catch (error) {
     return Promise.reject(error)
   }

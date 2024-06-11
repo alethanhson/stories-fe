@@ -4,7 +4,7 @@ import {
   logout as apiLogout,
   resendEmail
 } from '@/api/modules/auth'
-import type { FormRegister } from '@/api/modules/auth/types'
+import type { FormRegister, LoginRequest } from '@/api/modules/auth/types'
 import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', {
@@ -29,8 +29,9 @@ export const useAuthStore = defineStore('auth', {
     },
     async logout() {
       try {
-        const accessToken: any = this.access_token
-        await apiLogout({ access_token: accessToken })
+        if (this.access_token !== null) {
+          await apiLogout({ access_token: this.access_token })
+        }
         this.access_token = null
         this.user = null
         localStorage.removeItem('access_token')
@@ -39,7 +40,8 @@ export const useAuthStore = defineStore('auth', {
         return Promise.reject(error)
       }
     },
-    async login(credentials: any) {
+
+    async login(credentials: LoginRequest) {
       try {
         const auth = await apiLogin(credentials)
         this.setUserProfile(auth.user)

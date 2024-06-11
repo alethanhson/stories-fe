@@ -12,6 +12,7 @@ declare module 'vue' {
     BaseIcon: typeof import('./components/atoms/BaseIcon.vue')['default']
     BaseInputField: typeof import('./components/atoms/BaseInputField.vue')['default']
     BaseLoading: typeof import('./components/atoms/BaseLoading.vue')['default']
+    BasePackage: typeof import('./components/molecules/BasePackage.vue')['default']
     BasePagination: typeof import('./components/atoms/BasePagination.vue')['default']
     BaseToastMessage: typeof import('./components/atoms/BaseToastMessage.vue')['default']
     CarouselStory: typeof import('./components/organisms/CarouselStory.vue')['default']

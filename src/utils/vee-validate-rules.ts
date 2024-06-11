@@ -1,5 +1,5 @@
 import i18n from '@/i18n'
-import { max, required } from '@vee-validate/rules'
+import { email, max, min, required } from '@vee-validate/rules'
 import { configure, defineRule } from 'vee-validate'
 
 configure({
@@ -9,7 +9,9 @@ configure({
     const rule = context.rule ?? { name: '' }
     const messages = {
       required: (field) => i18n.global.t('validation.required', { field }),
-      max: (field, params) => i18n.global.t('validation.max', { field, length: params.length }),
+      email: (field) => i18n.global.t('validation.email', { field }),
+      min: (field, params) => i18n.global.t('validation.min', { field, min: params[0] }),
+      max: (field, params) => i18n.global.t('validation.max', { field, max: params[0] }),
       fileType: (field, params) =>
         i18n.global.t('validation.fileType', { field, allowedTypes: params.join(', ') })
     }
@@ -19,7 +21,9 @@ configure({
 })
 export default () => {
   defineRule('required', required)
+  defineRule('email', email)
   defineRule('max', max)
+  defineRule('min', min)
   defineRule('fileType', (value, allowedTypes) => {
     if (!value || !value.length) return true
 

@@ -10,7 +10,7 @@
             <td>Product</td>
             <td>
               <el-select
-                v-model="paymentPackage"
+                v-model="servicePackage.service_package_name"
                 filterable
                 remote
                 reserve-keyword
@@ -92,8 +92,6 @@ const props = defineProps({
   }
 })
 
-const route = useRoute()
-const paymentPackage = ref(parseInt(route.params.service_package_id + ''))
 const loading = ref(false)
 const options = ref<ServicePackage[]>([])
 

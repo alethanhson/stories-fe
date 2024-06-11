@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { useAuthStore } from '@/stores/modules/auth';
+import i18n from '@/i18n'
+import router from '@/router'
+import { useAuthStore } from '@/stores/modules/auth'
+import { ToastType } from '@/types'
+import { showToast } from '@/utils'
 import { onClickOutside } from '@vueuse/core'
 import { ref } from 'vue'
 
@@ -10,6 +14,16 @@ const authStore = useAuthStore()
 onClickOutside(target, () => {
   dropdownOpen.value = false
 })
+
+const handleLogout = async () => {
+  try {
+    await authStore.logout()
+    router.push({ name: 'home' })
+    showToast(i18n.global.t('common.logout_success'), ToastType.SUCCESS)
+  } catch (error) {
+    showToast(i18n.global.t('common.logout_error'), ToastType.ERROR)
+  }
+}
 </script>
 
 <template>
@@ -20,7 +34,9 @@ onClickOutside(target, () => {
       @click.prevent="dropdownOpen = !dropdownOpen"
     >
       <span class="text-right block">
-        <span class="block text-sm font-medium text-black dark:text-white">{{ authStore.currentUser.name }}</span>
+        <span class="block text-sm font-medium text-black dark:text-white">{{
+          authStore.currentUser.full_name
+        }}</span>
       </span>
       <svg
         :class="dropdownOpen && 'rotate-180'"
@@ -40,12 +56,13 @@ onClickOutside(target, () => {
       </svg>
     </router-link>
 
-    <!-- Dropdown Start -->
     <div
       v-show="dropdownOpen"
-      class="absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
+      class="absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-admin-stroke-dark dark:bg-admin-box-dark"
     >
-      <ul class="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
+      <ul
+        class="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-admin-stroke-dark"
+      >
         <li>
           <router-link
             to="/profile"
@@ -120,6 +137,7 @@ onClickOutside(target, () => {
       </ul>
       <button
         class="flex items-center gap-3.5 py-4 px-6 text-xs font-medium duration-300 ease-in-out hover:text-primary lg:text-sm"
+        @click="handleLogout"
       >
         <svg
           class="fill-current"
@@ -141,6 +159,5 @@ onClickOutside(target, () => {
         Log Out
       </button>
     </div>
-    <!-- Dropdown End -->
   </div>
 </template>

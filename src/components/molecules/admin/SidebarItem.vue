@@ -1,22 +1,23 @@
 <script setup lang="ts">
-import { useSidebarStore } from '@/stores/modules/sidebar';
+import { useRouter } from 'vue-router'
+import { useSidebarStore } from '@/stores/modules/sidebar'
 
 const sidebarStore = useSidebarStore()
+const router = useRouter()
 
 const props = defineProps(['item', 'index'])
 
-interface SidebarItem {
-  label: string
-}
-
 const handleItemClick = () => {
-  const pageName = sidebarStore.page === props.item.label ? '' : props.item.label
+  const pageName = sidebarStore.page === props.item.route.name ? '' : props.item.route.name
   sidebarStore.page = pageName
-
-  if (props.item.children) {
-    return props.item.children.some((child: SidebarItem) => sidebarStore.selected === child.label)
-  }
+  sidebarStore.selected = pageName
 }
+
+router.afterEach((to) => {
+  const pageName = (to.name as string) || ''
+  sidebarStore.page = pageName
+  sidebarStore.selected = pageName
+})
 </script>
 
 <template>
@@ -26,7 +27,7 @@ const handleItemClick = () => {
       class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-admin-body-dark1 duration-300 ease-in-out hover:bg-admin-gray-dark dark:hover:bg-admin-meta-4"
       @click.prevent="handleItemClick"
       :class="{
-        'bg-admin-gray-dark dark:bg-admin-meta-4': sidebarStore.page === item.label
+        'bg-admin-gray-dark dark:bg-admin-meta-4': sidebarStore.selected === item.route.name
       }"
     >
       <span v-html="item.icon"></span>
@@ -36,7 +37,7 @@ const handleItemClick = () => {
       <svg
         v-if="item.children"
         class="absolute right-4 top-1/2 -translate-y-1/2 fill-current"
-        :class="{ 'rotate-180': sidebarStore.page === item.label }"
+        :class="{ 'rotate-180': sidebarStore.selected === item.route.name }"
         width="20"
         height="20"
         viewBox="0 0 20 20"

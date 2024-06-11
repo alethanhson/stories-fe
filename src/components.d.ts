@@ -33,7 +33,6 @@ declare module 'vue' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     HeaderAdmin: typeof import('./components/organisms/admin/HeaderAdmin.vue')['default']
-    HeaderArea: typeof import('./components/organisms/admin/HeaderArea.vue')['default']
     ListStory: typeof import('./components/organisms/ListStory.vue')['default']
     RegisterModal: typeof import('./components/molecules/RegisterModal.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

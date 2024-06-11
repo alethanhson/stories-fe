@@ -9,12 +9,10 @@ const { isSidebarOpen, toggleSidebar } = useSidebarStore()
   <header class="sticky top-0 z-[999] flex w-full bg-white drop-shadow">
     <div class="flex flex-grow items-center justify-between py-6 px-4 shadow-2 md:px-6 2xl:px-11">
       <div class="flex items-center gap-2 sm:gap-4 lg:hidden">
-        <!-- Hamburger Toggle BTN -->
         <button
           class="z-999 block rounded-sm border border-white bg-white p-1.5 shadow-sm dark:border-admin-stroke-dark dark:bg-admin-box-dark lg:hidden"
           @click="
             () => {
-              console.log('Toggling Sidebar')
               toggleSidebar()
             }
           "
@@ -28,11 +26,12 @@ const { isSidebarOpen, toggleSidebar } = useSidebarStore()
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-          <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+            <path
+              d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+            />
           </svg>
         </button>
-        <!-- Hamburger Toggle BTN -->
-        <router-link class="block flex-shrink-0 lg:hidden" to="/">
+        <router-link class="block flex-shrink-0 lg:hidden" :to="{ name: 'dashboard_admin' }">
           <div class="text-black text-xl font-bold">Story</div>
         </router-link>
       </div>
@@ -73,9 +72,7 @@ const { isSidebarOpen, toggleSidebar } = useSidebarStore()
       </div>
 
       <div class="flex items-center gap-3 2xsm:gap-7">
-        <!-- User Area -->
         <DropdownUser />
-        <!-- User Area -->
       </div>
     </div>
   </header>

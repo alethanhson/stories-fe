@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-header class="bg-pink-100 !px-0">
+      <el-header class="bg-dark-50 [&>div>a>div>span]:text-main-primary-200 !px-0">
         <DefaultHeader />
       </el-header>
       <el-main class="!px-0 !py-0">

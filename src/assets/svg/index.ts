@@ -7,5 +7,21 @@ import photo from './photo.svg'
 import search from './search.svg'
 import uploadImage from './upload-image.svg'
 import bars from './bars.svg'
+import userCircle from './user-circle.svg'
+import arrowRight from './arrow-right.svg'
+import infoCircle from './info-circle.svg'
 
-export { arrowLeft, cancel, eye, eyeSlash, person, photo, search, uploadImage, bars }
+export {
+  arrowLeft,
+  cancel,
+  eye,
+  eyeSlash,
+  person,
+  photo,
+  search,
+  uploadImage,
+  bars,
+  userCircle,
+  arrowRight,
+  infoCircle
+}

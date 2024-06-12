@@ -48,7 +48,6 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="handleCreate">{{ t('story.accept') }}</el-button>
-        <el-button>{{ t('story.cancel') }}</el-button>
       </el-form-item>
     </el-form>
     <base-loading :loading="loading"></base-loading>

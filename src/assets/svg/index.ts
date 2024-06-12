@@ -7,5 +7,7 @@ import photo from './photo.svg'
 import search from './search.svg'
 import uploadImage from './upload-image.svg'
 import bars from './bars.svg'
+import del from './delete.svg'
+import edit from './edit.svg'
 
-export { arrowLeft, cancel, eye, eyeSlash, person, photo, search, uploadImage, bars }
+export { arrowLeft, cancel, eye, eyeSlash, person, photo, search, uploadImage, bars, del, edit }

@@ -13,7 +13,8 @@ configure({
       min: (field, params) => i18n.global.t('validation.min', { field, min: params[0] }),
       max: (field, params) => i18n.global.t('validation.max', { field, max: params[0] }),
       fileType: (field, params) =>
-        i18n.global.t('validation.fileType', { field, allowedTypes: params.join(', ') })
+        i18n.global.t('validation.fileType', { field, allowedTypes: params.join(', ') }),
+      url: (field) => i18n.global.t('validation.url', { field })
     }
 
     return messages[rule.name]?.(field, params) || i18n.global.t('validation.default', { field })
@@ -33,5 +34,9 @@ export default () => {
       allowedTypes.includes(fileExtension.toLowerCase()) ||
       i18n.global.t('validation.fileType', { field: 'file', allowedTypes: allowedTypes.join(', ') })
     )
+  })
+  defineRule('url', (value) => {
+    const urlPattern = /^https?:\/\/[^\s$.?#].[^\s]*$/i
+    return urlPattern.test(value) || i18n.global.t('validation.url', { field: 'URL' })
   })
 }

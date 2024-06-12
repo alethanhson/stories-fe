@@ -1,5 +1,34 @@
 {
   "story_hot": "Hottest story",
   "story_new": "Latest story",
-  "suggest": "Hints from the story"
+  "suggest": "Hints from the story",
+  "create": {
+    "path": "Enter path",
+    "story_reader": "Story reader",
+    "choose_author": "Select author",
+    "choose_genre": "Select genre",
+    "failed": "Failed to create story",
+    "success": "Story created successfully"
+  },
+  "update": {
+    "update": "Update",
+    "cover_image": "Cover image",
+    "title": "Enter title",
+    "story_reader": "Story reader",
+    "choose_author": "Select author",
+    "choose_genre": "Select genre",
+    "failed": "Failed to update story",
+    "success": "Story updated successfully"
+  },
+  "story_reader": {
+    "free": "Free",
+    "base": "Base",
+    "premium": "Premium"
+  },
+  "desc": "Description",
+  "deletion_warning": "Are you sure you want to delete this story?",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "accept": "Accept"
 }

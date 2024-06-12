@@ -85,7 +85,22 @@
 
         <hr class="my-4" />
 
-        <main class="w-full px-5 bg-fuchsia-400">content</main>
+        <main class="w-full overflow-y-auto h-[300px]">
+          <el-menu class="!bg-inherit !border-none" active-text-color="#1ed291">
+            <MenuGenre title="Truyện tranh" index-prefix="comic-" :genres="comicGenres"></MenuGenre>
+            <MenuGenre title="Truyện chữ" index-prefix="novel-" :genres="novelGenres"></MenuGenre>
+            <MenuStory
+              title="Truyện được xem nhiều nhất"
+              index-prefix="popular-"
+              :stories="popularStories"
+            ></MenuStory>
+            <MenuStory
+              title="Truyện mới phát hành"
+              index-prefix="new-"
+              :stories="newStories"
+            ></MenuStory>
+          </el-menu>
+        </main>
 
         <footer class="bottom-0 w-full px-5 py-3 absolute bg-cyan-100 flex">
           <router-link :to="{ name: 'login' }">
@@ -104,6 +119,8 @@ import avatarDefault from '@/assets/images/default_avatar.png'
 import logo from '@/assets/images/logo.jpg'
 import type { DropdownInstance } from 'element-plus'
 import { useAuthStore } from '@/stores/modules/auth'
+import { novelGenres, comicGenres } from '@/mock/mock.genre'
+import { popularStories, newStories } from '@/mock/mock.story'
 import { showToast } from '@/utils'
 import i18n from '@/i18n'
 import { ToastType } from '@/types'

@@ -64,11 +64,17 @@
       class="h-screen top-0 bg-white text-black pt-5 shadow-lg absolute right-0 transition-all duration-200 ease-in-out overflow-hidden z-50"
     >
       <div v-show="isOpen">
-        <div class="w-full px-4 flex items-center flex-row-reverse gap-5 text-nowrap">
-          <div class="w-10 h-10 flex items-center overflow-hidden rounded-full cursor-pointer">
-            <img :src="avatarDefault" alt="avatar" />
+        <div
+          v-if="isLogin"
+          class="w-full px-4 flex items-center flex-row-reverse gap-5 text-nowrap"
+        >
+          <div
+            v-if="authStore.currentUser.avatar"
+            class="w-10 h-10 flex items-center overflow-hidden rounded-full cursor-pointer"
+          >
+            <img :src="authStore.currentUser.avatar" alt="avatar" />
           </div>
-          <b class="text-2xl">Lê Công Anh</b>
+          <b class="text-2xl">{{ authStore.currentUser.full_name }}</b>
         </div>
 
         <div class="relative px-5 mt-3">
@@ -106,7 +112,10 @@
           <router-link :to="{ name: 'login' }">
             <el-button v-if="!isLogin" type="primary" plain class="w-full">Login</el-button>
           </router-link>
-          <el-button type="info" plain class="w-full">Register</el-button>
+          <el-button v-if="!isLogin" type="info" plain class="w-full">Register</el-button>
+          <el-button v-if="isLogin" type="primary" plain class="w-full" @click="handleLogout"
+            >Logout</el-button
+          >
         </footer>
       </div>
     </div>

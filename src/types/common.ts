@@ -46,3 +46,17 @@ export interface UserDetail {
   email: string
   role: UserRole
 }
+
+export interface Genre {
+  id: number
+  name_genre: string
+  cover_img?: string
+}
+
+export interface Story {
+  id: number
+  title: string
+  id_genre: number
+  type: string
+  views?: number
+}

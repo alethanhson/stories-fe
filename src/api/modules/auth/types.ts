@@ -27,3 +27,12 @@ export interface RegisterResponse {
 export interface UserDetail {
   status: number
 }
+
+export interface LogoutRequest {
+  access_token: string
+}
+
+export interface LogoutResponse {
+  code: number
+  message: string
+}

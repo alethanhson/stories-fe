@@ -8,7 +8,8 @@
     "choose_author": "Select author",
     "choose_genre": "Select genre",
     "failed": "Failed to create story",
-    "success": "Story created successfully"
+    "success": "Story created successfully",
+    "info": "Try entering another path again"
   },
   "update": {
     "update": "Update",

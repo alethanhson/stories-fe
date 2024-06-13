@@ -80,16 +80,14 @@ const { value: description } = useField('description', 'required')
 const handleCreate = async () => {
   try {
     submitClicked.value = loading.value = true
-    const { valid } = await validate()
-    if (!valid) return (loading.value = false)
-    const response = await admin.createStory(formCrawl)
-    if (response.code === 200) {
-      showToast(t('story.create.success'), ToastType.SUCCESS)
-      router.push({ name: 'admin_list_story' })
-    }
+    if (!(await validate()).valid) return (loading.value = false)
+    const result = await admin.createStory(formCrawl)
+    loading.value = true
+    if (!result) return showToast(t('story.create.info'), ToastType.INFO)
+    showToast(t('story.create.success'), ToastType.SUCCESS)
+    router.push({ name: 'admin_list_story' })
   } catch (error) {
     console.error('Create error:', error)
-    showToast(t('story.create.failed'), ToastType.ERROR)
   }
 }
 const getAuthor = async () => {

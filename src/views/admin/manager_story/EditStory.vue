@@ -151,8 +151,7 @@ const updateStory = async () => {
     if (!formUpdateStory.cover_image?.type?.startsWith('image/')) {
       delete formUpdateStory.cover_image
     }
-    const response = await admin.updateStory(book_id, formUpdateStory)
-    console.log('🚀 ~ updateStory ~ response:', response)
+    await admin.updateStory(book_id, formUpdateStory)
     showToast(t('story.update.success'), ToastType.SUCCESS)
     router.push({ name: 'admin_list_story' })
   } catch (error) {

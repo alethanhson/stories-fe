@@ -26,7 +26,6 @@ export const admin = {
     return response
   },
   updateStory: async (id: number, data: FormUpdateStory): Promise<DetailStoryResponse> => {
-    console.log('🚀 ~ updateStory: ~ data:', data)
     const { data: response } = await axios.post(`${resource}/update_book/${id}`, data, { headers })
     return response
   },

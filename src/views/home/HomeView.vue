@@ -33,7 +33,7 @@ const handlePaymentNotify = () => {
     showToast(t('payment.payment_success'), ToastType.SUCCESS)
   } else if (route.query.statusPayment == 'false') {
     router.replace({ query: {} })
-    showToast(t('payment.payment_error'), ToastType.ERROR)
+    showToast(route.query.message + '', ToastType.ERROR)
   }
 }
 </script>

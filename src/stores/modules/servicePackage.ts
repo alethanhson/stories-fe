@@ -1,14 +1,6 @@
 import { defineStore } from 'pinia'
-import {
-  registerServiceApi,
-  fetchServicePackageApi,
-  findServicePackageApi
-} from '@/api/modules/servicePackage'
-import type {
-  RegisterServiceForm,
-  ServicePackage,
-  ServicePackageResponse
-} from '@/api/modules/servicePackage/types'
+import { fetchServicePackageApi, findServicePackageApi } from '@/api/modules/servicePackage'
+import type { ServicePackage, ServicePackageResponse } from '@/api/modules/servicePackage/types'
 
 export const useUserServiceStore = defineStore('service', {
   state: () => ({
@@ -18,9 +10,6 @@ export const useUserServiceStore = defineStore('service', {
     getServicePackage: (state): ServicePackage[] => state.servicePackage
   },
   actions: {
-    async registerService(payload: RegisterServiceForm) {
-      return await registerServiceApi(payload)
-    },
     async fetchServicePackage() {
       const serviceResponse: ServicePackageResponse = await fetchServicePackageApi()
       this.servicePackage = serviceResponse.data

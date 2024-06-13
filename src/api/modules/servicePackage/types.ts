@@ -11,17 +11,6 @@ export interface ServicePackage {
   type: number
 }
 
-export interface RegisterServiceForm {
-  user_id: number
-  service_package_id: number
-}
-
-export interface RegisterServiceResponse {
-  code: number
-  message: string
-  data: UserServicePackage
-}
-
 export interface UserServicePackage {
   user_id: number
   service_package_id: number
@@ -37,7 +26,7 @@ export interface paymentForm {
 }
 
 export interface PaymentResponse {
-  code: number
+  code?: number
   message?: string
   payment_url: string
 }

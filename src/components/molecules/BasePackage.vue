@@ -38,18 +38,7 @@
 
 <script setup lang="ts">
 import { SERVICE_PACKAGE } from '@/constants'
-import { ToastType } from '@/types'
-import { showToast } from '@/utils'
-import { useUserServiceStore } from '@/stores/modules/servicePackage'
-import { useAuthStore } from '@/stores/modules/auth'
 import { formatVND } from '@/utils'
-import type {
-  RegisterServiceForm,
-  RegisterServiceResponse
-} from '@/api/modules/servicePackage/types'
-
-const userServiceStore = useUserServiceStore()
-const userStore = useAuthStore()
 
 const props = defineProps({
   isBorder: {
@@ -77,12 +66,6 @@ const style = {
   }
 }
 
-const registerServiceForm = reactive<RegisterServiceForm>({
-  // user_id: userStore.currentUser.id,
-  user_id: 2,
-  service_package_id: props.servicePackage.id
-})
-
 const pricePerDay = () => {
   const sp = props.servicePackage
   return sp.price / sp.duration
@@ -90,15 +73,6 @@ const pricePerDay = () => {
 const handleBorder = () => {
   const sp = props.servicePackage
   return style.border[sp.type]
-}
-const registerService = async () => {
-  try {
-    const userService: RegisterServiceResponse =
-      await userServiceStore.registerService(registerServiceForm)
-    if (userService) showToast(userService.message, ToastType.SUCCESS)
-  } catch (error: any) {
-    showToast(error.message, ToastType.ERROR)
-  }
 }
 </script>
 

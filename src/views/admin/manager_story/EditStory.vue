@@ -65,7 +65,7 @@
             <el-radio :label="t('story.story_reader.premium')" :value="PackageType.PREMIUM" />
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="Activity form">
+        <el-form-item :label="t('story.desc')">
           <el-input v-model="formUpdateStory.description" type="textarea" />
           <p v-show="submitClicked && errors.description" class="text-status-error text-body-xs">
             {{ errors.description }}

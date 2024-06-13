@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useSidebarStore } from '@/stores/modules/sidebar'
-import BaseIcon from '@/components/atoms/BaseIcon.vue';
+import BaseIcon from '@/components/atoms/BaseIcon.vue'
 
 const sidebarStore = useSidebarStore()
 const router = useRouter()

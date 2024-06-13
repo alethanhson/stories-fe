@@ -2,6 +2,7 @@
 import BaseIcon from '@/components/atoms/BaseIcon.vue'
 import SidebarItem from '@/components/molecules/admin/SidebarItem.vue'
 import { useSidebarStore } from '@/stores/modules/sidebar'
+import { mockMenuItems } from '@/views/admin/admin.common'
 import { onClickOutside } from '@vueuse/core'
 import { ref } from 'vue'
 
@@ -13,35 +14,9 @@ onClickOutside(target, () => {
   sidebarStore.isSidebarOpen = false
 })
 
-const menuGroups = ref([
+const menuGroups = reactive([
   {
-    menuItems: [
-      {
-        icon: 'dashboard',
-        label: 'Dashboard',
-        route: { name: 'dashboard_admin' }
-      },
-      {
-        icon: 'genre',
-        label: 'Genre',
-        route: { name: 'genre' }
-      },
-      {
-        icon: 'book',
-        label: 'Book',
-        route: { name: 'book' }
-      },
-      {
-        icon: 'crown',
-        label: 'Service Package',
-        route: { name: 'service_package' }
-      },
-      {
-        icon: 'users',
-        label: 'User',
-        route: { name: 'user' }
-      }
-    ]
+    menuItems: mockMenuItems
   }
 ])
 </script>

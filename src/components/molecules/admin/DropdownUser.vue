@@ -24,6 +24,8 @@ const handleLogout = async () => {
     showToast(i18n.global.t('common.logout_error'), ToastType.ERROR)
   }
 }
+
+const isLogin = computed(() => !!authStore.isLoggedIn)
 </script>
 
 <template>
@@ -34,7 +36,7 @@ const handleLogout = async () => {
       @click.prevent="dropdownOpen = !dropdownOpen"
     >
       <span class="text-right block">
-        <span class="block text-sm font-medium text-black dark:text-white">{{
+        <span v-if="isLogin" class="block text-sm font-medium text-black dark:text-white">{{
           authStore.currentUser.full_name
         }}</span>
       </span>

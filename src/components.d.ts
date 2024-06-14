@@ -19,6 +19,7 @@ declare module 'vue' {
     DefaultFooter: typeof import('./components/organisms/DefaultFooter.vue')['default']
     DefaultHeader: typeof import('./components/organisms/DefaultHeader.vue')['default']
     DefaultList: typeof import('./components/organisms/DefaultList.vue')['default']
+    DropdownUser: typeof import('./components/molecules/admin/DropdownUser.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
@@ -35,12 +36,15 @@ declare module 'vue' {
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElPagination: typeof import('element-plus/es')['ElPagination']
+    HeaderAdmin: typeof import('./components/organisms/admin/HeaderAdmin.vue')['default']
     ListStory: typeof import('./components/organisms/ListStory.vue')['default']
     MenuGenre: typeof import('./components/molecules/MenuGenre.vue')['default']
     MenuStory: typeof import('./components/molecules/MenuStory.vue')['default']
     RegisterModal: typeof import('./components/molecules/RegisterModal.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SidebarAdmin: typeof import('./components/organisms/admin/SidebarAdmin.vue')['default']
+    SidebarItem: typeof import('./components/molecules/admin/SidebarItem.vue')['default']
     StoryListVertical: typeof import('./components/organisms/StoryListVertical.vue')['default']
   }
 }

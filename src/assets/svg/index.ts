@@ -9,5 +9,29 @@ import uploadImage from './upload-image.svg'
 import bars from './bars.svg'
 import del from './delete.svg'
 import edit from './edit.svg'
+import dashboard from './dashboard.svg'
+import genre from './genre.svg'
+import book from './book.svg'
+import crown from './crown.svg'
+import users from './users.svg'
+import chevronDown from './chevron-down.svg'
 
-export { arrowLeft, cancel, eye, eyeSlash, person, photo, search, uploadImage, bars, del, edit }
+export {
+  arrowLeft,
+  cancel,
+  eye,
+  eyeSlash,
+  person,
+  photo,
+  search,
+  uploadImage,
+  bars,
+  del,
+  edit,
+  dashboard,
+  genre,
+  book,
+  crown,
+  users,
+  chevronDown,
+}

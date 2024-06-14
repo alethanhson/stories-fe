@@ -10,8 +10,8 @@
 
       <div class="w-full grid 2xl:grid-cols-3 lg:grid-cols-2 gap-5">
         <AuthorInfoCard icon="search" :value="stories.length">Story posted</AuthorInfoCard>
-        <AuthorInfoCard icon="bars" :value="chapters.length">Chaper posted</AuthorInfoCard>
-        <AuthorInfoCard icon="person" :value="followers">Followers</AuthorInfoCard>
+        <AuthorInfoCard icon="bars" :value="chapters">Chaper posted</AuthorInfoCard>
+        <AuthorInfoCard icon="person" :value="likes">Likes</AuthorInfoCard>
       </div>
 
       <div class="flex items-center gap-3">
@@ -28,7 +28,9 @@
       </div>
 
       <div class="w-full flex flex-col gap-5 text-[#e3e3e3]">
-        <p>Fullname:<span class="ms-10">Lê Công Anh</span></p>
+        <p>
+          Fullname:<span class="ms-10">{{ infoAuthor.author_name }}</span>
+        </p>
         <p>introduce:<span class="ms-10">...</span></p>
       </div>
     </div>
@@ -36,29 +38,30 @@
 </template>
 
 <script setup lang="ts">
-import type { Story, Chapter } from '@/api/modules/author/types'
-import { authors } from '@/api/modules/author'
+import type { Story } from '@/api/modules/author/types'
+import { useAuthorStore } from '@/stores/modules/author'
 
-defineProps({
-  stories: {
-    type: Array as PropType<Story[]>,
-    default: () => []
-  },
-  chapters: {
-    type: Array as PropType<Chapter[]>,
-    default: () => []
-  }
-})
-
-const followers = ref(0)
+const authorStore = useAuthorStore()
+const stories = reactive<Story[]>([])
+const chapters = ref(0)
+const likes = ref(0)
+const infoAuthor = computed(() => authorStore.getInfoAuthor)
 
 onMounted(async () => {
-  getFollower()
+  await getBook()
+  loadInfo()
 })
 
-const getFollower = async () => {
-  const res: any = await authors.fetchFollowerApi()
-  followers.value = res.data
+const getBook = async () => {
+  if (!authorStore.getStories.length) await authorStore.fetchBookPosted()
+  stories.push(...authorStore.getStories)
+}
+
+const loadInfo = () => {
+  stories.forEach((story) => {
+    chapters.value += story.chapters.length
+    likes.value += story.book_likes
+  })
 }
 </script>
 

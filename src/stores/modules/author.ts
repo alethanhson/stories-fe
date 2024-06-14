@@ -3,18 +3,18 @@ import { authors } from '@/api/modules/author'
 import type {
   StoryPostedResponse,
   Story,
-  ChapterPostedResponse,
-  Chapter
+  AuthorData,
+  DetailAuthorResponse
 } from '@/api/modules/author/types'
 
 export const useAuthorStore = defineStore('author', {
   state: () => ({
     stories: [] as Story[],
-    chapters: [] as Chapter[]
+    infoAuthor: {} as AuthorData
   }),
   getters: {
-    getBooks: (state) => state.stories,
-    getChapters: (state) => state.chapters
+    getStories: (state) => state.stories,
+    getInfoAuthor: (state) => state.infoAuthor
   },
   actions: {
     async fetchBookPosted() {
@@ -22,10 +22,14 @@ export const useAuthorStore = defineStore('author', {
       this.stories = res.data
       return res.data
     },
-    async fetChapterPosted() {
-      const res: ChapterPostedResponse = await authors.fetchChapterPostedApi()
-      this.chapters = res.data
+    async getData() {
+      const res: DetailAuthorResponse = await authors.getDataApi()
+      this.infoAuthor = res.data
       return res.data
+    },
+    resetAuthor() {
+      this.infoAuthor = {} as AuthorData
+      this.stories = []
     }
   }
 })

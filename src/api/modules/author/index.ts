@@ -2,9 +2,7 @@ import axios from '@/api/axios'
 import type {
   DetailAuthorResponse,
   FormAuthorData,
-  StoryPostedResponse,
-  ChapterPostedResponse,
-  FollowerResponse
+  StoryPostedResponse
 } from '@/api/modules/author/types'
 
 const resource = '/authors'
@@ -15,9 +13,7 @@ const headers = {
 export const authors = {
   create: (data: FormAuthorData): Promise<DetailAuthorResponse> =>
     axios.post(`${resource}/register`, data, { headers }),
+  getDataApi: async (): Promise<DetailAuthorResponse> => await axios.get(`${resource}`),
   fetchBookPostedApi: async (): Promise<StoryPostedResponse> =>
-    await axios.get(`${resource}/book-posted`),
-  fetchChapterPostedApi: async (): Promise<ChapterPostedResponse> =>
-    await axios.get(`${resource}/chapter-posted`),
-  fetchFollowerApi: async (): Promise<FollowerResponse> => await axios.get(`${resource}/follower`)
+    await axios.get(`${resource}/book-posted`)
 }

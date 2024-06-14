@@ -6,7 +6,7 @@
 
     <div class="flex-1 flex flex-col gap-2">
       <p>
-        {{ story.title }}
+        <span class="font-bold">{{ story.title }}</span>
         <span
           v-if="story.status == BOOK_STATUS.ACTIVE"
           class="border border-main-primary-200 rounded-xl text-main-primary-200 px-2 pb-[2px] ms-3 text-[0.75rem]"
@@ -33,15 +33,15 @@
         <thead>
           <tr class="[&>th]:px-3 [&>*:nth-child(2)]:border-x [&>th]:border-gray-700">
             <th>Chaper</th>
-            <th>Reads</th>
+            <th>Likes</th>
             <th>Followers</th>
           </tr>
         </thead>
         <tbody>
           <tr class="[&>td]:px-3 [&>*:nth-child(2)]:border-x [&>td]:border-gray-700">
-            <td>5</td>
-            <td>5</td>
-            <td>5</td>
+            <td>{{ story.chapters.length }}</td>
+            <td>{{ story.book_likes }}</td>
+            <td>{{ story.followers }}</td>
           </tr>
         </tbody>
       </table>

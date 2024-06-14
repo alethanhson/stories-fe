@@ -10,7 +10,7 @@ export interface AuthorData extends FormAuthorData {
 
 export interface DetailAuthorResponse {
   code: number
-  message: string
+  message?: string
   data: AuthorData
 }
 
@@ -30,22 +30,15 @@ export interface Story {
   cover_image: string
   package_type: number
   story_type: number
-}
-
-export interface ChapterPostedResponse {
-  code: number
-  data: Chapter[]
+  chapters: Chapter[]
+  followers: number
+  book_likes: number
 }
 
 export interface Chapter {
   id: number
+  chapter_number: number
+  book_id: number
   chapter_title: string
   chapter_content: string
-  book_id: number
-  chapter_number: number
-}
-
-export interface FollowerResponse {
-  code: number
-  data: number
 }

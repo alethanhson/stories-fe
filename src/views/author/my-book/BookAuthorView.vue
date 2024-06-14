@@ -20,18 +20,20 @@
 </template>
 
 <script setup lang="ts">
-import type { Story, Chapter } from '@/api/modules/author/types'
+import type { Story } from '@/api/modules/author/types'
+import { useAuthorStore } from '@/stores/modules/author'
 
-defineProps({
-  stories: {
-    type: Array as PropType<Story[]>,
-    default: () => []
-  },
-  chapters: {
-    type: Array as PropType<Chapter[]>,
-    default: () => []
-  }
+const authorStore = useAuthorStore()
+const stories = reactive<Story[]>([])
+
+onMounted(async () => {
+  await getBook()
 })
+
+const getBook = async () => {
+  if (!authorStore.getStories.length) await authorStore.fetchBookPosted()
+  stories.push(...authorStore.getStories)
+}
 </script>
 
 <style></style>

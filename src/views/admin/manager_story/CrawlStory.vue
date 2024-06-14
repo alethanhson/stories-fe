@@ -81,12 +81,12 @@ const handleCreate = async () => {
   try {
     submitClicked.value = loading.value = true
     if (!(await validate()).valid) return (loading.value = false)
-    const result = await admin.createStory(formCrawl)
-    loading.value = true
-    if (!result) return showToast(t('story.create.info'), ToastType.INFO)
+    await admin.createStory(formCrawl)
     showToast(t('story.create.success'), ToastType.SUCCESS)
     router.push({ name: 'admin_list_story' })
   } catch (error) {
+    loading.value = false
+    showToast(t('story.create.info'), ToastType.INFO)
     console.error('Create error:', error)
   }
 }

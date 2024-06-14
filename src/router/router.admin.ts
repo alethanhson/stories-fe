@@ -16,17 +16,17 @@ const adminRouter: Array<RouteRecordRaw> = [
         component: () => import('@/views/admin/AdminHomeView.vue')
       },
       {
-        path: 'crawl_story',
+        path: 'crawl-story',
         name: 'manager_story',
         component: () => import('@/views/admin/manager_story/CrawlStory.vue')
       },
       {
-        path: 'list_story',
+        path: 'list-story',
         name: 'admin_list_story',
         component: () => import('@/views/admin/manager_story/ListStory.vue')
       },
       {
-        path: 'edit_story/:id',
+        path: 'edit-story/:id',
         name: 'admin_edit_story',
         component: () => import('@/views/admin/manager_story/EditStory.vue')
       }

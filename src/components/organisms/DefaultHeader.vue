@@ -69,11 +69,17 @@
       class="h-screen top-0 bg-white text-black pt-5 shadow-lg absolute right-0 transition-all duration-200 ease-in-out overflow-hidden z-50"
     >
       <div v-show="isOpen">
-        <div class="w-full px-4 flex items-center flex-row-reverse gap-5 text-nowrap">
-          <div class="w-10 h-10 flex items-center overflow-hidden rounded-full cursor-pointer">
-            <img :src="avatarDefault" alt="avatar" />
+        <div
+          v-if="isLogin"
+          class="w-full px-4 flex items-center flex-row-reverse gap-5 text-nowrap"
+        >
+          <div
+            v-if="authStore.currentUser.avatar"
+            class="w-10 h-10 flex items-center overflow-hidden rounded-full cursor-pointer"
+          >
+            <img :src="authStore.currentUser.avatar" alt="avatar" />
           </div>
-          <b class="text-2xl">Lê Công Anh</b>
+          <b class="text-2xl">{{ authStore.currentUser.full_name }}</b>
         </div>
 
         <div class="relative px-5 mt-3">
@@ -90,13 +96,31 @@
 
         <hr class="my-4" />
 
-        <main class="w-full px-5 bg-fuchsia-400">content</main>
+        <main class="w-full overflow-y-auto h-[300px]">
+          <el-menu class="!bg-inherit !border-none" active-text-color="#1ed291">
+            <MenuGenre title="Truyện tranh" index-prefix="comic-" :genres="comicGenres"></MenuGenre>
+            <MenuGenre title="Truyện chữ" index-prefix="novel-" :genres="novelGenres"></MenuGenre>
+            <MenuStory
+              title="Truyện được xem nhiều nhất"
+              index-prefix="popular-"
+              :stories="popularStories"
+            ></MenuStory>
+            <MenuStory
+              title="Truyện mới phát hành"
+              index-prefix="new-"
+              :stories="newStories"
+            ></MenuStory>
+          </el-menu>
+        </main>
 
         <footer class="bottom-0 w-full px-5 py-3 absolute bg-cyan-100 flex">
           <router-link :to="{ name: 'login' }">
             <el-button v-if="!isLogin" type="primary" plain class="w-full">Login</el-button>
           </router-link>
-          <el-button type="info" plain class="w-full">Register</el-button>
+          <el-button v-if="!isLogin" type="info" plain class="w-full">Register</el-button>
+          <el-button v-if="isLogin" type="primary" plain class="w-full" @click="handleLogout"
+            >Logout</el-button
+          >
         </footer>
       </div>
     </div>
@@ -109,6 +133,8 @@ import avatarDefault from '@/assets/images/default_avatar.png'
 import logo from '@/assets/images/logo.jpg'
 import type { DropdownInstance } from 'element-plus'
 import { useAuthStore } from '@/stores/modules/auth'
+import { novelGenres, comicGenres } from '@/mock/mock.genre'
+import { popularStories, newStories } from '@/mock/mock.story'
 import { useAuthorStore } from '@/stores/modules/author'
 import { showToast } from '@/utils'
 import i18n from '@/i18n'

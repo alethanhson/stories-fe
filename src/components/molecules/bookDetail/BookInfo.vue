@@ -1,6 +1,6 @@
 <template>
-  <main class="flex gap-10">
-    <div class="flex-1">
+  <main class="flex gap-10 md:flex-row flex-col">
+    <div class="flex-1 w-52 mx-auto">
       <img
         src="https://cdnntx.com/nettruyen/thumb/ban-trai-cu-la-quy-hut-mau-dung-treu-toi.jpg"
         alt=""

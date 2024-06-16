@@ -25,7 +25,7 @@
 
         <div class="flex-1">
           <p class="font-semibold">Đại ma vòng tha mạng</p>
-          <p class="text-[#ccc]">Continue reading chapter 123</p>
+          <p class="text-[#ccc] text-sm">Continue reading chapter 123</p>
         </div>
 
         <div class="flex items-center gap-1">

@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AddGenreModel: typeof import('./components/molecules/genre/AddGenreModel.vue')['default']
     AuthorRegister: typeof import('./components/organisms/AuthorRegister.vue')['default']
     BaseButton: typeof import('./components/atoms/BaseButton.vue')['default']
     BaseIcon: typeof import('./components/atoms/BaseIcon.vue')['default']
@@ -36,5 +37,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     StoryListVertical: typeof import('./components/organisms/StoryListVertical.vue')['default']
+    UpdateGenreModel: typeof import('./components/molecules/genre/UpdateGenreModel.vue')['default']
   }
 }

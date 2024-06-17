@@ -14,6 +14,11 @@ const adminRouter: Array<RouteRecordRaw> = [
         path: '/admin',
         name: 'dashboard_admin',
         component: () => import('@/views/admin/AdminHomeView.vue')
+      },
+      {
+        path: 'genres',
+        name: 'genre',
+        component: () => import('@/views/admin/GenreView.vue')
       }
     ]
   }

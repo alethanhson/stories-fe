@@ -1,0 +1,6 @@
+{
+  "create_success": "Added new genre success",
+  "create_fail": "Added new genre fail",
+  "update_success": "Updated genre success",
+  "update_fail": "Updated genre fail"
+}

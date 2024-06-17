@@ -6,21 +6,25 @@
     </div>
 
     <div class="[&>div:last-child]:border-0 [&>div:last-child]:-mb-2">
-      <div v-for="book in books" :key="book.id" class="flex items-center py-2 gap-3 border-b">
+      <div v-for="book in historyList" :key="book.id" class="flex items-center py-2 gap-3 border-b">
         <div class="w-16 aspect-square overflow-hidden flex items-center">
           <img :src="book.cover_image" alt="" class="object-cover w-full h-full" />
         </div>
 
         <div class="flex-1">
           <router-link :to="{ name: 'detail_story', params: { id: book.id } }">
-            <p class="font-semibold hover:underline hover:text-main-primary-200">{{ book.title }}</p>
+            <p class="font-semibold hover:underline hover:text-main-primary-200">
+              {{ book.title }}
+            </p>
           </router-link>
-          <p class="text-[#ccc]">Continue reading chapter 123</p>
+          <p class="text-[#ccc]">
+            Continue reading chapter {{ book.user_chapters.chapter.chapter_number }}
+          </p>
         </div>
 
         <div class="flex items-center gap-1">
-          <BaseIcon name="eye" class="w-4 h-4 fill-white" />
-          <span>123M</span>
+          <BaseIcon name="heart" class="w-4 h-4 fill-white" />
+          <span>{{ book.likes }}</span>
         </div>
       </div>
     </div>
@@ -28,16 +32,23 @@
 </template>
 
 <script setup lang="ts">
-import type { BookHistory } from '@/api/modules/story/types'
+import type { BookHistoryResponse, BookHistory } from '@/api/modules/story/types'
+import { fetchReadingHistoryApi } from '@/api/modules/story'
 
-defineProps({
-  books: {
-    type: Array as PropType<BookHistory[] | null>,
-    default: () => {
-      ;[]
-    }
-  }
+const historyList = ref<BookHistory[] | null>(null)
+
+onMounted(async () => {
+  getReadingHistory()
 })
+
+const getReadingHistory = async () => {
+  try {
+    const response: BookHistoryResponse = await fetchReadingHistoryApi()
+    historyList.value = response.data
+  } catch (error) {
+    console.error('Failed to fetch book detail:', error)
+  }
+}
 </script>
 
 <style></style>

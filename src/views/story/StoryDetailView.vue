@@ -20,7 +20,7 @@
       </div>
 
       <div class="flex-1 max-[1200px]:hidden">
-        <BookHistory :books="historyList" />
+        <BookHistory v-if="user" />
 
         <TopBookList />
       </div>
@@ -29,30 +29,24 @@
 </template>
 
 <script setup lang="ts">
-import { fetchBookDetailApi, fetchReadingHistoryApi } from '@/api/modules/story'
-import type { BookDetailResponse, BookDetail, BookHistoryResponse, BookHistory } from '@/api/modules/story/types'
+import { fetchBookDetailApi } from '@/api/modules/story'
+import type { BookDetailResponse, BookDetail } from '@/api/modules/story/types'
+import { useAuthStore } from '@/stores/modules/auth'
 
 const bookDetail = ref<BookDetail | null>(null)
-const historyList = ref<BookHistory[] | null>(null)
+
 const route = useRoute()
+const authStore = useAuthStore()
+const user = computed(() => authStore.currentUser)
 
 onMounted(async () => {
   getBookDetail()
-  getReadingHistory()
 })
 
 const getBookDetail = async () => {
   try {
     const response: BookDetailResponse = await fetchBookDetailApi(Number(route.params.id))
     bookDetail.value = response.data
-  } catch (error) {
-    console.error('Failed to fetch book detail:', error)
-  }
-}
-const getReadingHistory = async () => {
-  try {
-    const response: BookHistoryResponse = await fetchReadingHistoryApi()
-    historyList.value = response.data
   } catch (error) {
     console.error('Failed to fetch book detail:', error)
   }

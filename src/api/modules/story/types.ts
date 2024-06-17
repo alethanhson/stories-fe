@@ -47,6 +47,7 @@ export interface UserChapter {
   id: number
   user_id: number
   chapter_id: number
+  chapter: Chapter
 }
 
 export interface BookDetailResponse {

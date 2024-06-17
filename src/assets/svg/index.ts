@@ -13,6 +13,7 @@ import book from './book.svg'
 import crown from './crown.svg'
 import users from './users.svg'
 import chevronDown from './chevron-down.svg'
+import heart from './heart.svg'
 
 export {
   arrowLeft,
@@ -28,6 +29,7 @@ export {
   genre,
   book,
   crown,
+  heart,
   users,
   chevronDown
 }

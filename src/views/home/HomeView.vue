@@ -16,6 +16,24 @@
 <script setup lang="ts">
 import i18n from '@/i18n'
 import data_story from '@/sample_data/list_story'
+import { ToastType } from '@/types'
+import { showToast } from '@/utils'
 
 const { t } = i18n.global
+const route = useRoute()
+const router = useRouter()
+
+onMounted(() => {
+  handlePaymentNotify()
+})
+
+const handlePaymentNotify = () => {
+  if (route.query.statusPayment == 'true') {
+    router.replace({ query: {} })
+    showToast(t('payment.payment_success'), ToastType.SUCCESS)
+  } else if (route.query.statusPayment == 'false') {
+    router.replace({ query: {} })
+    showToast(route.query.message + '', ToastType.ERROR)
+  }
+}
 </script>

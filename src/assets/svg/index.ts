@@ -10,6 +10,19 @@ import bars from './bars.svg'
 import arrowUpFromBracket from './arrow-up-from-bracket.svg'
 import update from './pen-to-square.svg'
 import trash from './trash.svg'
+import bank from './bank.svg'
+import check from './check.svg'
+import del from './delete.svg'
+import edit from './edit.svg'
+import dashboard from './dashboard.svg'
+import genre from './genre.svg'
+import book from './book.svg'
+import crown from './crown.svg'
+import users from './users.svg'
+import chevronDown from './chevron-down.svg'
+import userCircle from './user-circle.svg'
+import arrowRight from './arrow-right.svg'
+import infoCircle from './info-circle.svg'
 
 export {
   arrowLeft,
@@ -23,5 +36,18 @@ export {
   bars,
   arrowUpFromBracket,
   update,
-  trash
+  trash,
+  bank,
+  check,
+  del,
+  edit,
+  dashboard,
+  genre,
+  book,
+  crown,
+  users,
+  chevronDown,
+  userCircle,
+  arrowRight,
+  infoCircle
 }

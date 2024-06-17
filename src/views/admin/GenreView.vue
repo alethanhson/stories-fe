@@ -1,5 +1,5 @@
 <template>
-  <BaseButton @click="showAdd = !showAdd" class="ml-auto my-4">Add genre</BaseButton>
+  <BaseButton @click="showAdd = !showAdd" class="ml-auto mb-4">Add</BaseButton>
   <AddGenreModel :show="showAdd" @close-form="closeForm" @reload="reload" />
   <UpdateGenreModel
     :show="showUpdate"
@@ -77,11 +77,12 @@ const fetchGenre = async () => {
 const handleDelete = async (id) => {
   try {
     await deleteGenre(id)
-    router.push({ name: 'genres' })
+    router.push({ name: 'genre' })
     reload()
-    showToast(t('genre.create_success'), ToastType.SUCCESS)
+    showToast(t('genre.delete_success'), ToastType.SUCCESS)
   } catch (error) {
-    showToast(t('genre.create_fail'), ToastType.ERROR)
+    console.log(error)
+    showToast(t('genre.delete_fail'), ToastType.ERROR)
   }
 }
 

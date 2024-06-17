@@ -99,7 +99,12 @@ export default {
           'meta-8': '#F0950C',
           'meta-9': '#E5E7EB',
           'meta-10': '#0FADCF'
-        }
+        },
+        dark: {
+          0: '#1C1E1F',
+          50: '#181A1B',
+          100: '#111111',
+        },
       },
       
     },

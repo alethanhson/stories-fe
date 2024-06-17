@@ -17,6 +17,9 @@ import book from './book.svg'
 import crown from './crown.svg'
 import users from './users.svg'
 import chevronDown from './chevron-down.svg'
+import userCircle from './user-circle.svg'
+import arrowRight from './arrow-right.svg'
+import infoCircle from './info-circle.svg'
 
 export {
   arrowLeft,
@@ -38,4 +41,7 @@ export {
   crown,
   users,
   chevronDown,
+  userCircle,
+  arrowRight,
+  infoCircle
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-header class="bg-pink-100 !px-0 fixed w-full z-50">
+      <el-header class="bg-dark-50 !px-0 fixed w-full z-50 [&>div>a>div>span]:text-main-primary-200">
         <DefaultHeader />
       </el-header>
       <el-main class="!px-0 !py-0 min-h-screen !pt-[60px] !flex [&>div]:w-full bg-black">

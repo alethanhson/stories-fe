@@ -1,11 +1,7 @@
 <template>
   <main class="flex gap-10 md:flex-row flex-col">
     <div class="flex-1 w-52 mx-auto">
-      <img
-        :src="book.cover_image"
-        alt=""
-        class="w-full"
-      />
+      <img :src="book.cover_image" alt="" class="w-full" />
     </div>
 
     <div class="flex-[3] gap-4 flex flex-col">
@@ -32,7 +28,9 @@
 
       <div class="flex gap-5 items-center">
         <el-button type="primary">Follow</el-button>
-        <p><span>{{ book.followers }}</span> Followers</p>
+        <p>
+          <span>{{ book.followers }}</span> Followers
+        </p>
       </div>
 
       <div>

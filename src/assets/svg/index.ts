@@ -9,6 +9,8 @@ import uploadImage from './upload-image.svg'
 import bars from './bars.svg'
 import bank from './bank.svg'
 import check from './check.svg'
+import del from './delete.svg'
+import edit from './edit.svg'
 import dashboard from './dashboard.svg'
 import genre from './genre.svg'
 import book from './book.svg'
@@ -28,10 +30,12 @@ export {
   bars,
   bank,
   check,
+  del,
+  edit,
   dashboard,
   genre,
   book,
   crown,
   users,
-  chevronDown
+  chevronDown,
 }

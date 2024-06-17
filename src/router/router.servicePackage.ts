@@ -11,6 +11,11 @@ const servicePackage: Array<RouteRecordRaw> = [
         path: '',
         name: 'service-package',
         component: () => import('@/views/servicePackage/ServicePackageView.vue')
+      },
+      {
+        path: 'gateway/:service_package_id',
+        name: 'gateway',
+        component: () => import('@/views/servicePackage/GatewayView.vue')
       }
     ]
   }

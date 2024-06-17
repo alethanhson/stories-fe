@@ -21,11 +21,11 @@
 </template>
 
 <script setup lang="ts">
-import type { Story } from '@/types'
+import type { Book } from '@/types'
 
 const props = defineProps({
   stories: {
-    type: Array as PropType<Story[]>,
+    type: Array as PropType<Book[]>,
     default: () => []
   },
   total: {

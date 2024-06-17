@@ -7,6 +7,8 @@ import photo from './photo.svg'
 import search from './search.svg'
 import uploadImage from './upload-image.svg'
 import bars from './bars.svg'
+import bank from './bank.svg'
+import check from './check.svg'
 import dashboard from './dashboard.svg'
 import genre from './genre.svg'
 import book from './book.svg'
@@ -27,6 +29,8 @@ export {
   search,
   uploadImage,
   bars,
+  bank,
+  check,
   dashboard,
   genre,
   book,

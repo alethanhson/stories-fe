@@ -1,6 +1,6 @@
-import type { Story } from '@/types'
+import type { Book } from '@/types'
 
-const data_story: Story[] = [
+const data_story: Book[] = [
   {
     id: 1,
     title: 'thuy',

@@ -11,15 +11,27 @@
         </tr>
       </thead>
       <tbody class="[&>tr>td]:p-1">
-        <tr v-for="chapter in 10" :key="chapter">
-          <td class="cursor-pointer hover:text-main-primary-200">Chapter 1</td>
-          <td>9999/99/99</td>
+        <tr v-for="chapter in chapters" :key="chapter.id">
+          <td class="cursor-pointer hover:text-main-primary-200">
+            Chapter <span>{{ chapter.chapter_number }}</span>
+          </td>
+          <td>{{ formatDate(chapter.updated_at + '') }}</td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { Chapter } from '@/api/modules/story/types'
+import { formatDate } from '@/utils'
+
+defineProps({
+  chapters: {
+    type: Array as PropType<Chapter[]>,
+    default: () => []
+  }
+})
+</script>
 
 <style></style>

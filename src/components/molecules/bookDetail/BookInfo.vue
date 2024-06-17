@@ -2,7 +2,7 @@
   <main class="flex gap-10 md:flex-row flex-col">
     <div class="flex-1 w-52 mx-auto">
       <img
-        src="https://cdnntx.com/nettruyen/thumb/ban-trai-cu-la-quy-hut-mau-dung-treu-toi.jpg"
+        :src="book.cover_image"
         alt=""
         class="w-full"
       />
@@ -13,26 +13,26 @@
         <tbody>
           <tr>
             <td>Author</td>
-            <td>Lê Công Anh</td>
+            <td>{{ book.author.author_name }}</td>
           </tr>
           <tr>
             <td>Status</td>
-            <td>Active</td>
+            <td>{{ book.status }}</td>
           </tr>
           <tr>
             <td>Genre</td>
-            <td>Oke</td>
+            <td>{{ book.genre.genre_name }}</td>
           </tr>
           <tr>
             <td>Likes</td>
-            <td>123</td>
+            <td>{{ book.likes }}</td>
           </tr>
         </tbody>
       </table>
 
       <div class="flex gap-5 items-center">
         <el-button type="primary">Follow</el-button>
-        <p><span>4</span> Followers</p>
+        <p><span>{{ book.followers }}</span> Followers</p>
       </div>
 
       <div>
@@ -47,6 +47,15 @@
   </main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { BookDetail } from '@/api/modules/story/types'
+
+defineProps({
+  book: {
+    type: Object as PropType<BookDetail>,
+    default: () => {}
+  }
+})
+</script>
 
 <style></style>

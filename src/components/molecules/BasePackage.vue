@@ -12,13 +12,17 @@
     <div class="flex flex-col items-center mt-7 text-xl w-full">
       <p class="font-semibold text-3xl">{{ formatVND(servicePackage.price) }}</p>
       <span class="text-base">{{ formatVND(pricePerDay()) }} / day</span>
-      <el-button
-        type="primary"
-        round
-        class="mt-3 font-semibold bg-main-primary-300 px-4 py-2 w-full rounded-3xl hover:bg-main-primary-400"
-        @click="registerService()"
-        >Buy
-      </el-button>
+      <router-link
+        :to="{ name: 'gateway', params: { service_package_id: servicePackage.id } }"
+        class="w-full"
+      >
+        <el-button
+          type="primary"
+          round
+          class="mt-3 font-semibold bg-main-primary-300 px-4 py-2 w-full rounded-3xl hover:bg-main-primary-400"
+          >Buy
+        </el-button>
+      </router-link>
     </div>
     <div
       v-if="tag"
@@ -34,18 +38,7 @@
 
 <script setup lang="ts">
 import { SERVICE_PACKAGE } from '@/constants'
-import { ToastType } from '@/types'
-import { showToast } from '@/utils'
-import { useUserServiceStore } from '@/stores/modules/servicePackage'
-import { useAuthStore } from '@/stores/modules/auth'
 import { formatVND } from '@/utils'
-import type {
-  RegisterServiceForm,
-  RegisterServiceResponse
-} from '@/api/modules/servicePackage/types'
-
-const userServiceStore = useUserServiceStore()
-const userStore = useAuthStore()
 
 const props = defineProps({
   isBorder: {
@@ -73,11 +66,6 @@ const style = {
   }
 }
 
-const registerServiceForm = reactive<RegisterServiceForm>({
-  user_id: userStore.currentUser.id,
-  service_package_id: props.servicePackage.id
-})
-
 const pricePerDay = () => {
   const sp = props.servicePackage
   return sp.price / sp.duration
@@ -85,15 +73,6 @@ const pricePerDay = () => {
 const handleBorder = () => {
   const sp = props.servicePackage
   return style.border[sp.type]
-}
-const registerService = async () => {
-  try {
-    const userService: RegisterServiceResponse =
-      await userServiceStore.registerService(registerServiceForm)
-    if (userService) showToast(userService.message, ToastType.SUCCESS)
-  } catch (error: any) {
-    showToast(error.message, ToastType.ERROR)
-  }
 }
 </script>
 

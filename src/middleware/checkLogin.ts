@@ -59,6 +59,13 @@ export async function checkLogin(
       return next({ name: 'page_unauthorized' })
     }
 
+    if (
+      (to.name === 'dashboard_author' || to.name === 'author') &&
+      (auth.role == USER_ROLE.AUTHOR || auth.role == USER_ROLE.ADMIN)
+    ) {
+      return next({ name: 'author.profile' })
+    }
+
     next()
   } else {
     if (to.name === 'login') {

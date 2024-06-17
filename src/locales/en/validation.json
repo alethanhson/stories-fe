@@ -4,5 +4,6 @@
   "default": "{field} is not valid",
   "email": "Please enter a valid email address",
   "min": "The {field} must be at least {min} characters.",
-  "max": "The {field} must not exceed {max} characters."
+  "max": "The {field} must not exceed {max} characters.",
+  "url": "Please enter a valid {field}"
 }

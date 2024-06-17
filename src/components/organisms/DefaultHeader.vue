@@ -49,6 +49,11 @@
               >Register as an author</el-dropdown-item
             >
             <el-dropdown-item>Manager Service Package</el-dropdown-item>
+            <router-link :to="{ name: 'author.profile' }">
+              <el-dropdown-item v-if="user.role == USER_ROLE.AUTHOR">
+                Manager Author
+              </el-dropdown-item>
+            </router-link>
             <el-dropdown-item>Setting</el-dropdown-item>
             <el-dropdown-item @click="handleLogout">Logout</el-dropdown-item>
           </el-dropdown-menu>
@@ -130,17 +135,21 @@ import type { DropdownInstance } from 'element-plus'
 import { useAuthStore } from '@/stores/modules/auth'
 import { novelGenres, comicGenres } from '@/mock/mock.genre'
 import { popularStories, newStories } from '@/mock/mock.story'
+import { useAuthorStore } from '@/stores/modules/author'
 import { showToast } from '@/utils'
 import i18n from '@/i18n'
 import { ToastType } from '@/types'
+import { USER_ROLE } from '@/constants'
 
 const authStore = useAuthStore()
+const authorStore = useAuthorStore()
 const isLogin = computed(() => !!authStore.isLoggedIn)
 const search = ref('')
 const navbar = ref<HTMLElement | null>(null)
 const isOpen = ref(false)
 const dropdown = ref<DropdownInstance>()
 const showAuthorRegis = ref<boolean>(false)
+const user = computed(() => authStore.currentUser)
 
 function showClick() {
   if (!dropdown.value) return
@@ -176,6 +185,7 @@ const router = useRouter()
 const handleLogout = async () => {
   try {
     await authStore.logout()
+    authorStore.resetAuthor()
     router.push({ name: 'home' })
     showToast(i18n.global.t('common.logout_success'), ToastType.SUCCESS)
   } catch (error) {

@@ -7,6 +7,12 @@ import photo from './photo.svg'
 import search from './search.svg'
 import uploadImage from './upload-image.svg'
 import bars from './bars.svg'
+import dashboard from './dashboard.svg'
+import genre from './genre.svg'
+import book from './book.svg'
+import crown from './crown.svg'
+import users from './users.svg'
+import chevronDown from './chevron-down.svg'
 import userCircle from './user-circle.svg'
 import arrowRight from './arrow-right.svg'
 import infoCircle from './info-circle.svg'
@@ -21,6 +27,12 @@ export {
   search,
   uploadImage,
   bars,
+  dashboard,
+  genre,
+  book,
+  crown,
+  users,
+  chevronDown,
   userCircle,
   arrowRight,
   infoCircle

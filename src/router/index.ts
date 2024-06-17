@@ -5,13 +5,15 @@ import adminRouter from './router.admin'
 import authorRouter from './router.author'
 import homeRouter from './router.home'
 import servicePackageRouter from './router.servicePackage'
+import storyRouter from './router.story'
 
 const routes: Array<RouteRecordRaw> = [
   ...authRouter,
   ...homeRouter,
   ...adminRouter,
   ...authorRouter,
-  ...servicePackageRouter
+  ...servicePackageRouter,
+  ...storyRouter
 ]
 
 const router = createRouter({

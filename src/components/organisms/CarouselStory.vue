@@ -27,7 +27,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { Story } from '@/types'
+import type { Book } from '@/types'
 import i18n from '@/i18n'
 
 const { t } = i18n.global
@@ -35,7 +35,7 @@ const activeIndex = ref<number>(0)
 
 const props = defineProps({
   stories: {
-    type: Array as PropType<Story[]>,
+    type: Array as PropType<Book[]>,
     default: () => []
   }
 })

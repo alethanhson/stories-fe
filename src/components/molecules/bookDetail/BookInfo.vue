@@ -13,7 +13,9 @@
           </tr>
           <tr>
             <td>Status</td>
-            <td>{{ book.status }}</td>
+            <td>
+              {{ getStatusText(book.status) }}
+            </td>
           </tr>
           <tr>
             <td>Genre</td>
@@ -47,6 +49,7 @@
 
 <script setup lang="ts">
 import type { BookDetail } from '@/api/modules/story/types'
+import { BOOK_STATUS } from '@/constants'
 
 defineProps({
   book: {
@@ -54,6 +57,19 @@ defineProps({
     default: () => {}
   }
 })
+
+const getStatusText = (status) => {
+  switch (Number(status)) {
+    case BOOK_STATUS.PENDING:
+      return 'Pending'
+    case BOOK_STATUS.ACTIVE:
+      return 'Active'
+    case BOOK_STATUS.BAN:
+      return 'Ban'
+    default:
+      return 'Unknown'
+  }
+}
 </script>
 
 <style></style>

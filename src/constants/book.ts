@@ -4,4 +4,10 @@ const BOOK_STATUS = {
   BAN: 3
 }
 
-export { BOOK_STATUS }
+const TOP_TYPE = {
+  MONTH: 30,
+  WEEK: 7,
+  DAY: 1
+}
+
+export { BOOK_STATUS, TOP_TYPE }

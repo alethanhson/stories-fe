@@ -59,3 +59,13 @@ export interface BookHistoryResponse {
   code: number
   data: BookHistory[]
 }
+
+export interface TopBookResponse {
+  code: number
+  data: TopBook[]
+}
+
+export interface TopBook extends BookBase {
+  likes: number
+  chapters: Chapter[]
+}

@@ -1,20 +1,16 @@
 import axios from '@/api/axios'
-import type { BookDetailResponse, BookHistoryResponse } from './types'
+import type { BookDetailResponse, BookHistoryResponse, TopBookResponse } from './types'
 
 const BookResource = '/book'
 
 export const fetchBookDetailApi = async (id: number): Promise<BookDetailResponse> => {
-  try {
-    return await axios.get(`${BookResource}/${id}`)
-  } catch (error) {
-    return Promise.reject(error)
-  }
+  return await axios.get(`${BookResource}/${id}`)
 }
 
 export const fetchReadingHistoryApi = async (): Promise<BookHistoryResponse> => {
-  try {
-    return await axios.get(`${BookResource}/reading-history`)
-  } catch (error) {
-    return Promise.reject(error)
-  }
+  return await axios.get(`${BookResource}/reading-history`)
+}
+
+export const fetchTopBookApi = async (days: number): Promise<TopBookResponse> => {
+  return await axios.get(`${BookResource}/get-top-book/${days}`)
 }

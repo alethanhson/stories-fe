@@ -5,7 +5,11 @@
     <p ref="content" :class="{ 'line-clamp-3': !expanded }" class="overflow-hidden mt-3">
       {{ description }}
     </p>
-    <button v-if="showButton" @click="toggleExpand" class="text-main-primary-300 mt-2">
+    <button
+      v-if="showButton"
+      @click="toggleExpand"
+      class="text-main-primary-300 -mt-2 hover:underline"
+    >
       {{ expanded ? 'See less' : 'See more' }}
     </button>
   </div>

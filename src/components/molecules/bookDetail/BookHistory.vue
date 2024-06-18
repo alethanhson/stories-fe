@@ -1,5 +1,5 @@
 <template>
-  <div class="border p-2">
+  <div v-if="historyList && historyList.length > 0" class="border p-2">
     <div class="border-b pb-2 flex justify-between">
       <p class="text-lg font-semibold text-main-primary-300">Reading history</p>
       <p class="text-lg font-semibold">See all</p>
@@ -13,11 +13,11 @@
 
         <div class="flex-1">
           <router-link :to="{ name: 'detail_story', params: { id: book.id } }">
-            <p class="font-semibold hover:underline hover:text-main-primary-200">
+            <p class="truncate-multiline font-semibold hover:underline hover:text-main-primary-200">
               {{ book.title }}
             </p>
           </router-link>
-          <p class="text-[#ccc]">
+          <p class="text-[#ccc] cursor-pointer hover:underline">
             Continue reading chapter {{ book.user_chapters.chapter.chapter_number }}
           </p>
         </div>
@@ -51,4 +51,13 @@ const getReadingHistory = async () => {
 }
 </script>
 
-<style></style>
+<style scoped>
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+</style>

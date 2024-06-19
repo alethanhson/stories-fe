@@ -5,32 +5,43 @@
         v-for="(item, index) in tabs"
         :key="index"
         :class="{ 'border-t-2 border-main-primary-400 bg-black': selectedTab === index }"
-        @click="selectedTab = index"
+        @click="setTopBookList(index)"
         class="top-title cursor-pointer"
       >
-        {{ item }}
+        {{ 'Top ' + item }}
       </li>
     </ul>
 
-    <div class="px-2">
-      <div class="flex items-center py-2 gap-3 border-b">
-        <span class="flex items-center gap-1"> 01 </span>
-        <div class="w-16 aspect-square overflow-hidden flex items-center">
-          <img
-            src="https://cdnntx.com/nettruyen/thumb/ban-trai-cu-la-quy-hut-mau-dung-treu-toi.jpg"
-            alt=""
-            class="object-cover w-full h-full"
-          />
+    <div
+      class="px-2 [&>div:first-child>span]:text-pink-400 [&>div:nth-child(2)>span]:text-blue-400 [&>div:nth-child(3)>span]:text-green-400"
+    >
+      <div
+        v-for="(book, index) in TopBookList"
+        :key="book.id"
+        class="flex items-center py-2 gap-3 border-b"
+      >
+        <span class="flex items-center gap-1 text-lg font-semibold"> 0{{ index + 1 }} </span>
+        <div class="w-14 aspect-square overflow-hidden flex items-center">
+          <img :src="book.cover_image" alt="" class="object-cover w-full h-full" />
         </div>
 
         <div class="flex-1">
-          <p class="font-semibold">Đại ma vòng tha mạng</p>
-          <p class="text-[#ccc] text-sm">Continue reading chapter 123</p>
+          <router-link :to="{ name: 'detail_story', params: { id: book.id } }">
+            <p class="truncate-multiline font-semibold hover:underline hover:text-main-primary-200">
+              {{ book.title }}
+            </p>
+          </router-link>
+          <p
+            v-if="book.chapters.length > 0"
+            class="text-[#ccc] text-sm hover:underline cursor-pointer"
+          >
+            Chapter {{ book.chapters[0].chapter_number }}
+          </p>
         </div>
 
         <div class="flex items-center gap-1">
-          <BaseIcon name="eye" class="w-4 h-4 fill-white" />
-          <span>123M</span>
+          <BaseIcon name="heart" class="w-4 h-4 fill-white" />
+          <span>{{ book.likes }}</span>
         </div>
       </div>
     </div>
@@ -38,10 +49,41 @@
 </template>
 
 <script setup lang="ts">
+import { fetchTopBookApi } from '@/api/modules/story'
+import { TOP_TYPE } from '@/constants'
+import type { TopBook, TopBookResponse } from '@/api/modules/story/types'
+
 const topTitle = ref<HTMLElement | null>(null)
 const selectedTab = ref(0)
+const TopBookList = ref<TopBook[] | null>(null)
+const tabs = ['Month', 'Week', 'Day']
 
-const tabs = ['Top Month', 'Top Week', 'Top Day']
+onMounted(() => {
+  getTopBook(TOP_TYPE.MONTH)
+})
+
+const getTopBook = async (days: number) => {
+  try {
+    const response: TopBookResponse = await fetchTopBookApi(days)
+    TopBookList.value = response.data
+  } catch (error) {
+    console.log('error: ', error)
+  }
+}
+
+const setTopBookList = (index: number) => {
+  selectedTab.value = index
+  getTopBook(TOP_TYPE[tabs[index].toUpperCase()])
+}
 </script>
 
-<style></style>
+<style scoped>
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+</style>

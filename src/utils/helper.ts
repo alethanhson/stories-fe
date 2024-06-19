@@ -31,3 +31,7 @@ export const getLastDayOfMonth = () => {
 export const formatVND = (vnd: number) => {
   return vnd.toLocaleString('vi', { style: 'currency', currency: 'VND' })
 }
+
+export const formatDate = (date: string) => {
+  return dayjs(date).format('DD/MM/YYYY')
+}

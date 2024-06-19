@@ -15,7 +15,10 @@ declare module 'vue' {
     BasePackage: typeof import('./components/molecules/BasePackage.vue')['default']
     BasePagination: typeof import('./components/atoms/BasePagination.vue')['default']
     BaseToastMessage: typeof import('./components/atoms/BaseToastMessage.vue')['default']
+    BookHistory: typeof import('./components/molecules/bookDetail/BookHistory.vue')['default']
+    BookInfo: typeof import('./components/molecules/bookDetail/BookInfo.vue')['default']
     CarouselStory: typeof import('./components/organisms/CarouselStory.vue')['default']
+    ChapterList: typeof import('./components/molecules/bookDetail/ChapterList.vue')['default']
     DefaultFooter: typeof import('./components/organisms/DefaultFooter.vue')['default']
     DefaultHeader: typeof import('./components/organisms/DefaultHeader.vue')['default']
     DefaultList: typeof import('./components/organisms/DefaultList.vue')['default']
@@ -40,5 +43,7 @@ declare module 'vue' {
     SidebarAdmin: typeof import('./components/organisms/admin/SidebarAdmin.vue')['default']
     SidebarItem: typeof import('./components/molecules/admin/SidebarItem.vue')['default']
     StoryListVertical: typeof import('./components/organisms/StoryListVertical.vue')['default']
+    SummaryStory: typeof import('./components/molecules/bookDetail/SummaryStory.vue')['default']
+    TopBookList: typeof import('./components/molecules/bookDetail/TopBookList.vue')['default']
   }
 }

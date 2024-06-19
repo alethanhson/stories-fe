@@ -29,7 +29,13 @@
       </table>
 
       <div class="flex gap-5 items-center">
-        <el-button type="primary">Follow</el-button>
+        <el-button
+          @click="followBook"
+          :disabled="loadBtnFollow"
+          class="min-w-24"
+          :type="book.is_follow ? 'danger' : 'primary'"
+          >{{ book.is_follow ? 'Unfollow' : 'Follow' }}</el-button
+        >
         <p>
           <span>{{ book.followers }}</span> Followers
         </p>
@@ -49,9 +55,12 @@
 
 <script setup lang="ts">
 import type { BookDetail } from '@/api/modules/story/types'
+import { followBookApi } from '@/api/modules/story'
 import { BOOK_STATUS } from '@/constants'
 
-defineProps({
+const loadBtnFollow = ref(false)
+const emit = defineEmits(['update:book'])
+const props = defineProps({
   book: {
     type: Object as PropType<BookDetail>,
     default: () => {}
@@ -68,6 +77,20 @@ const getStatusText = (status) => {
       return 'Ban'
     default:
       return 'Unknown'
+  }
+}
+
+const followBook = async () => {
+  loadBtnFollow.value = true
+  try {
+    await followBookApi({
+      book_id: props.book.id
+    })
+    emit('update:book', { ...props.book, is_follow: !props.book.is_follow })
+  } catch (error) {
+    console.log('error: ', error)
+  } finally {
+    loadBtnFollow.value = false
   }
 }
 </script>

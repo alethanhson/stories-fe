@@ -36,6 +36,7 @@ export interface BookDetail extends BookBase {
   author: AuthorData
   genre: Genre
   chapters: Chapter[]
+  is_follow: boolean
 }
 
 export interface BookHistory extends BookBase {

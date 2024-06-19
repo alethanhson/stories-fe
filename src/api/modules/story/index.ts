@@ -14,3 +14,7 @@ export const fetchReadingHistoryApi = async (): Promise<BookHistoryResponse> => 
 export const fetchTopBookApi = async (days: number): Promise<TopBookResponse> => {
   return await axios.get(`${BookResource}/get-top-book/${days}`)
 }
+
+export const followBookApi = async (payload: any): Promise<any> => {
+  return await axios.post(`${BookResource}/follow`, payload)
+}

@@ -3,8 +3,12 @@ import type { BookDetailResponse, BookHistoryResponse, TopBookResponse } from '.
 
 const BookResource = '/book'
 
-export const fetchBookDetailApi = async (id: number): Promise<BookDetailResponse> => {
-  return await axios.get(`${BookResource}/${id}`)
+export const fetchBookDetailApi = async (
+  id: number,
+  limit?: any
+): Promise<BookDetailResponse> => {
+  const url = limit ? `${BookResource}/${id}/${limit}` : `${BookResource}/${id}`
+  return await axios.get(url)
 }
 
 export const fetchReadingHistoryApi = async (): Promise<BookHistoryResponse> => {

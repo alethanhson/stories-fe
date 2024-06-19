@@ -36,6 +36,7 @@ export interface BookDetail extends BookBase {
   author: AuthorData
   genre: Genre
   chapters: Chapter[]
+  total_chapters: number
 }
 
 export interface BookHistory extends BookBase {

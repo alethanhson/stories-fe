@@ -19,7 +19,11 @@
 
         <SummaryStory :description="bookDetail.description" />
 
-        <ChapterList :chapters="bookDetail.chapters" />
+        <ChapterList
+          :chapters="bookDetail.chapters"
+          :total_chapters="bookDetail.total_chapters"
+          @moreChapter="handleMoreChapter"
+        />
       </div>
 
       <div class="flex-1 max-[1200px]:hidden">
@@ -50,6 +54,14 @@ onMounted(async () => {
 const getBookDetail = async () => {
   try {
     const response: BookDetailResponse = await fetchBookDetailApi(Number(route.params.id))
+    bookDetail.value = response.data
+  } catch (error) {
+    console.error('Failed to fetch book detail:', error)
+  }
+}
+const handleMoreChapter = async () => {
+  try {
+    const response: BookDetailResponse = await fetchBookDetailApi(Number(route.params.id), -1)
     bookDetail.value = response.data
   } catch (error) {
     console.error('Failed to fetch book detail:', error)

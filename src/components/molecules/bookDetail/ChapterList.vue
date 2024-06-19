@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-10">
     <p class="mt-3 text-2xl font-semibold uppercase text-main-primary-300">Chapter list</p>
     <hr class="border-main-primary-300" />
 
@@ -19,6 +19,14 @@
         </tr>
       </tbody>
     </table>
+
+    <p
+      v-show="chapters.length < total_chapters"
+      @click="$emit('moreChapter')"
+      class="mt-3 text-center text-gray-400 hover:text-main-primary-400 cursor-pointer"
+    >
+      show more
+    </p>
   </div>
 </template>
 
@@ -30,6 +38,10 @@ defineProps({
   chapters: {
     type: Array as PropType<Chapter[]>,
     default: () => []
+  },
+  total_chapters: {
+    type: Number,
+    default: 0
   }
 })
 </script>

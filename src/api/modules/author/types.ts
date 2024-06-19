@@ -40,5 +40,46 @@ export interface Chapter {
   chapter_number: number
   book_id: number
   chapter_title: string
-  chapter_content: string
+  chapter_content?: string
+}
+
+export interface BasicStory {
+  id: number
+  title: string
+  author_id: number
+  genre_id: number
+  description: string
+  cover_image: string
+  package_type: number
+  status: number
+  story_type: number
+}
+
+export interface FormCreateStory {
+  title: string
+  author_id: number | null
+  genre_id: number
+  description: string
+  cover_image: File | null
+  package_type: number
+  story_type: number
+}
+
+export interface StoryResponse {
+  code: number
+  message?: string
+  data: BasicStory
+}
+
+export interface FormCreateChapter {
+  book_id: number | null
+  chapter_number: number | null
+  chapter_title?: string | null
+  image: File[]
+}
+
+export interface ChapterResponse {
+  code: number
+  message?: string
+  data: Chapter
 }

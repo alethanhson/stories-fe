@@ -3,6 +3,7 @@
   "story_new": "Latest story",
   "suggest": "Hints from the story",
   "create": {
+    "title": "Enter title",
     "path": "Enter path",
     "story_reader": "Story reader",
     "choose_author": "Select author",
@@ -31,5 +32,13 @@
   "delete": "Delete",
   "cancel": "Cancel",
   "confirm": "Confirm",
-  "accept": "Accept"
+  "accept": "Accept",
+  "chapter": {
+    "create": "Create",
+    "createChap": "Create chapter",
+    "cancel": "Cancel",
+    "title": "Enter title",
+    "failed": "Chapter create failed",
+    "success": "Chapter created successfully"
+  }
 }

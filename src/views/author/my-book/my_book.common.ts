@@ -1,4 +1,4 @@
-import type { FormCreateChapter, FormCreateStory } from "@/api/modules/author/types";
+import type { FormCreateChapter, FormCreateStory } from '@/api/modules/author/types'
 
 export const formCreate = reactive<FormCreateStory>({
   title: '',
@@ -7,11 +7,11 @@ export const formCreate = reactive<FormCreateStory>({
   description: '',
   cover_image: null,
   package_type: 1,
-  story_type: 1,
+  story_type: 1
 })
 
 export const FormCreateChap = reactive<FormCreateChapter>({
   book_id: null,
   chapter_number: null,
-  image: [],
+  image: []
 })

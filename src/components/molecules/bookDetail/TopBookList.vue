@@ -31,12 +31,14 @@
               {{ book.title }}
             </p>
           </router-link>
-          <p
-            v-if="book.chapters.length > 0"
-            class="text-[#ccc] text-sm hover:underline cursor-pointer"
-          >
-            Chapter {{ book.chapters[0].chapter_number }}
-          </p>
+          <router-link :to="{ name: 'reading-story', params: { id_chapter: book.chapters[0].id } }">
+            <p
+              v-if="book.chapters.length > 0"
+              class="text-[#ccc] text-sm hover:underline cursor-pointer"
+            >
+              Chapter {{ book.chapters[0].chapter_number }}
+            </p>
+          </router-link>
         </div>
 
         <div class="flex items-center gap-1">

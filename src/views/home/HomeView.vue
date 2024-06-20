@@ -5,7 +5,7 @@
   <div class="w-full lg:flex block">
     <div class="w-full lg:flex-[4]">
       <h1 class="text-xl font-bold text-gray-800">{{ t('story.story_hot') }}</h1>
-      <list-story :stories="data_story"></list-story>
+      <list-story :stories="bookList"></list-story>
     </div>
     <div class="w-full lg:flex-[2] ms-2">
       <h1 class="text-xl font-bold text-gray-800">{{ t('story.story_new') }}</h1>
@@ -18,13 +18,16 @@ import i18n from '@/i18n'
 import data_story from '@/sample_data/list_story'
 import { ToastType } from '@/types'
 import { showToast } from '@/utils'
+import { fetchBookListApi } from '@/api/modules/story'
 
 const { t } = i18n.global
 const route = useRoute()
 const router = useRouter()
+const bookList = reactive<any>([])
 
 onMounted(() => {
   handlePaymentNotify()
+  loadBook()
 })
 
 const handlePaymentNotify = () => {
@@ -34,6 +37,14 @@ const handlePaymentNotify = () => {
   } else if (route.query.statusPayment == 'false') {
     router.replace({ query: {} })
     showToast(route.query.message + '', ToastType.ERROR)
+  }
+}
+const loadBook = async () => {
+  try {
+    const response: any = await fetchBookListApi()
+    bookList.push(...response.data)
+  } catch (error) {
+    console.log('error: ', error)
   }
 }
 </script>

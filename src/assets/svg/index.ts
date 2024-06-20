@@ -20,6 +20,8 @@ import chevronDown from './chevron-down.svg'
 import userCircle from './user-circle.svg'
 import arrowRight from './arrow-right.svg'
 import infoCircle from './info-circle.svg'
+import right from './right.svg'
+import left from './left.svg'
 
 export {
   arrowLeft,
@@ -43,5 +45,7 @@ export {
   chevronDown,
   userCircle,
   arrowRight,
-  infoCircle
+  infoCircle,
+  right,
+  left
 }

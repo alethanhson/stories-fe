@@ -10,6 +10,11 @@ const storyRouter: Array<RouteRecordRaw> = [
         path: ':id',
         name: 'detail_story',
         component: () => import('@/views/story/StoryDetailView.vue')
+      },
+      {
+        path: 'reading/:id_chapter',
+        name: 'reading-story',
+        component: () => import('@/views/story/ReadStory.vue'),
       }
     ]
   }

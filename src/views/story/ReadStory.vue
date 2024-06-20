@@ -77,10 +77,14 @@ const getChapterImage = async () => {
   }
 }
 const getBookChap = async () => {
-  Object.assign(
-    bookChapter,
-    (await getBookByChapter(route.params.id_chapter as unknown as number)).data
-  )
+  try {
+    Object.assign(
+      bookChapter,
+      (await getBookByChapter(route.params.id_chapter as unknown as number)).data
+    )
+  } catch (error) {
+    console.log(error)
+  }
 }
 const currentChapter = computed(() => {
   chapterIndex.value = bookChapter.chapters.findIndex(

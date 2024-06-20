@@ -20,6 +20,7 @@ import chevronDown from './chevron-down.svg'
 import userCircle from './user-circle.svg'
 import arrowRight from './arrow-right.svg'
 import infoCircle from './info-circle.svg'
+import heart from './heart.svg'
 import right from './right.svg'
 import left from './left.svg'
 
@@ -41,6 +42,7 @@ export {
   genre,
   book,
   crown,
+  heart,
   users,
   chevronDown,
   userCircle,

@@ -7,6 +7,9 @@ import photo from './photo.svg'
 import search from './search.svg'
 import uploadImage from './upload-image.svg'
 import bars from './bars.svg'
+import arrowUpFromBracket from './arrow-up-from-bracket.svg'
+import update from './pen-to-square.svg'
+import trash from './trash.svg'
 import bank from './bank.svg'
 import check from './check.svg'
 import del from './delete.svg'
@@ -32,6 +35,9 @@ export {
   search,
   uploadImage,
   bars,
+  arrowUpFromBracket,
+  update,
+  trash,
   bank,
   check,
   del,

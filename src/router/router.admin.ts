@@ -18,7 +18,7 @@ const adminRouter: Array<RouteRecordRaw> = [
       {
         path: 'genres',
         name: 'genre',
-        component: () => import('@/views/admin/AdminHomeView.vue')
+        component: () => import('@/views/admin/GenreView.vue')
       },
       {
         path: 'service-packages',

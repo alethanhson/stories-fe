@@ -98,6 +98,7 @@ const onFileChange = (event: Event) => {
 }
 const createBook = async () => {
   try {
+    setFormCreate()
     submitClicked.value = true
     if (!(await validate()).valid) return
     const response = await authors.createBook(formCreate)
@@ -114,13 +115,23 @@ const createBook = async () => {
     console.log(error)
   }
 }
-
-watchEffect(() => {
+const getGenre = async () => {
+  try {
+    Object.assign(genres, await getGenre())
+  } catch (error) {
+    console.log(error)
+  }
+}
+const setFormCreate = () => {
   title.value = formCreate.title
   package_type.value = formCreate.package_type
   description.value = formCreate.description
   genre_id.value = formCreate.genre_id
   cover_image.value = formCreate.cover_image
   formCreate.author_id = useAuthorStore().getInfoAuthor.id
+}
+
+onMounted(() => {
+  //getGenre()
 })
 </script>

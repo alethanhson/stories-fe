@@ -17,9 +17,13 @@
               {{ book.title }}
             </p>
           </router-link>
-          <p class="text-[#ccc] cursor-pointer hover:underline">
-            Continue reading chapter {{ book.user_chapters.chapter.chapter_number }}
-          </p>
+          <router-link
+            :to="{ name: 'reading-story', params: { id_chapter: book.user_chapters.chapter.id } }"
+          >
+            <p class="text-[#ccc] cursor-pointer hover:underline">
+              Continue reading chapter {{ book.user_chapters.chapter.chapter_number }}
+            </p>
+          </router-link>
         </div>
 
         <div class="flex items-center gap-1">

@@ -15,7 +15,7 @@
           <span class="italic">[Updated at {{ formatDate(bookDetail?.updated_at + '') }} ]</span>
         </div>
 
-        <BookInfo :book="bookDetail" />
+        <BookInfo :book="bookDetail" :chapters="bookDetail.chapters" />
 
         <SummaryStory :description="bookDetail.description" />
 

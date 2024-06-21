@@ -12,9 +12,11 @@
       </thead>
       <tbody class="[&>tr>td]:p-1">
         <tr v-for="chapter in chapters" :key="chapter.id">
-          <td class="cursor-pointer hover:text-main-primary-200">
-            Chapter <span>{{ chapter.chapter_number }}</span>
-          </td>
+          <router-link :to="{ name: 'reading-story', params: { id_chapter: chapter.id } }">
+            <td class="cursor-pointer hover:text-main-primary-200">
+              Chapter <span>{{ chapter.chapter_number }}</span>
+            </td>
+          </router-link>
           <td>{{ formatDate(chapter.updated_at + '') }}</td>
         </tr>
       </tbody>

@@ -3,6 +3,7 @@ import author from './author.json'
 import validation from './validation.json'
 import common from './common.json'
 import story from './story.json'
+import genre from './genre.json'
 import payment from './payment.json'
 
 export default {
@@ -11,5 +12,6 @@ export default {
   validation,
   common,
   story,
+  genre,
   payment
 }

@@ -33,7 +33,7 @@
       </div>
       <div class="w-1/3 flex justify-center gap-8 mx-auto">
         <button
-          v-if="chapterIndex > 0"
+          v-if="chapterIndex > 0 && !loading"
           @click="changeChap(chapterIndex - 1)"
           class="flex p-1 px-2 bg-slate-300 rounded-md gap-2 items-center m-4 font-medium text-slate-600"
         >
@@ -42,7 +42,7 @@
         </button>
         <button
           class="flex p-1 px-2 bg-slate-300 rounded-md gap-2 items-center m-4 font-medium text-slate-600"
-          v-if="chapterIndex < bookChapter.chapters.length - 1"
+          v-if="chapterIndex < bookChapter.chapters.length - 1 && !loading"
           @click="changeChap(chapterIndex + 1)"
         >
           <span>{{ t('story.after') }}</span>
@@ -55,7 +55,7 @@
 <script setup lang="ts">
 import { chapter_images } from '@/api/modules/chapter_image'
 import type { ChapterImage } from '@/api/modules/chapter_image/type'
-import { bookChapter } from './story.common'
+import { bookChapter } from './stories.common'
 import { getBookByChapter } from '@/api/modules/story'
 import i18n from '@/i18n'
 
@@ -65,12 +65,10 @@ const router = useRouter()
 const listChapterImage = reactive<ChapterImage[]>([])
 const loading = ref<boolean>(true)
 const chapterIndex = ref<number>(0)
+const chapterId = route.params.id_chapter as unknown as number
 const getChapterImage = async () => {
   try {
-    Object.assign(
-      listChapterImage,
-      await chapter_images.list(route.params.id_chapter as unknown as number)
-    )
+    Object.assign(listChapterImage, await chapter_images.list(chapterId))
     loading.value = false
   } catch (error) {
     console.log(error)
@@ -78,18 +76,13 @@ const getChapterImage = async () => {
 }
 const getBookChap = async () => {
   try {
-    Object.assign(
-      bookChapter,
-      (await getBookByChapter(route.params.id_chapter as unknown as number)).data
-    )
+    Object.assign(bookChapter, (await getBookByChapter(chapterId)).data)
   } catch (error) {
     console.log(error)
   }
 }
 const currentChapter = computed(() => {
-  chapterIndex.value = bookChapter.chapters.findIndex(
-    (chapter) => chapter.id == (route.params.id_chapter as unknown as number)
-  )
+  chapterIndex.value = bookChapter.chapters.findIndex((chapter) => chapter.id == chapterId)
   return chapterIndex.value !== -1 ? bookChapter.chapters[chapterIndex.value] : null
 })
 const changeChap = (index_chap: number) => {

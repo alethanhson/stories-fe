@@ -21,9 +21,9 @@ export const fetchTopBookApi = async (days: number): Promise<TopBookResponse> =>
   return await axios.get(`${BookResource}/get-top-book/${days}`)
 }
 
-export const getBookByChapter = async (chapter_id: number): Promise<BookChapterResponse> => {
+export const getBookByChapter = async (chapterId: number): Promise<BookChapterResponse> => {
   try {
-    return await axios.get(`${BookResource}/chapter/${chapter_id}`)
+    return await axios.get(`${BookResource}/chapter/${chapterId}`)
   } catch (error) {
     return Promise.reject(error)
   }

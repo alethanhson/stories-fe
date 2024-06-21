@@ -37,6 +37,7 @@ export interface BookDetail extends BookBase {
   genre: Genre
   chapters: Chapter[]
   total_chapters: number
+  is_follow: boolean
 }
 
 export interface BookHistory extends BookBase {

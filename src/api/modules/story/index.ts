@@ -23,3 +23,7 @@ export const fetchBookListApi = async (): Promise<any> => {
     return Promise.reject(error)
   }
 }
+
+export const followBookApi = async (payload: any): Promise<any> => {
+  return await axios.post(`${BookResource}/follow`, payload)
+}

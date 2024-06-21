@@ -1,7 +1,14 @@
 <template>
   <main class="flex gap-10 md:flex-row flex-col">
-    <div class="flex-1 w-52 mx-auto">
+    <div class="flex-1 w-52 mx-auto relative">
       <img :src="book.cover_image" alt="" class="w-full" />
+
+      <div
+        class="absolute top-0 right-0 z-10 px-5 py-0.5 text-white font-semibold rounded-bl-xl"
+        :class="serviceTag(book.package_type)"
+      >
+        {{ serviceName(book.package_type) }}
+      </div>
     </div>
 
     <div class="flex-[3] gap-4 flex flex-col">
@@ -42,10 +49,18 @@
       </div>
 
       <div>
-        <el-button type="primary" class="!bg-main-primary-200 hover:!bg-main-primary-400">
+        <el-button
+          @click="readingStory(chapters[chapters.length - 1].id)"
+          type="primary"
+          class="!bg-main-primary-200 hover:!bg-main-primary-400"
+        >
           Read Beginning
         </el-button>
-        <el-button type="primary" class="!bg-main-primary-200 hover:!bg-main-primary-400">
+        <el-button
+          @click="readingStory(chapters[0].id)"
+          type="primary"
+          class="!bg-main-primary-200 hover:!bg-main-primary-400"
+        >
           Read Latest
         </el-button>
       </div>
@@ -54,16 +69,21 @@
 </template>
 
 <script setup lang="ts">
-import type { BookDetail } from '@/api/modules/story/types'
+import type { BookDetail, Chapter } from '@/api/modules/story/types'
+import { BOOK_STATUS, SERVICE_PACKAGE } from '@/constants'
 import { followBookApi } from '@/api/modules/story'
-import { BOOK_STATUS } from '@/constants'
 
+const router = useRouter()
 const loadBtnFollow = ref(false)
 const emit = defineEmits(['update:book'])
 const props = defineProps({
   book: {
     type: Object as PropType<BookDetail>,
     default: () => {}
+  },
+  chapters: {
+    type: Array as PropType<Chapter[]>,
+    default: () => []
   }
 })
 
@@ -79,7 +99,25 @@ const getStatusText = (status) => {
       return 'Unknown'
   }
 }
-
+const serviceTag = (type) => {
+  if (type == SERVICE_PACKAGE.PRO) {
+    return 'bg-gradient-to-r-custom'
+  } else if (type == SERVICE_PACKAGE.BASE) {
+    return 'bg-green-400'
+  }
+  return 'bg-main-primary-500'
+}
+const serviceName = (type) => {
+  if (type == SERVICE_PACKAGE.PRO) {
+    return 'Pro'
+  } else if (type == SERVICE_PACKAGE.BASE) {
+    return 'Base'
+  }
+  return 'Free'
+}
+const readingStory = (id) => {
+  router.push({ name: 'reading-story', params: { id_chapter: id } })
+}
 const followBook = async () => {
   loadBtnFollow.value = true
   try {

@@ -29,6 +29,10 @@ export const fetchBookListApi = async (): Promise<any> => {
   }
 }
 
+export const followBookApi = async (payload: any): Promise<any> => {
+  return await axios.post(`${BookResource}/follow`, payload)
+}
+
 export const getBookByChapter = async (chapterId: number): Promise<BookChapterResponse> => {
   try {
     return await axios.get(`${BookResource}/chapter/${chapterId}`)

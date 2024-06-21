@@ -71,9 +71,10 @@ import { showToast } from '@/utils'
 import { ToastType } from '@/types'
 import type { Genre } from '@/api/modules/admin/types'
 import { useAuthorStore } from '@/stores/modules/author'
+import { getGenre } from '@/api/modules/genre'
 
 const { t } = i18n.global
-const genres = ref<Genre[]>([])
+const genres = reactive<Genre[]>([])
 const router = useRouter()
 const imagePreview = ref<string>()
 const submitClicked = ref<boolean>(false)
@@ -115,9 +116,9 @@ const createBook = async () => {
     console.log(error)
   }
 }
-const getGenre = async () => {
+const getGenres = async () => {
   try {
-    Object.assign(genres, await getGenre())
+    Object.assign(genres, (await getGenre()).genres)
   } catch (error) {
     console.log(error)
   }
@@ -132,6 +133,6 @@ const setFormCreate = () => {
 }
 
 onMounted(() => {
-  //getGenre()
+  getGenres()
 })
 </script>

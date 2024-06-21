@@ -109,7 +109,7 @@ watch(
 
 const { handleSubmit } = useForm()
 
-function onFileChange(event) {
+const onFileChange = (event) => {
   const file = event.target.files[0]
   if (file) {
     genre.cover_image = URL.createObjectURL(file)
@@ -117,7 +117,7 @@ function onFileChange(event) {
   }
 }
 
-function onFileClose() {
+const onFileClose = () => {
   genre.cover_image = ''
   genre.upload_cover_image = null
 }

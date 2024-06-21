@@ -54,7 +54,6 @@ import { ToastType } from '@/types'
 import { showToast } from '@/utils'
 import i18n from '@/i18n'
 
-const router = useRouter()
 const { t } = i18n.global
 const showAdd = ref(false)
 const showUpdate = ref(false)
@@ -63,9 +62,7 @@ const closeForm = () => {
   showUpdate.value = false
 }
 
-const reload = async () => {
-  await fetchGenre()
-}
+const reload = () => fetchGenre()
 
 const genreList = ref<GenreData[]>([])
 
@@ -77,7 +74,6 @@ const fetchGenre = async () => {
 const handleDelete = async (id) => {
   try {
     await deleteGenre(id)
-    router.push({ name: 'genre' })
     reload()
     showToast(t('genre.delete_success'), ToastType.SUCCESS)
   } catch (error) {

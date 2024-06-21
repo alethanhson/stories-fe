@@ -102,7 +102,7 @@ const errorMsg = messageErrorGenre
 const { validate } = useForm()
 
 const URLImage = ref('')
-function onFileChange(event) {
+const onFileChange = (event) => {
   const file = event.target.files[0]
   if (file) {
     URLImage.value = URL.createObjectURL(file)
@@ -110,7 +110,7 @@ function onFileChange(event) {
   }
 }
 
-function onFileClose() {
+const onFileClose = () => {
   URLImage.value = ''
 }
 

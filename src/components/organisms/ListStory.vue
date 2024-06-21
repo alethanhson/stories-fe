@@ -5,13 +5,22 @@
       :key="story.id"
       class="relative flex justify-center rounded-lg overflow-hidden"
     >
-      <img :src="story.cover_image" class="w-full h-full" alt="Book Cover" />
-      <div
-        class="absolute text-main-primary-25 bottom-0 text-center w-full bg-gray-700 bg-opacity-50 h-10 pb-11"
-      >
-        <p class="font-sm truncate">{{ story.title }}</p>
-        <p class="text-xs truncate">{{ story.author }}</p>
-      </div>
+      <router-link :to="{ name: 'detail_story', params: { id: story.id } }">
+        <img :src="story.cover_image" class="w-full h-full" alt="Book Cover" />
+        <div
+          class="absolute text-main-primary-25 bottom-0 text-center w-full bg-gray-700 bg-opacity-50 h-10 pb-11"
+        >
+          <p class="font-sm truncate px-3">{{ story.title }}</p>
+          <p class="text-xs truncate px-3">{{ story.author.author_name }}</p>
+        </div>
+
+        <div
+          class="absolute top-0 right-0 z-10 px-5 py-0.5 text-white font-semibold rounded-bl-xl"
+          :class="serviceTag(story.package_type)"
+        >
+          {{ serviceName(story.package_type) }}
+        </div>
+      </router-link>
     </div>
   </div>
   <el-pagination
@@ -24,10 +33,11 @@
 
 <script setup lang="ts">
 import type { Book } from '@/types'
+import { SERVICE_PACKAGE } from '@/constants'
 
 const props = defineProps({
   stories: {
-    type: Array as PropType<Book[]>,
+    type: Array as PropType<any>,
     default: () => []
   },
   total: {
@@ -51,6 +61,22 @@ const form = computed(() => {
     total: props.total
   }
 })
+const serviceTag = (type) => {
+  if (type == SERVICE_PACKAGE.PRO) {
+    return 'bg-gradient-to-r-custom'
+  } else if (type == SERVICE_PACKAGE.BASE) {
+    return 'bg-green-400'
+  }
+  return 'bg-main-primary-500'
+}
+const serviceName = (type) => {
+  if (type == SERVICE_PACKAGE.PRO) {
+    return 'Pro'
+  } else if (type == SERVICE_PACKAGE.BASE) {
+    return 'Base'
+  }
+  return 'Free'
+}
 </script>
 
 <style scope>

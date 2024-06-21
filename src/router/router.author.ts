@@ -25,6 +25,16 @@ const authorRouter: Array<RouteRecordRaw> = [
             path: 'my-book',
             name: 'author.book',
             component: () => import('@/views/author/my-book/BookAuthorView.vue')
+          },
+          {
+            path: 'create-book',
+            name: 'author.book.create',
+            component: () => import('@/views/author/my-book/CreateBook.vue')
+          },
+          {
+            path: 'create-chapter',
+            name: 'author.chapter.create',
+            component: () => import('@/views/author/my-book/AddChapter.vue')
           }
         ]
       }

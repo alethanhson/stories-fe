@@ -1,5 +1,10 @@
 import axios from '@/api/axios'
-import type { BookDetailResponse, BookHistoryResponse, TopBookResponse } from './types'
+import type {
+  BookDetailResponse,
+  BookHistoryResponse,
+  TopBookResponse,
+  BookChapterResponse
+} from './types'
 
 const BookResource = '/book'
 
@@ -26,4 +31,12 @@ export const fetchBookListApi = async (): Promise<any> => {
 
 export const followBookApi = async (payload: any): Promise<any> => {
   return await axios.post(`${BookResource}/follow`, payload)
+}
+
+export const getBookByChapter = async (chapterId: number): Promise<BookChapterResponse> => {
+  try {
+    return await axios.get(`${BookResource}/chapter/${chapterId}`)
+  } catch (error) {
+    return Promise.reject(error)
+  }
 }

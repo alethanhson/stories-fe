@@ -40,5 +40,8 @@
     "title": "Enter title",
     "failed": "Chapter create failed",
     "success": "Chapter created successfully"
-  }
+  },
+  "chap": "Chater",
+  "before": "Before",
+  "after": "After"
 }

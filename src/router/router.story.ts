@@ -15,7 +15,7 @@ const storyRouter: Array<RouteRecordRaw> = [
       {
         path: 'reading/:id_chapter',
         name: 'reading-story',
-        component: () => import('@/views/story/ReadingStoryView.vue'),
+        component: () => import('@/views/story/ReadStory.vue'),
         beforeEnter: checkRoleService
       }
     ]

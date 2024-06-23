@@ -37,6 +37,7 @@ export interface BookDetail extends BookBase {
   genre: Genre
   chapters: Chapter[]
   total_chapters: number
+  is_follow: boolean
 }
 
 export interface BookHistory extends BookBase {
@@ -68,5 +69,17 @@ export interface TopBookResponse {
 
 export interface TopBook extends BookBase {
   likes: number
+  chapters: Chapter[]
+}
+
+export interface BookChapterResponse {
+  code: number
+  message: string
+  data: BookChapter
+}
+export interface BookChapter {
+  id: number
+  title: string
+  package_type: number
   chapters: Chapter[]
 }

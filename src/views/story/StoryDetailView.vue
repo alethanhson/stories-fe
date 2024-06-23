@@ -15,7 +15,11 @@
           <span class="italic">[Updated at {{ formatDate(bookDetail?.updated_at + '') }} ]</span>
         </div>
 
-        <BookInfo :book="bookDetail" :chapters="bookDetail.chapters" />
+        <BookInfo
+          :book="bookDetail"
+          :chapters="bookDetail.chapters"
+          @update:book="handleUpdateBook"
+        />
 
         <SummaryStory :description="bookDetail.description" />
 
@@ -66,6 +70,9 @@ const handleMoreChapter = async () => {
   } catch (error) {
     console.error('Failed to fetch book detail:', error)
   }
+}
+const handleUpdateBook = (value) => {
+  bookDetail.value = value
 }
 </script>
 

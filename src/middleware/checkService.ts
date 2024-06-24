@@ -15,13 +15,16 @@ export async function checkRoleService(to, from) {
     Swal.fire({
       title: 'You need to register for the service to be able to read this story!',
       icon: 'warning',
-      showCancelButton: false,
-      showConfirmButton: false,
+      showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Okeeee!'
-    }).then(() => {
-      if (!from.name) router.push({ name: 'home' })
+    }).then((result) => {
+      if (result.isConfirmed) {
+        router.push({ name: 'service-package' })
+      } else if (!from.name) {
+        router.push({ name: 'home' })
+      }
     })
 
     return false

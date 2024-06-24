@@ -65,6 +65,7 @@ import { showToast } from '@/utils'
 import { ToastType } from '@/types'
 
 const { t } = i18n.global
+const router = useRouter()
 const dialogImageUrl = ref('')
 const dialogVisible = ref(false)
 const disabled = ref(false)
@@ -88,6 +89,7 @@ const createChapter = async () => {
     showValidate.value = true
     await authors.createChapter(FormCreateChap)
     showToast(t('story.chapter.success'), ToastType.SUCCESS)
+    router.push({ name: 'author.book' })
   } catch (error) {
     console.error(error)
     showToast(t('story.chapter.failed'), ToastType.ERROR)

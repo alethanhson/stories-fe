@@ -38,6 +38,7 @@ export interface BookDetail extends BookBase {
   chapters: Chapter[]
   total_chapters: number
   is_follow: boolean
+  first_chapter_id: number
 }
 
 export interface BookHistory extends BookBase {

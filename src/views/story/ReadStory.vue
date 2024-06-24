@@ -2,7 +2,9 @@
   <div class="w-full">
     <div class="mx-0 sm:mx-16 lg:m-28 xl:mx-48 bg-white">
       <h1 class="p-4 font-medium text-xl text-slate-500">
-        {{ bookChapter.title + `- ${t('story.chap')} ` + currentChapter?.chapter_number }}
+        {{
+          bookChapter.title + `- ${t('story.chap')} ` + (currentChapter?.chapter_number ?? '...')
+        }}
       </h1>
       <div class="w-1/3 mx-auto bg-slate-400 p-1 rounded-md flex justify-center mb-2">
         <base-icon
@@ -12,7 +14,7 @@
           @click="changeChap(chapterIndex - 1)"
         ></base-icon>
         <p class="mx-2 sm:mx-4 md:mx-10 xl:mx-16 font-medium text-slate-600">
-          {{ t('story.chap') + ': ' + currentChapter?.chapter_number }}
+          {{ t('story.chap') + ': ' + (currentChapter?.chapter_number ?? '...') }}
         </p>
         <base-icon
           name="right"

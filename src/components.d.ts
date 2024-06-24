@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AddGenreModel: typeof import('./components/molecules/genre/AddGenreModel.vue')['default']
     AuthorInfoCard: typeof import('./components/molecules/author/AuthorInfoCard.vue')['default']
     AuthorRegister: typeof import('./components/organisms/AuthorRegister.vue')['default']
     BankLabel: typeof import('./components/molecules/BankLabel.vue')['default']
@@ -64,5 +65,6 @@ declare module 'vue' {
     StoryListVertical: typeof import('./components/organisms/StoryListVertical.vue')['default']
     SummaryStory: typeof import('./components/molecules/bookDetail/SummaryStory.vue')['default']
     TopBookList: typeof import('./components/molecules/bookDetail/TopBookList.vue')['default']
+    UpdateGenreModel: typeof import('./components/molecules/genre/UpdateGenreModel.vue')['default']
   }
 }

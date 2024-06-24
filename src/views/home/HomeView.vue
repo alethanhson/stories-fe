@@ -1,67 +1,56 @@
 <template>
-  <div>
-    <div class="w-full mb-6">
-      <carousel-story :stories="data_story"></carousel-story>
-    </div>
-    <div class="w-1/2 flex justify-between">
-      <el-select
-        v-model="paramFilter.selectedPackage"
-        @change="getFilterListStory"
-        placeholder="Select Package"
-        style="width: 240px"
-      >
-        <el-option
-          v-for="servicePackage in servicePackages"
-          :key="servicePackage.value"
-          :label="servicePackage.label"
-          :value="servicePackage.value"
-        />
-      </el-select>
-
-      <el-select
-        v-model="paramFilter.selectedStoryType"
-        @change="getFilterListStory"
-        placeholder="Select type"
-        style="width: 240px"
-      >
-        <el-option
-          v-for="storyType in storyTypes"
-          :key="storyType.value"
-          :label="storyType.label"
-          :value="storyType.value"
-        />
-      </el-select>
-
-      <el-select
-        v-model="paramFilter.selectedGenre"
-        @change="getFilterListStory"
-        placeholder="Select genre"
-        style="width: 240px"
-      >
-        <el-option label="genre 1" value="1" />
-        <el-option label="genre 2" value="2" />
-        <el-option label="genre 3" value="3" />
-        <el-option label="genre 4" value="4" />
-      </el-select>
-    </div>
-
-    <div v-if="filterResults.length > 0">
-      <list-story :stories="filterResults"></list-story>
-    </div>
-    <div v-else>
-      <p>{{ t('story.no_find') }}</p>
+  <div class="w-full mb-6">
+    <carousel-story :stories="data_story"></carousel-story>
+  </div>
+  <div class="w-full lg:flex block">
+    <div class="w-full lg:flex-[4]">
+      <h1 class="text-xl font-bold text-gray-800">{{ t('story.story_hot') }}</h1>
+      <list-story :stories="bookList"></list-story>
     </div>
 
     <div class="w-full lg:flex block">
-      <div class="w-full lg:flex-[4]">
-        <h1 class="text-xl font-bold text-gray-800">{{ t('story.story_hot') }}</h1>
-        <list-story :stories="data_story"></list-story>
-      </div>
       <div class="w-full lg:flex-[2] ms-2">
         <h1 class="text-xl font-bold text-gray-800">{{ t('story.story_new') }}</h1>
         <story-list-vertical :stories="data_story"></story-list-vertical>
       </div>
     </div>
+  </div>
+
+  <div class="w-1/2 flex justify-between">
+    <el-select
+      v-model="paramFilter.selectedPackage"
+      @change="getFilterListStory"
+      placeholder="Select Package"
+      style="width: 240px"
+    >
+      <el-option
+        v-for="servicePackage in servicePackages"
+        :key="servicePackage.value"
+        :label="servicePackage.label"
+        :value="servicePackage.value"
+      />
+    </el-select>
+
+    <el-select
+      v-model="paramFilter.selectedStoryType"
+      @change="getFilterListStory"
+      placeholder="Select type"
+      style="width: 240px"
+    >
+      <el-option
+        v-for="storyType in storyTypes"
+        :key="storyType.value"
+        :label="storyType.label"
+        :value="storyType.value"
+      />
+    </el-select>
+  </div>
+
+  <div v-if="filterResults.length > 0">
+    <list-story :stories="filterResults"></list-story>
+  </div>
+  <div v-else>
+    <p>{{ t('story.no_find') }}</p>
   </div>
 </template>
 
@@ -74,6 +63,7 @@ import { useStoriesStore } from '@/stores/modules/story'
 import { ToastType } from '@/types'
 import { showToast } from '@/utils'
 import { SERVICE_PACKAGE, STORY_TYPE } from '@/constants'
+import { fetchBookListApi } from '@/api/modules/story'
 
 const { t } = i18n.global
 const route = useRoute()
@@ -81,7 +71,10 @@ const router = useRouter()
 onMounted(() => {
   handlePaymentNotify()
   getFilterListStory()
+  loadBook()
 })
+
+const bookList = reactive<any>([])
 
 const handlePaymentNotify = () => {
   if (route.query.statusPayment == 'true') {
@@ -118,4 +111,14 @@ const storyTypes = ref([
   { label: t('story.story_type.comic'), value: STORY_TYPE.COMIC },
   { label: t('story.story_type.novel'), value: STORY_TYPE.NOVEL }
 ])
+const loadBook = async () => {
+  try {
+    const response: any = await fetchBookListApi()
+    bookList.push(...response.data)
+  } catch (error) {
+    console.log('error: ', error)
+  }
+}
+
+
 </script>

@@ -50,7 +50,7 @@
 
       <div>
         <el-button
-          @click="readingStory(chapters[chapters.length - 1].id)"
+          @click="readingStory(book.first_chapter_id)"
           type="primary"
           class="!bg-main-primary-200 hover:!bg-main-primary-400"
         >

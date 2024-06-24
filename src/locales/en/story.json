@@ -24,12 +24,19 @@
   "story_reader": {
     "free": "Free",
     "base": "Base",
-    "premium": "Premium"
+    "premium": "Premium",
+    "all": "All"
   },
   "desc": "Description",
   "deletion_warning": "Are you sure you want to delete this story?",
   "delete": "Delete",
   "cancel": "Cancel",
   "confirm": "Confirm",
-  "accept": "Accept"
+  "accept": "Accept",
+  "no_find": "No results were found for",
+  "story_type": {
+    "novel": "Novel",
+    "comic": "Comic",
+    "all": "All"
+  }
 }

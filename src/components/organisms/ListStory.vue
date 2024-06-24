@@ -27,7 +27,7 @@ import type { Book } from '@/types'
 
 const props = defineProps({
   stories: {
-    type: Array as PropType<Book[]>,
+    type: Array as PropType<any[]>,
     default: () => []
   },
   total: {

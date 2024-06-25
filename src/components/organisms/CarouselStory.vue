@@ -18,7 +18,7 @@
               class="absolute text-main-primary-25 bottom-0 text-center w-full bg-gray-700 bg-opacity-50 h-10 pb-11"
             >
               <p class="font-sm truncate">{{ item.title }}</p>
-              <p class="text-xs truncate">{{ item.author }}</p>
+              <p class="text-xs truncate">{{ item.author.author_name }}</p>
             </div>
           </div>
         </el-carousel-item>

@@ -83,3 +83,8 @@ export interface ChapterResponse {
   message?: string
   data: Chapter
 }
+
+export interface DeleteResponse {
+  code: number
+  message: string
+}

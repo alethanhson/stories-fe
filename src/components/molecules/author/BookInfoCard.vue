@@ -70,6 +70,7 @@
         </button>
         <button
           class="text-red-500 w-full border text-nowrap border-red-500 px-10 py-1 cursor-pointer rounded-2xl hover:bg-red-500 hover:text-white"
+          @click="emit('delete', story.id)"
         >
           Delete
         </button>
@@ -90,6 +91,7 @@ defineProps({
     default: () => {}
   }
 })
+const emit = defineEmits(['delete'])
 </script>
 
 <style></style>

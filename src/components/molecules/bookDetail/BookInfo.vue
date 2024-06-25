@@ -121,10 +121,14 @@ const readingStory = (id) => {
 const followBook = async () => {
   loadBtnFollow.value = true
   try {
-    await followBookApi({
+    const response = await followBookApi({
       book_id: props.book.id
     })
-    emit('update:book', { ...props.book, is_follow: !props.book.is_follow })
+    emit('update:book', {
+      ...props.book,
+      is_follow: !props.book.is_follow,
+      followers: response.follows
+    })
   } catch (error) {
     console.log('error: ', error)
   } finally {

@@ -8,6 +8,7 @@
       <el-button
         round
         class="!bg-main-primary-200 !text-white !border-main-primary-300 hover:!bg-main-primary-400 !px-10"
+        @click="router.push({ name: 'author.book.create' })"
       >
         + Add Book
       </el-button>
@@ -25,14 +26,14 @@ import { useAuthorStore } from '@/stores/modules/author'
 
 const authorStore = useAuthorStore()
 const stories = reactive<Story[]>([])
+const router = useRouter()
 
 onMounted(async () => {
   await getBook()
 })
 
 const getBook = async () => {
-  if (!authorStore.getStories.length) await authorStore.fetchBookPosted()
-  stories.push(...authorStore.getStories)
+  Object.assign(stories, await authorStore.fetchBookPosted())
 }
 </script>
 

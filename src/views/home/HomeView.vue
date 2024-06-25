@@ -2,12 +2,12 @@
   <div class="w-full mb-6">
     <carousel-story v-if="hintList.length > 0" :stories="hintList"></carousel-story>
   </div>
-  <div class="w-full lg:flex block">
-    <div class="w-full lg:flex-[4]">
+  <div class="w-full xl:flex block">
+    <div class="w-full lg:flex-[2]">
       <h1 class="text-xl font-bold text-gray-800">{{ t('story.story_hot') }}</h1>
       <list-story :stories="bookList"></list-story>
     </div>
-    <div class="w-full lg:flex-[2] ms-2">
+    <div class="w-full lg:flex-1 ms-2">
       <h1 class="text-xl font-bold text-gray-800">{{ t('story.story_new') }}</h1>
       <story-list-vertical :stories="hintList"></story-list-vertical>
     </div>

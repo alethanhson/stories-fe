@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-4 mt-2">
+  <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 mb-4 mt-2">
     <div
       v-for="story in props.stories"
       :key="story.id"

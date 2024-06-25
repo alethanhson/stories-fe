@@ -6,7 +6,6 @@ import { ToastType } from '@/types'
 import { showToast } from '@/utils'
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 
-const authStore = useAuthStore()
 export async function checkLogin(
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
@@ -26,12 +25,11 @@ export async function checkLogin(
     next()
     return
   }
+  const userJson = localStorage.getItem('user')
+  const auth: any = userJson ? JSON.parse(userJson) : null
+  console.log('🚀 ~ auth:', auth)
 
-  const isLoggedIn = authStore.isLoggedIn
-  if (isLoggedIn) {
-    const auth = await authStore.currentUser
-    console.log('🚀 ~ auth:', auth)
-
+  if (auth) {
     if (to.name === 'login' || excludedRoutes.includes(to.name as string)) {
       return next({ name: 'login' })
     }

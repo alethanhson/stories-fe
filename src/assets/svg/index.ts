@@ -59,5 +59,5 @@ export {
   img,
   right,
   left,
-  add,
+  add
 }

@@ -8,5 +8,5 @@ export const mockMenuItems = [
     icon: 'book',
     label: 'Book',
     route: { name: 'admin_list_story' }
-  },
+  }
 ]

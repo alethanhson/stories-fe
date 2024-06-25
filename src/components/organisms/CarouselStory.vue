@@ -2,10 +2,10 @@
   <div class="sm:grid sm:grid-cols-2">
     <div class="p-4 bg-white bg-opacity-45 rounded-lg shadow-lg me-2 hidden sm:block">
       <h2 class="text-2xl font-bold mb-4 text-gray-800">{{ t('story.suggest') }}</h2>
-      <p class="text-lg text-gray-800 mb-2">
+      <p class="text-lg text-gray-800 mb-2 font-semibold">
         {{ stories[activeIndex].title }}
       </p>
-      <span class="block text-xs text-blue-600 mb-2 overflow-hidden truncate">{{
+      <span class="block text-xs text-blue-600 mb-2 truncate-multiline">{{
         stories[activeIndex].description
       }}</span>
     </div>
@@ -58,5 +58,13 @@ const handleCarouselChange = (index: number) => {
   background-color: transparent;
   display: flex;
   justify-content: center;
+}
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 </style>

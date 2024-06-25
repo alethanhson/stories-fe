@@ -27,6 +27,7 @@ import heart from './heart.svg'
 import img from './img.svg'
 import right from './right.svg'
 import left from './left.svg'
+import add from './add.svg'
 
 export {
   arrowLeft,
@@ -57,5 +58,6 @@ export {
   infoCircle,
   img,
   right,
-  left
+  left,
+  add,
 }

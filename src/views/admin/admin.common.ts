@@ -1,10 +1,5 @@
 export const mockMenuItems = [
   {
-    icon: 'dashboard',
-    label: 'Dashboard',
-    route: { name: 'dashboard_admin' }
-  },
-  {
     icon: 'genre',
     label: 'Genre',
     route: { name: 'genre' }
@@ -12,16 +7,6 @@ export const mockMenuItems = [
   {
     icon: 'book',
     label: 'Book',
-    route: { name: 'book' }
+    route: { name: 'admin_list_story' }
   },
-  {
-    icon: 'crown',
-    label: 'Service Package',
-    route: { name: 'service_package' }
-  },
-  {
-    icon: 'users',
-    label: 'User',
-    route: { name: 'user' }
-  }
 ]

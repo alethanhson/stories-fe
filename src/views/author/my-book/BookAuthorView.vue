@@ -15,12 +15,13 @@
     </div>
 
     <div class="flex flex-col gap-5 overflow-x-auto">
-      <BookInfoCard v-for="story in stories" :key="story.id" :story="story" />
+      <BookInfoCard v-for="story in stories" :key="story.id" :story="story" @delete="deleteStory" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { authors } from '@/api/modules/author'
 import type { Story } from '@/api/modules/author/types'
 import { useAuthorStore } from '@/stores/modules/author'
 
@@ -33,7 +34,15 @@ onMounted(async () => {
 })
 
 const getBook = async () => {
-  Object.assign(stories, await authorStore.fetchBookPosted())
+  stories.splice(0, stories.length, ...(await authorStore.fetchBookPosted()))
+}
+const deleteStory = async (bookId: number) => {
+  try {
+    await authors.deleteBook(bookId)
+    getBook()
+  } catch (error) {
+    console.log(error)
+  }
 }
 </script>
 

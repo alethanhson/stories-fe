@@ -173,9 +173,11 @@ const register = async () => {
     if (errors.value && Object.keys(errors.value).length > 0) return
     const result = await userStore.register(userForm)
 
-    if (result) showToast(t('userForm.created_success'), ToastType.SUCCESS)
-  } catch (error) {
-    showToast('error', ToastType.ERROR)
+    if (result) showToast(t('auth.register_success'), ToastType.SUCCESS)
+  } catch (error: any) {
+    Object.keys(error).forEach((key) => {
+      showToast(error[key], ToastType.ERROR)
+    })
   } finally {
     isLoadingButton.value = false
   }

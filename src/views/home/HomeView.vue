@@ -119,6 +119,4 @@ const loadBook = async () => {
     console.log('error: ', error)
   }
 }
-
-
 </script>

@@ -1,14 +1,14 @@
 <template>
   <div v-if="authorSearchResults.length > 0">
-    <h3>Authors:</h3>
+    <p class="text-lg font-medium">Authors:</p>
     <ul>
       <li v-for="(author, index) in authorSearchResults" :key="index">
         <p>{{ author.author_name }}</p>
       </li>
     </ul>
   </div>
-  <div v-if="bookSearchResults.length > 0">
-    <h3>Books:</h3>
+  <div class="mt-4" v-if="bookSearchResults.length > 0">
+    <p class="text-lg font-medium">Books:</p>
     <list-story :stories="bookSearchResults"></list-story>
   </div>
   <div
@@ -19,7 +19,7 @@
       authorSearchResults.length == 0
     "
   >
-    <p>{{ t('story.no_find') }} "{{ searchKeyWord }}"</p>
+    <p>{{ t('story.no_find_for') }} "{{ searchKeyWord }}"</p>
   </div>
 </template>
 

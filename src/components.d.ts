@@ -52,6 +52,7 @@ declare module 'vue' {
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     HeaderAdmin: typeof import('./components/organisms/admin/HeaderAdmin.vue')['default']
     ListStory: typeof import('./components/organisms/ListStory.vue')['default']
     MenuAuthorItem: typeof import('./components/molecules/author/MenuAuthorItem.vue')['default']

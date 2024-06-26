@@ -198,22 +198,26 @@ const handleLogout = async () => {
 const searchKeyWord = ref('')
 const storiesStore = useStoriesStore()
 
+let isSearching = false
+
 const onSearchInput = async () => {
-  console.log('Input value:', searchKeyWord.value)
-  if (searchKeyWord.value.trim() === '') {
-    console.log('searchKeyWord.value.trim()', searchKeyWord.value.trim())
+  const trimmedKeyword = searchKeyWord.value.trim()
+
+  if (!trimmedKeyword) {
     storiesStore.clearSearchResults()
-    console.log('222222222')
-    router.push({ name: 'home' })
-    console.log('1111')
-  } else {
-    storiesStore.searchKeyWord = searchKeyWord.value
-    try {
-      await storiesStore.searchStories(searchKeyWord.value)
-      router.push({ name: 'search' })
-    } catch (error) {
-      console.error('Error searching stories:', error)
-    }
+    isSearching = false
+    await router.push({ name: 'home' })
+    return
+  }
+
+  isSearching = true
+  storiesStore.searchKeyWord = trimmedKeyword
+
+  try {
+    await storiesStore.searchStories(trimmedKeyword)
+    if (isSearching) await router.push({ name: 'search' })
+  } catch (error: any) {
+    showToast(error.message, ToastType.ERROR)
   }
 }
 

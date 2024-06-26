@@ -34,7 +34,8 @@
   "cancel": "Cancel",
   "confirm": "Confirm",
   "accept": "Accept",
-  "no_find": "No results were found for",
+  "no_find": "No results were found.",
+  "no_find_for": "No results were found for",
   "story_type": {
     "novel": "Novel",
     "comic": "Comic",

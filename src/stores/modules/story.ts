@@ -15,7 +15,6 @@ export const useStoriesStore = defineStore('stories', {
       try {
         const response = await getFilterListStory(params)
         this.filterResults = response.data || []
-        console.log('Updated filterResults:', this.filterResults)
       } catch (error) {
         this.filterResults = []
         return Promise.reject(error)
@@ -24,32 +23,18 @@ export const useStoriesStore = defineStore('stories', {
     async searchStories(keyword) {
       try {
         const response = await fetchSearchStory(keyword)
+        const data = response.data || []
+        this.authorSearchResults = data
+          .filter((item) => item.type === 'authors')
+          .map((item) => item.data)
 
-        if (response.data) {
-          if (response.data.some((item) => item.type === 'authors')) {
-            this.authorSearchResults = response.data
-              .filter((item) => item.type === 'authors')
-              .map((item) => item.author)
-          } else {
-            this.authorSearchResults = []
-          }
-
-          if (response.data.some((item) => item.type === 'books')) {
-            this.bookSearchResults = response.data
-              .filter((item) => item.type === 'books')
-              .map((item) => item.book)
-          } else {
-            this.bookSearchResults = []
-          }
-        } else {
-          this.authorSearchResults = []
-          this.bookSearchResults = []
-        }
+        this.bookSearchResults = data
+          .filter((item) => item.type === 'books')
+          .map((item) => item.data)
       } catch (error) {
         return Promise.reject(error)
       }
     },
-
     clearSearchResults() {
       this.searchKeyWord = ''
       this.authorSearchResults = []

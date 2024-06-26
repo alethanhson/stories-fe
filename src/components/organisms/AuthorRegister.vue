@@ -2,11 +2,11 @@
   <div
     v-if="props.showAuthorRegis"
     @click="emit('show', false)"
-    class="fixed inset-0 bg-gray-25 bg-opacity-60"
+    class="fixed inset-0 bg-gray-25 bg-opacity-60 z-50"
   >
     <div
       @click.stop
-      class="w-[400px] shadow-sm mx-auto mt-20 h-fit flex flex-col bg-white p-10 rounded-lg"
+      class="w-[400px] shadow-xl mx-auto mt-20 h-fit flex flex-col bg-white p-10 rounded-lg border-dark-50"
     >
       <base-icon name="cancel" @click="emit('show', false)" class="self-end w-8 h-8"></base-icon>
       <label htmlFor="fileUpload" class="flex justify-center relative mb-6">
@@ -62,13 +62,14 @@ const props = defineProps({
     default: false
   }
 })
+const router = useRouter()
 const emit = defineEmits(['show'])
 const authStore = useAuthStore()
 const { t } = i18n.global
 const imagePreview = ref<string | null>(null)
 const author = reactive<FormAuthorData>({
   create_by_user_id: authStore.currentUser?.id,
-  author_name: computed(() => valueFieldName) as unknown as string
+  author_name: ''
 })
 const {
   value: valueFieldName,
@@ -95,8 +96,11 @@ const onFileChange = async (event: Event) => {
 const createAuthor = async () => {
   if ((await validateName()).valid) {
     try {
+      author.author_name = valueFieldName.value as string
       await authors.create(author)
       showToast(t('author.register_success'), ToastType.SUCCESS)
+      await authStore.logout()
+      router.push({ name: 'login' })
       emit('show', false)
     } catch (error) {
       showToast(t('author.register_failed'), ToastType.ERROR)

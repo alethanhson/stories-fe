@@ -1,5 +1,12 @@
 <template>
   <div class="w-full">
+    <div class="w-full flex justify-end pe-10">
+      <base-icon
+        name="add"
+        class="w-10 h-10"
+        @click="router.push({ name: 'manager_story' })"
+      ></base-icon>
+    </div>
     <div
       v-for="story in stories"
       :key="story.id"
@@ -44,6 +51,7 @@ import { formGetStory } from './manager_story.common'
 import type { Story } from '@/api/modules/admin/types'
 
 const { t } = i18n.global
+const router = useRouter()
 const centerDialogVisible = ref(false)
 const stories = ref<Story[]>([])
 const total = ref<number>(0)

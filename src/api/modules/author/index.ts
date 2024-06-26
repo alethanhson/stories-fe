@@ -1,6 +1,7 @@
 import axios from '@/api/axios'
 import type {
   ChapterResponse,
+  DeleteResponse,
   DetailAuthorResponse,
   FormAuthorData,
   FormCreateChapter,
@@ -31,5 +32,8 @@ export const authors = {
   getNumberChapter: async (id: number): Promise<number> => {
     const { data: response } = await axios.get(`${resource}/chapters/getNumber/${id}`)
     return response
+  },
+  deleteBook: (bookId: number): Promise<DeleteResponse> => {
+    return axios.delete(`${resource}/book/${bookId}`)
   }
 }

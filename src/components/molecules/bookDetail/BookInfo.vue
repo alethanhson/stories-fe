@@ -50,7 +50,7 @@
 
       <div>
         <el-button
-          @click="readingStory(chapters[chapters.length - 1].id)"
+          @click="readingStory(book.first_chapter_id)"
           type="primary"
           class="!bg-main-primary-200 hover:!bg-main-primary-400"
         >
@@ -121,10 +121,14 @@ const readingStory = (id) => {
 const followBook = async () => {
   loadBtnFollow.value = true
   try {
-    await followBookApi({
+    const response = await followBookApi({
       book_id: props.book.id
     })
-    emit('update:book', { ...props.book, is_follow: !props.book.is_follow })
+    emit('update:book', {
+      ...props.book,
+      is_follow: !props.book.is_follow,
+      followers: response.follows
+    })
   } catch (error) {
     console.log('error: ', error)
   } finally {

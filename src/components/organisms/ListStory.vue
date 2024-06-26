@@ -1,17 +1,26 @@
 <template>
-  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-4 mt-2">
+  <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 mb-4 mt-2">
     <div
       v-for="story in props.stories"
       :key="story.id"
-      class="relative flex justify-center rounded-lg overflow-hidden"
+      class="relative rounded-lg overflow-hidden h-[250px] w-full bg-blue-200"
     >
-      <img :src="story.cover_image" class="w-full h-full" alt="Book Cover" />
-      <div
-        class="absolute text-main-primary-25 bottom-0 text-center w-full bg-gray-700 bg-opacity-50 h-10 pb-11"
-      >
-        <p class="font-sm truncate">{{ story.title }}</p>
-        <p class="text-xs truncate">{{ story.author }}</p>
-      </div>
+      <router-link :to="{ name: 'detail_story', params: { id: story.id } }">
+        <img :src="story.cover_image" class="w-full h-full object-cover" alt="Book Cover" />
+        <div
+          class="absolute text-main-primary-25 bottom-0 text-center w-full bg-gray-700 bg-opacity-50 h-10 pb-11"
+        >
+          <p class="font-sm truncate px-3">{{ story.title }}</p>
+          <p class="text-xs truncate px-3">{{ story.author.author_name }}</p>
+        </div>
+
+        <div
+          class="absolute top-0 right-0 z-10 px-5 py-0.5 text-white font-semibold rounded-bl-xl"
+          :class="serviceTag(story.package_type)"
+        >
+          {{ serviceName(story.package_type) }}
+        </div>
+      </router-link>
     </div>
   </div>
   <el-pagination

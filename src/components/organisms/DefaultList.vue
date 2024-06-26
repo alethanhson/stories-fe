@@ -1,17 +1,15 @@
 <template>
-  <el-menu class="!bg-inherit !border-none" active-text-color="#1ed291">
-    <MenuGenre title="Truyện tranh" index-prefix="comic-" :genres="comicGenres"></MenuGenre>
-    <MenuGenre title="Truyện chữ" index-prefix="novel-" :genres="novelGenres"></MenuGenre>
-    <MenuStory
-      title="Truyện được xem nhiều nhất"
-      index-prefix="popular-"
-      :stories="popularStories"
-    ></MenuStory>
-    <MenuStory title="Truyện mới phát hành" index-prefix="new-" :stories="newStories"></MenuStory>
+  <el-menu class="!bg-inherit !border-none !p-5" active-text-color="#1ed291">
+    <BookHistory v-if="user" class="[&>div>div>div>svg]:fill-black" />
+
+    <TopBookList
+      class="[&>div>div>div>svg]:fill-black [&>ul]:bg-[#e2e2e2] [&>ul>.border-t-2]:bg-white"
+    />
   </el-menu>
 </template>
 
 <script setup lang="ts">
-import { novelGenres, comicGenres } from '@/mock/mock.genre'
-import { popularStories, newStories } from '@/mock/mock.story'
+import { useAuthStore } from '@/stores/modules/auth'
+
+const user = computed(() => useAuthStore().currentUser)
 </script>

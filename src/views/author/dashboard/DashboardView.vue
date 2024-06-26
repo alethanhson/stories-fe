@@ -22,7 +22,6 @@
         <router-link :to="{ name: 'author.book' }">
           <MenuAuthorItem icon-left="userCircle" icon-right="arrowRight"> My Books </MenuAuthorItem>
         </router-link>
-        <MenuAuthorItem icon-left="userCircle" icon-right="arrowRight"> Logout </MenuAuthorItem>
       </div>
     </div>
     <div class="flex-[3]">

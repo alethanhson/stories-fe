@@ -3,7 +3,9 @@ import type {
   BookDetailResponse,
   BookHistoryResponse,
   TopBookResponse,
-  BookChapterResponse
+  BookChapterResponse,
+  SearchResponse,
+  StoryResponse
 } from './types'
 
 const BookResource = '/book'
@@ -36,6 +38,22 @@ export const followBookApi = async (payload: any): Promise<any> => {
 export const getBookByChapter = async (chapterId: number): Promise<BookChapterResponse> => {
   try {
     return await axios.get(`${BookResource}/chapter/${chapterId}`)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+export const fetchSearchStory = async (keyword: string): Promise<SearchResponse> => {
+  try {
+    return await axios.get(`/search?keyword=${keyword}`)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+export const getFilterListStory = async (params): Promise<StoryResponse> => {
+  try {
+    return await axios.get('/filter', { params })
   } catch (error) {
     return Promise.reject(error)
   }

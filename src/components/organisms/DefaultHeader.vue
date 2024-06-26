@@ -12,10 +12,12 @@
     <div class="flex-1 flex-row-reverse me-4 md:flex hidden">
       <div class="relative">
         <el-input
-          v-model="search"
+          type="text"
+          v-model="searchKeyWord"
           size="large"
-          placeholder="Please input"
+          placeholder="Enter book, author,..."
           class="[&>div>input]:pe-10 input-search"
+          @input="onSearchInput"
         />
         <div class="w-4 me-4 cursor-pointer absolute top-1/2 -translate-y-1/2 right-0">
           <BaseIcon name="search" />
@@ -84,7 +86,7 @@
 
         <div class="relative px-5 mt-3">
           <el-input
-            v-model="search"
+            v-model="searchKeyWord"
             size="large"
             placeholder="Please input"
             class="[&>div>input]:pe-6 input-search"
@@ -140,11 +142,11 @@ import { showToast } from '@/utils'
 import i18n from '@/i18n'
 import { ToastType } from '@/types'
 import { USER_ROLE } from '@/constants'
+import { useStoriesStore } from '@/stores/modules/story'
 
 const authStore = useAuthStore()
 const authorStore = useAuthorStore()
 const isLogin = computed(() => !!authStore.isLoggedIn)
-const search = ref('')
 const navbar = ref<HTMLElement | null>(null)
 const isOpen = ref(false)
 const dropdown = ref<DropdownInstance>()
@@ -192,4 +194,38 @@ const handleLogout = async () => {
     showToast(i18n.global.t('common.logout_error'), ToastType.ERROR)
   }
 }
+
+const searchKeyWord = ref('')
+const storiesStore = useStoriesStore()
+
+let isSearching = false
+
+const onSearchInput = async () => {
+  const trimmedKeyword = searchKeyWord.value.trim()
+
+  if (!trimmedKeyword) {
+    storiesStore.clearSearchResults()
+    isSearching = false
+    await router.push({ name: 'home' })
+    return
+  }
+
+  isSearching = true
+  storiesStore.searchKeyWord = trimmedKeyword
+
+  try {
+    await storiesStore.searchStories(trimmedKeyword)
+    if (isSearching) await router.push({ name: 'search' })
+  } catch (error: any) {
+    showToast(error.message, ToastType.ERROR)
+  }
+}
+
+watch(searchKeyWord, (newKeyword) => {
+  storiesStore.searchKeyWord = newKeyword
+})
+
+onMounted(() => {
+  searchKeyWord.value = storiesStore.searchKeyWord
+})
 </script>

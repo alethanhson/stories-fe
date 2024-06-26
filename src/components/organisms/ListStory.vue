@@ -33,11 +33,10 @@
 
 <script setup lang="ts">
 import type { Book } from '@/types'
-import { SERVICE_PACKAGE } from '@/constants'
 
 const props = defineProps({
   stories: {
-    type: Array as PropType<any>,
+    type: Array as PropType<any[]>,
     default: () => []
   },
   total: {
@@ -61,22 +60,6 @@ const form = computed(() => {
     total: props.total
   }
 })
-const serviceTag = (type) => {
-  if (type == SERVICE_PACKAGE.PRO) {
-    return 'bg-gradient-to-r-custom'
-  } else if (type == SERVICE_PACKAGE.BASE) {
-    return 'bg-green-400'
-  }
-  return 'bg-main-primary-500'
-}
-const serviceName = (type) => {
-  if (type == SERVICE_PACKAGE.PRO) {
-    return 'Pro'
-  } else if (type == SERVICE_PACKAGE.BASE) {
-    return 'Base'
-  }
-  return 'Free'
-}
 </script>
 
 <style scope>

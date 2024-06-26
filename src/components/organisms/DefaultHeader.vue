@@ -44,17 +44,14 @@
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>Profile</el-dropdown-item>
             <el-dropdown-item @click="showAuthorRegis = true" v-if="user.role == USER_ROLE.USER"
               >Register as an author</el-dropdown-item
             >
-            <el-dropdown-item>Manager Service Package</el-dropdown-item>
             <router-link :to="{ name: 'author.profile' }">
               <el-dropdown-item v-if="user.role == USER_ROLE.AUTHOR">
                 Manager Author
               </el-dropdown-item>
             </router-link>
-            <el-dropdown-item>Setting</el-dropdown-item>
             <el-dropdown-item @click="handleLogout">Logout</el-dropdown-item>
           </el-dropdown-menu>
         </template>

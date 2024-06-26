@@ -2,7 +2,6 @@
   <div v-if="historyList && historyList.length > 0" class="border p-2">
     <div class="border-b pb-2 flex justify-between">
       <p class="text-lg font-semibold text-main-primary-300">Reading history</p>
-      <p class="text-lg font-semibold">See all</p>
     </div>
 
     <div class="[&>div:last-child]:border-0 [&>div:last-child]:-mb-2">

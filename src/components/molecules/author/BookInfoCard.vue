@@ -5,8 +5,10 @@
         <img :src="story.cover_image" alt="" class="w-full object-cover" />
       </div>
       <div class="flex-1 flex flex-col gap-2">
-        <p>
-          <span class="font-bold">{{ story.title }}</span>
+        <div class="w-full flex">
+          <p class="max-w-[150px] truncate">
+            <span class="font-bold w-[150px] overflow-hidden">{{ story.title }} </span>
+          </p>
           <span
             v-if="story.status == BOOK_STATUS.ACTIVE"
             class="border border-main-primary-200 rounded-xl text-main-primary-200 px-2 pb-[2px] ms-3 text-[0.75rem]"
@@ -25,7 +27,7 @@
           >
             ban
           </span>
-        </p>
+        </div>
 
         <p>Updated 14:31 June 12, 2024</p>
 

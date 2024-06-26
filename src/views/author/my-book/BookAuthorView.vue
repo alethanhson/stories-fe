@@ -14,7 +14,7 @@
       </el-button>
     </div>
 
-    <div class="flex flex-col gap-5 overflow-x-auto">
+    <div class="flex flex-col gap-5 overflow-x-auto mb-20">
       <BookInfoCard v-for="story in stories" :key="story.id" :story="story" @delete="deleteStory" />
     </div>
   </div>

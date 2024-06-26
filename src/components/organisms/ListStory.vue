@@ -3,10 +3,10 @@
     <div
       v-for="story in props.stories"
       :key="story.id"
-      class="relative flex justify-center rounded-lg overflow-hidden"
+      class="relative rounded-lg overflow-hidden h-[250px] w-full bg-blue-200"
     >
       <router-link :to="{ name: 'detail_story', params: { id: story.id } }">
-        <img :src="story.cover_image" class="w-full h-full" alt="Book Cover" />
+        <img :src="story.cover_image" class="w-full h-full object-cover" alt="Book Cover" />
         <div
           class="absolute text-main-primary-25 bottom-0 text-center w-full bg-gray-700 bg-opacity-50 h-10 pb-11"
         >

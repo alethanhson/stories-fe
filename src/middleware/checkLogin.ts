@@ -40,8 +40,7 @@ export async function checkLogin(
         return
       }
     })
-
-    if (to.name === 'dashboard_admin' && auth.role != USER_ROLE.ADMIN) {
+    if (to.fullPath.split('/')[1] === 'admin' && auth.role != USER_ROLE.ADMIN) {
       showToast(i18n.global.t('common.unauthorized'), ToastType.ERROR)
 
       return next({ name: 'page_unauthorized' })

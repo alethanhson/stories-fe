@@ -88,3 +88,14 @@ export interface DeleteResponse {
   code: number
   message: string
 }
+
+export interface FormUpdateBook {
+  title?: string
+  author_id?: number 
+  genre_id?: number
+  description?: string
+  cover_image?: File 
+  package_type?: number
+  story_type?: number
+  _method: string
+}

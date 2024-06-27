@@ -97,10 +97,11 @@ const createAuthor = async () => {
   if ((await validateName()).valid) {
     try {
       author.author_name = valueFieldName.value as string
-      await authors.create(author)
+      const response: any = await authors.create(author)
+      const user = authStore.currentUser
+      user.role = response.role
+      authStore.setUserProfile(user)
       showToast(t('author.register_success'), ToastType.SUCCESS)
-      await authStore.logout()
-      router.push({ name: 'login' })
       emit('show', false)
     } catch (error) {
       showToast(t('author.register_failed'), ToastType.ERROR)

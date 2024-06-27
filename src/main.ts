@@ -15,6 +15,7 @@ const app = createApp(App)
 app.use(Toast, options)
 app.use(VueI18n)
 const { t } = VueI18n.global
+// test template git pull request
 app.config.globalProperties.$t = t
 app.use(createPinia())
 app.use(router)

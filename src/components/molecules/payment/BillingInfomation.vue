@@ -48,6 +48,7 @@
         @click="handlePayment"
         round
         class="w-full !bg-main-primary-500 !border-none !text-white"
+        :disabled="loadingBtnPay"
         >Pay</el-button
       >
     </div>
@@ -93,6 +94,7 @@ const props = defineProps({
 })
 
 const loading = ref(false)
+const loadingBtnPay = ref(false)
 const options = ref<ServicePackage[]>([])
 
 const remoteMethod = (query: string) => {
@@ -110,6 +112,7 @@ const remoteMethod = (query: string) => {
 }
 const handlePayment = async () => {
   try {
+    loadingBtnPay.value = true
     const payload: paymentForm = {
       bankCode: props.bankList[props.bankActive].shortName,
       amount: servicePackage.value.price,
@@ -123,6 +126,8 @@ const handlePayment = async () => {
     }
   } catch (error: any) {
     showToast(error.message, ToastType.ERROR)
+  } finally {
+    loadingBtnPay.value = false
   }
 }
 </script>

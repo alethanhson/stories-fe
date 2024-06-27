@@ -90,10 +90,12 @@ const handleLogin = async () => {
         router.push({ name: 'dashboard_admin' })
         break
       case USER_ROLE.AUTHOR:
-        router.push({ name: 'dashboard_author' })
-        break
       case USER_ROLE.USER:
-        router.push({ name: 'home' })
+        if (!router.options.history.state.back) {
+          router.push({ name: 'home' })
+          break
+        }
+        router.go(-1)
         break
       default:
         router.push({ name: 'login' })

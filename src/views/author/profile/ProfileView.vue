@@ -19,19 +19,12 @@
           <BaseIcon name="infoCircle" class="fill-main-primary-200" />
         </div>
         <strong class="text-2xl flex-1">Information</strong>
-        <el-button
-          round
-          class="!bg-main-primary-200 !text-white !border-main-primary-300 hover:!bg-main-primary-400 !px-10"
-        >
-          Update
-        </el-button>
       </div>
 
       <div class="w-full flex flex-col gap-5 text-[#e3e3e3]">
         <p>
           Fullname:<span class="ms-10">{{ infoAuthor.author_name }}</span>
         </p>
-        <p>introduce:<span class="ms-10">...</span></p>
       </div>
     </div>
   </div>

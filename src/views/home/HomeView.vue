@@ -18,12 +18,14 @@ import i18n from '@/i18n'
 import { ToastType } from '@/types'
 import { showToast } from '@/utils'
 import { fetchBookListApi } from '@/api/modules/story'
+import { useAuthStore } from '@/stores/modules/auth'
 
 const { t } = i18n.global
 const route = useRoute()
 const router = useRouter()
 const bookList = reactive<any>([])
 const hintList = reactive<any>([])
+const authStore = useAuthStore()
 
 onMounted(() => {
   handlePaymentNotify()
@@ -32,6 +34,9 @@ onMounted(() => {
 
 const handlePaymentNotify = () => {
   if (route.query.statusPayment == 'true') {
+    const user = authStore.currentUser
+    user.service_package = {type : route.query.role}
+    authStore.setUserProfile(user)
     router.replace({ query: {} })
     showToast(t('payment.payment_success'), ToastType.SUCCESS)
   } else if (route.query.statusPayment == 'false') {

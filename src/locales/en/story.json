@@ -20,7 +20,9 @@
     "choose_author": "Select author",
     "choose_genre": "Select genre",
     "failed": "Failed to update story",
-    "success": "Story updated successfully"
+    "success": "Story updated successfully",
+    "genDesc": "Generate",
+    "genFaied": "Genreate Failed"
   },
   "story_reader": {
     "free": "Free",

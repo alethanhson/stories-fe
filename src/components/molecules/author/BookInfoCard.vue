@@ -52,6 +52,7 @@
     <div class="flex flex-col gap-3 max-w-[360px] p-4">
       <button
         class="text-main-primary-200 w-full border border-main-primary-200 px-3 py-1 cursor-pointer rounded-2xl hover:bg-main-primary-200 hover:text-white"
+        @click="router.push({ name: 'author.book.update', params: { id: story.id } })"
       >
         Update
       </button>

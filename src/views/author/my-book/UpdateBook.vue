@@ -53,14 +53,25 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item :label="t('story.desc')">
-          <el-input v-model="description" type="textarea" />
+          <el-input v-model="description" type="textarea" :rows="5" />
           <p v-show="submitClicked && errors.description" class="text-status-error text-body-xs">
             {{ errors.description }}
           </p>
         </el-form-item>
+        <el-form-item class="flex">
+          <div class="flex-1"></div>
+          <el-button
+            type="success"
+            @click="gennerateDes()"
+            :class="!showLoading ? '' : '!bg-transparent !border-none'"
+          >
+            <base-loading :loading="showLoading"></base-loading>
+            {{ showLoading ? '' : t('story.update.genDesc') }}</el-button
+          >
+        </el-form-item>
         <el-form-item>
           <el-button>
-            <router-link :to="{ name: 'admin_list_story' }">{{
+            <router-link :to="{ name: 'author.book' }">{{
               t('story.cancel')
             }}</router-link></el-button
           >
@@ -81,9 +92,11 @@ import type { Genre } from '@/api/modules/admin/types'
 import { authors } from '@/api/modules/author'
 import { getGenre } from '@/api/modules/genre'
 import { fetchBookDetailApi } from '@/api/modules/story'
+import { generate } from '@/api/modules/generate_desc'
 
 const { t } = i18n.global
 const router = useRouter()
+const showLoading = ref<boolean>(false)
 const submitClicked = ref(false)
 const genres = reactive<Genre[]>([])
 const imagePreview = ref<string | null>(null)
@@ -97,7 +110,7 @@ const { value: cover_image } = useField('cover_image', 'required')
 
 const getGenres = async () => {
   try {
-    Object.assign(genres, await getGenre())
+    Object.assign(genres, (await getGenre()).genres)
   } catch (error) {
     console.log(error)
   }
@@ -117,10 +130,9 @@ const onFileChange = (event: Event) => {
 const getStory = async () => {
   try {
     const response = await fetchBookDetailApi(book_id)
-    setValues(response.data as unknown as FormUpdateBook)
-    console.log(errors)
-
-    package_type.value = parseInt(package_type as unknown as string)
+    const updatedValues = { ...response.data, _method: 'put' }
+    setValues(updatedValues as unknown as FormUpdateBook)
+    package_type.value = parseInt(response.data.package_type as unknown as string)
   } catch (error) {
     console.log(error)
   }
@@ -128,20 +140,29 @@ const getStory = async () => {
 const updateStory = async () => {
   try {
     submitClicked.value = true
+    const updatedValues = { ...values }
     if (!(await validate()).valid) return
     if (!values.cover_image?.type?.startsWith('image/')) {
-      delete values.cover_image
+      delete updatedValues.cover_image
     }
-    values._method = 'put'
-    console.log('🚀 ~ updateStory ~ values:', values._method)
-
-    await authors.updateBook(values, book_id)
+    await authors.updateBook(updatedValues, book_id)
     showToast(t('story.update.success'), ToastType.SUCCESS)
     router.push({ name: 'author.book' })
   } catch (error) {
     showToast(t('story.update.failed'), ToastType.ERROR)
     console.log(error)
   }
+}
+
+const gennerateDes = async () => {
+  try {
+    showLoading.value = true
+    description.value = await generate.description(description.value as string)
+  } catch (error) {
+    console.log(error)
+    showToast(t('story.update.genFaied'), ToastType.INFO)
+  }
+  showLoading.value = false
 }
 onMounted(() => {
   getGenres()

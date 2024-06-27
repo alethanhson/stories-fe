@@ -27,7 +27,7 @@ export const authors = {
     return response
   },
   updateBook: (data: FormUpdateBook, id: number): Promise<StoryResponse> =>
-    axios.put(`${resource}/updateBook/${id}`, data, { headers }),
+    axios.post(`${resource}/updateBook/${id}`, data, { headers }),
   createChapter: (data: FormCreateChapter): Promise<ChapterResponse> =>
     axios.post(`${resource}/chapters`, data, { headers }),
   getNumberChapter: async (id: number): Promise<number> => {
